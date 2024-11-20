@@ -51,7 +51,8 @@ abstract class Repository {
       int domainId, int formationId);
   Future<Either<Failure, List<CoursesByStatusEntity>>> getCoursesByStatus(
       String status);
-
+  Future<Either<Failure, String>> startCourse(int courseId, int formationId);
+  Future<Either<Failure, String>> finishCourse(int courseId, int formationId);
   Future<String> requestDiploma(RequestDiplomaEntity requests, int formationId);
 
   Future<Either<Failure, RibEntity>> getRib();

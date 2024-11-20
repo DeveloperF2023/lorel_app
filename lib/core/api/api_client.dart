@@ -36,7 +36,7 @@ class ApiClient {
   }
 
   Future<Response> patchRequest(
-      String endpoint, Map<String, dynamic> data, String? token) async {
+      String endpoint, dynamic data, String? token) async {
     return await client.patch(
       endpoint,
       data: data,

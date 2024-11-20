@@ -50,7 +50,6 @@ import 'core/routes/on_general_routes.dart';
 import 'core/utils/helpers/locale_service.dart';
 import 'core/utils/helpers/pusher_service.dart';
 import 'dependencies_injection.dart';
-import 'features/data/models/user/requests_register_model.dart';
 import 'features/presentation/manager/courses/get_detail_course/get_detail_course_cubit.dart';
 import 'features/presentation/manager/courses/get_detail_formation/get_detail_formation_cubit.dart';
 import 'features/presentation/manager/offers/remove_from_favorite_list/remove_from_favorite_list_cubit.dart';
@@ -69,14 +68,7 @@ void main() async {
   PreferencesHelper preferences = PreferencesHelper(_preferences);
   RemoteDataSource remoteDataSource = RemoteDataSourceImpl(
       client: client, apiClient: apiClient, preferencesHelper: preferences);
-  print(remoteDataSource.registerUser(RequestRegisterUserModel(
-      name: "Soukaina jaouhari",
-      email: "bouchareb25@gmail.com",
-      passwordConfirmation: "Lorel@2024",
-      password: "Lorel@2024",
-      address: "Rabat",
-      phone: "0622547893",
-      country: "Maroc")));
+  print(remoteDataSource.finishCourse(1, 1));
   runApp(const MyApp());
 }
 

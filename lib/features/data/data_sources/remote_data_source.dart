@@ -44,6 +44,8 @@ abstract class RemoteDataSource {
   ///Courses
   Future<CoursesModel> getDetailFormation(int domainId, int formationId);
   Future<List<CoursesByStatusModel>> getCoursesByStatus(String status);
+  Future<String> startCourse(int courseId, int formationId);
+  Future<String> finishCourse(int courseId, int formationId);
   Future<String> requestDiploma(RequestDiplomaModel requests, int formationId);
   Future<RibModel> getRib();
   Future<DetailCourseModel> getDetailCourse(int courseId, int formationId);

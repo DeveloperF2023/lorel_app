@@ -374,4 +374,28 @@ class RepositoryImpl implements Repository {
       return Left(ServerFailure(message: error.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, String>> startCourse(
+      int courseId, int formationId) async {
+    try {
+      final startCourse =
+          await remoteDataSourceImpl.startCourse(courseId, formationId);
+      return Right(startCourse);
+    } catch (error) {
+      return Left(ServerFailure(message: error.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> finishCourse(
+      int courseId, int formationId) async {
+    try {
+      final finishCourse =
+          await remoteDataSourceImpl.finishCourse(courseId, formationId);
+      return Right(finishCourse);
+    } catch (error) {
+      return Left(ServerFailure(message: error.toString()));
+    }
+  }
 }

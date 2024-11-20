@@ -87,8 +87,9 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         null,
         false);
     print(response.data);
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       await preferencesHelper.saveUserDetailsRegister(response.data);
+      print("OK");
       return UserModel.fromJson(response.data);
     } else {
       throw Exception('Failed to register user');
@@ -566,6 +567,40 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       return LivesModel.fromJsonList(response.data);
     } else {
       throw Exception('Failed to get notification');
+    }
+  }
+
+  @override
+  Future<String> startCourse(int courseId, int formationId) async {
+    final token = await preferencesHelper.getToken();
+    final response = await apiClient.patchRequest(
+        "${EndpointsConstants.baseUrl}formations/$formationId/courses/$courseId/start",
+        null,
+        token);
+    print("Response start course: ${response.data}");
+    print("Response status code: ${response.statusCode}");
+    print("Token: $token");
+    if (response.statusCode == 200) {
+      return response.data["message"];
+    } else {
+      throw Exception('Failed to update profile');
+    }
+  }
+
+  @override
+  Future<String> finishCourse(int courseId, int formationId) async {
+    final token = await preferencesHelper.getToken();
+    final response = await apiClient.patchRequest(
+        "${EndpointsConstants.baseUrl}formations/$formationId/courses/$courseId/finish",
+        null,
+        token);
+    print("Response start course: ${response.data}");
+    print("Response status code: ${response.statusCode}");
+    print("Token: $token");
+    if (response.statusCode == 200) {
+      return response.data["message"];
+    } else {
+      throw Exception('Failed to update profile');
     }
   }
 }
