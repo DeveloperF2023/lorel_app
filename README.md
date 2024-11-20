@@ -1,16 +1,27 @@
-# school_test_online
+# Lorel Elearning app
 
-A new Flutter project.
+The Lorel Eleaning app was developed by Flutter developer Soukaina Bouchareb and Backend developer Solaymane Chamane. I created a straightforward and practical app for users of iOS and Android using Cubit and Clean architecture.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This is features of app:
+- Multiple languages (arabic, french, english)
+- Login,Register and Logout
+- fetch Timetable
+- fetch all courses available
+- fetch courses assign it to specific user
+- Real time chat for communication between learners and teachers
+- Push notifications by Pusher
+- Workshops and Conferences
+- Lives on zoom
+- Books and read it as PDF
+- Offers and internship
+- Manage user account(update password, upload avatar, update profile)
+The tools that I work with:
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Figma (design from designer)
+- Git and github
+- Pusher (Powering realtime experiences for mobile and web)
+## AI tools:
+- Picsart[https://picsart.com/ai-image-enhancer/]
+- Gemini and ChatGPT
