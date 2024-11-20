@@ -1,0 +1,11 @@
+import 'package:equatable/equatable.dart';
+
+class PdfEntity extends Equatable {
+  final String? name;
+  final String? url;
+
+  PdfEntity({this.name, this.url});
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
+}
