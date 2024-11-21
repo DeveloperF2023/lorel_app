@@ -42,7 +42,8 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       required this.apiClient,
       required this.preferencesHelper});
 
-  /// Users
+  /// --------------------Start Users-----------------------------
+  /// ************************************************************
   @override
   Future<UserModel> loginUser(String email, String password) async {
     final response = await apiClient.postRequest(
@@ -158,7 +159,11 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     }
   }
 
-  ///Domain
+  /// --------------------End Users-----------------------------
+  /// ************************************************************
+
+  /// --------------------Start Domain-----------------------------
+  /// ************************************************************
   @override
   Future<List<DomainModel>> getDomains() async {
     final response = await apiClient.getRequest(
@@ -181,7 +186,11 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     }
   }
 
-  ///Courses
+  /// ************************************************************
+  /// --------------------End Domains-----------------------------
+
+  /// --------------------Start Courses-----------------------------
+  /// ************************************************************
   @override
   Future<CoursesModel> getDetailFormation(int domainId, int formationId) async {
     final response = await apiClient.getRequest(
@@ -282,7 +291,59 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     }
   }
 
-  ///Books(Library)
+  @override
+  Future<String> startCourse(int courseId, int formationId) async {
+    final token = await preferencesHelper.getToken();
+    final response = await apiClient.patchRequest(
+        "${EndpointsConstants.baseUrl}formations/$formationId/courses/$courseId/start",
+        null,
+        token);
+    print("Response start course: ${response.data}");
+    print("Response status code: ${response.statusCode}");
+    print("Token: $token");
+    if (response.statusCode == 200) {
+      return response.data["message"];
+    } else {
+      throw Exception('Failed to update profile');
+    }
+  }
+
+  @override
+  Future<String> finishCourse(int courseId, int formationId) async {
+    final token = await preferencesHelper.getToken();
+    final response = await apiClient.patchRequest(
+        "${EndpointsConstants.baseUrl}formations/$formationId/courses/$courseId/finish",
+        null,
+        token);
+    print("Response start course: ${response.data}");
+    print("Response status code: ${response.statusCode}");
+    print("Token: $token");
+    if (response.statusCode == 200) {
+      return response.data["message"];
+    } else {
+      throw Exception('Failed to update profile');
+    }
+  }
+
+  @override
+  Future<List<DetailCourseModel>> getCoursesOfFormation(int formationId) async {
+    final token = await preferencesHelper.getToken();
+    final response = await apiClient.getRequest(
+        "${EndpointsConstants.baseUrl}formations/$formationId/courses", token);
+    print(response.data);
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      return DetailCourseModel.fromJsonList(response.data);
+    } else {
+      throw Exception('Failed to update profile');
+    }
+  }
+
+  /// ************************************************************
+  /// --------------------End Courses-----------------------------
+
+  /// --------------------Start Books (Library)-----------------------------
+  /// ************************************************************
   @override
   Future<List<BookModel>> getBooks() async {
     final token = await preferencesHelper.getToken();
@@ -308,7 +369,12 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     }
   }
 
-  ///Workshops and Conferences
+  /// ************************************************************
+  /// --------------------End Books (Library)-----------------------------
+
+  /// --------------------Start Workshops and Conferences-----------------------------
+  /// ************************************************************
+
   @override
   Future<List<WorkshopModel>> getWorkshops() async {
     final token = await preferencesHelper.getToken();
@@ -334,7 +400,11 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     }
   }
 
-  ///Offers and Internship
+  /// ************************************************************
+  /// --------------------End Workshops and Conferences-----------------------------
+
+  /// --------------------Start Offers and Internships-----------------------------
+  /// ************************************************************
 
   @override
   Future<List<OffersModel>> getOffersByType(String type) async {
@@ -432,7 +502,12 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     }
   }
 
-  ///Chat and Messages
+  /// ************************************************************
+  /// --------------------End Offers and Internships-----------------------------
+
+  /// --------------------Start Chat and Messages-----------------------------
+  /// ************************************************************
+
   @override
   Future<List<ChatModel>> getChat() async {
     final token = await preferencesHelper.getToken();
@@ -516,7 +591,11 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     }
   }
 
-  ///Notification
+  /// ************************************************************
+  /// --------------------End Chat and Messages-----------------------------
+
+  /// --------------------Start Notification-----------------------------
+  /// ************************************************************
 
   @override
   Future<List<NotificationModel>> getAllNotification() async {
@@ -531,7 +610,11 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     }
   }
 
-  ///Enrollments
+  /// ************************************************************
+  /// --------------------End Notification-----------------------------
+
+  /// --------------------Start Enrollments-----------------------------
+  /// ************************************************************
 
   @override
   Future<List<EnrollmentModel>> getEnrollment() async {
@@ -557,7 +640,11 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     }
   }
 
-  ///Lives
+  /// ************************************************************
+  /// --------------------End Enrollments-----------------------------
+
+  /// --------------------Start Lives-----------------------------
+  /// ************************************************************
   @override
   Future<List<LivesModel>> getAllLives() async {
     final token = await preferencesHelper.getToken();
@@ -570,51 +657,6 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     }
   }
 
-  @override
-  Future<String> startCourse(int courseId, int formationId) async {
-    final token = await preferencesHelper.getToken();
-    final response = await apiClient.patchRequest(
-        "${EndpointsConstants.baseUrl}formations/$formationId/courses/$courseId/start",
-        null,
-        token);
-    print("Response start course: ${response.data}");
-    print("Response status code: ${response.statusCode}");
-    print("Token: $token");
-    if (response.statusCode == 200) {
-      return response.data["message"];
-    } else {
-      throw Exception('Failed to update profile');
-    }
-  }
-
-  @override
-  Future<String> finishCourse(int courseId, int formationId) async {
-    final token = await preferencesHelper.getToken();
-    final response = await apiClient.patchRequest(
-        "${EndpointsConstants.baseUrl}formations/$formationId/courses/$courseId/finish",
-        null,
-        token);
-    print("Response start course: ${response.data}");
-    print("Response status code: ${response.statusCode}");
-    print("Token: $token");
-    if (response.statusCode == 200) {
-      return response.data["message"];
-    } else {
-      throw Exception('Failed to update profile');
-    }
-  }
-
-  @override
-  Future<List<DetailCourseModel>> getCoursesOfFormation(int formationId) async {
-    final token = await preferencesHelper.getToken();
-    final response = await apiClient.getRequest(
-        "${EndpointsConstants.baseUrl}formations/$formationId/courses", token);
-    print(response.data);
-    print(response.statusCode);
-    if (response.statusCode == 200) {
-      return DetailCourseModel.fromJsonList(response.data);
-    } else {
-      throw Exception('Failed to update profile');
-    }
-  }
+  /// ************************************************************
+  /// --------------------End Lives-----------------------------
 }

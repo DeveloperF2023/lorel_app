@@ -27,7 +27,6 @@ class _MyCoursesScreenState extends State<MyCoursesScreen> {
   List<bool> isSelected = [true, false];
   String status = 'in_progress';
 
-  ///Initialize screen with fetch user name and courses by status
   Future<void> initializeScreen() async {
     await fetchUserName();
     context

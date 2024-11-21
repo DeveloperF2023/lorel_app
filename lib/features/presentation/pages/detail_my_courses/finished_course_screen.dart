@@ -64,7 +64,6 @@ class _FinishedCourseScreenState extends State<FinishedCourseScreen> {
                 onNext: currentIndex < courses.length - 1
                     ? () {
                         _nextCourse(courses);
-                        print("Courses id:${currentCourse.id}");
                       }
                     : () {
                         Navigator.pushNamed(
