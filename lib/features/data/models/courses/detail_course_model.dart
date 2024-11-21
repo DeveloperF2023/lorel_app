@@ -66,4 +66,8 @@ class DetailCourseModel extends DetailCourseEntity {
       });
     }
   }
+
+  static List<DetailCourseModel> fromJsonList(List<dynamic> jsonList) {
+    return jsonList.map((json) => DetailCourseModel.fromJson(json)).toList();
+  }
 }

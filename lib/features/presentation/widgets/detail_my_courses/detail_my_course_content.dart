@@ -2,9 +2,13 @@ part of 'widgets_imports.dart';
 
 class DetailMyCourseContent extends StatefulWidget {
   final DetailCourseEntity detailCourse;
+  final void Function()? onNext;
+  final void Function()? onPrevious;
   const DetailMyCourseContent({
     super.key,
     required this.detailCourse,
+    required this.onNext,
+    this.onPrevious,
   });
 
   @override
@@ -29,7 +33,7 @@ class _DetailMyCourseContentState extends State<DetailMyCourseContent> {
           });
 
     _controller.addListener(() {
-      setState(() {}); // Update the UI whenever the video position changes
+      setState(() {});
     });
   }
 
@@ -261,22 +265,11 @@ class _DetailMyCourseContentState extends State<DetailMyCourseContent> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   NavigationMyCourses(
-                    onNavigate: () {
-                      Navigator.pushNamed(context, NavigationStrings.myCourses);
-                    },
+                    onNavigate: widget.onPrevious,
                     isBack: true,
                   ),
                   NavigationMyCourses(
-                    onNavigate: () {
-                      Navigator.pushNamed(context, NavigationStrings.zoom,
-                          arguments: {
-                            'joinUrl1': widget.detailCourse.lives![0]
-                                .zoomResponse!.data!.joinUrl,
-                            "joinUrl2": widget.detailCourse.lives![1]
-                                .zoomResponse!.data!.joinUrl,
-                            "formationId": widget.detailCourse.formationId
-                          });
-                    },
+                    onNavigate: widget.onNext,
                     isBack: false,
                   ),
                 ],

@@ -20,8 +20,11 @@ import 'package:school_test_online/features/presentation/manager/chat/attach_fil
 import 'package:school_test_online/features/presentation/manager/chat/get_conversations/get_conversations_cubit.dart';
 import 'package:school_test_online/features/presentation/manager/chat/get_messages/get_messages_cubit.dart';
 import 'package:school_test_online/features/presentation/manager/chat/send_message/send_message_cubit.dart';
+import 'package:school_test_online/features/presentation/manager/courses/finish_course/finish_course_cubit.dart';
 import 'package:school_test_online/features/presentation/manager/courses/get_courses_by_domain/get_courses_by_domain_cubit.dart';
 import 'package:school_test_online/features/presentation/manager/courses/get_courses_by_status/get_courses_by_status_cubit.dart';
+import 'package:school_test_online/features/presentation/manager/courses/get_courses_of_formation/get_courses_of_formation_cubit.dart';
+import 'package:school_test_online/features/presentation/manager/courses/start_course/start_course_cubit.dart';
 import 'package:school_test_online/features/presentation/manager/courses/toggle_buttons/toggle_buttons_cubit.dart';
 import 'package:school_test_online/features/presentation/manager/domains/get_domains/get_domains_cubit.dart';
 import 'package:school_test_online/features/presentation/manager/lives/get_lives/get_lives_cubit.dart';
@@ -68,7 +71,7 @@ void main() async {
   PreferencesHelper preferences = PreferencesHelper(_preferences);
   RemoteDataSource remoteDataSource = RemoteDataSourceImpl(
       client: client, apiClient: apiClient, preferencesHelper: preferences);
-  print(remoteDataSource.finishCourse(1, 1));
+  print(remoteDataSource.getCoursesOfFormation(1));
   runApp(const MyApp());
 }
 
@@ -333,6 +336,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         BlocProvider(create: (_) => locator<UpdatePasswordCubit>()),
         BlocProvider(create: (_) => locator<UpdateProfileCubit>()),
         BlocProvider(create: (_) => locator<UploadAvatarCubit>()),
+        BlocProvider(create: (_) => locator<StartCourseCubit>()),
+        BlocProvider(create: (_) => locator<FinishCourseCubit>()),
+        BlocProvider(create: (_) => locator<GetCoursesOfFormationCubit>()),
       ],
       child: ScreenUtilInit(
         minTextAdapt: true,

@@ -16,8 +16,10 @@ final class GetDetailCourseLoading extends GetDetailCourseState {
 
 final class GetDetailCourseLoaded extends GetDetailCourseState {
   final DetailCourseEntity detailCourse;
+  final bool isLastCourse;
 
-  const GetDetailCourseLoaded({required this.detailCourse});
+  const GetDetailCourseLoaded(
+      {required this.detailCourse, required this.isLastCourse});
   @override
   List<Object> get props => [];
 }

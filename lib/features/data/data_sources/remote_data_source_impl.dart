@@ -603,4 +603,16 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       throw Exception('Failed to update profile');
     }
   }
+
+  @override
+  Future<List<DetailCourseModel>> getCoursesOfFormation(int formationId) async {
+    final token = await preferencesHelper.getToken();
+    final response = await apiClient.getRequest(
+        "${EndpointsConstants.baseUrl}formations/$formationId/courses", token);
+    if (response.statusCode == 200) {
+      return DetailCourseModel.fromJsonList(response.data);
+    } else {
+      throw Exception('Failed to update profile');
+    }
+  }
 }

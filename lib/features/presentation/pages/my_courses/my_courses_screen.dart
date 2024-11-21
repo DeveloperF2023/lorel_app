@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:school_test_online/features/presentation/manager/courses/start_course/start_course_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/constants/app_colors.dart';
@@ -173,21 +172,25 @@ class _MyCoursesScreenState extends State<MyCoursesScreen> {
                               return MyCoursesContent(
                                 onTap: () {
                                   if (course.currentCourse != null) {
-                                    BlocProvider.of<StartCourseCubit>(context)
-                                        .startCourse(
-                                            courseId: course.currentCourse!.id!,
-                                            formationId: course.id!);
                                     Navigator.pushNamed(
                                       context,
-                                      NavigationStrings.detailMyCourse,
+                                      NavigationStrings.coursesList,
                                       arguments: {
-                                        "courseId": course.currentCourse!.id,
                                         "formationId": course.id,
-                                        "title": course.currentCourse!.title,
                                       },
                                     );
                                   } else {
-                                    _showMyDialog(context, course.title!);
+                                    if (course.status == "finished") {
+                                      Navigator.pushNamed(
+                                        context,
+                                        NavigationStrings.coursesList,
+                                        arguments: {
+                                          "formationId": course.id,
+                                        },
+                                      );
+                                    } else {
+                                      _showMyDialog(context, course.title!);
+                                    }
                                   }
                                 },
                                 myCourses: course,

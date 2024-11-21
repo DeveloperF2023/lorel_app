@@ -54,14 +54,15 @@ abstract class Repository {
   Future<Either<Failure, String>> startCourse(int courseId, int formationId);
   Future<Either<Failure, String>> finishCourse(int courseId, int formationId);
   Future<String> requestDiploma(RequestDiplomaEntity requests, int formationId);
-
+  Future<Either<Failure, List<DetailCourseEntity>>> getCoursesOfFormation(
+      int formationId);
   Future<Either<Failure, RibEntity>> getRib();
   Future<Either<Failure, DetailCourseEntity>> getDetailCourse(
       int courseId, int formationId);
   Future<Either<Failure, ManualPaymentResponseEntity>> manualPayment(
       String formationId, String additionalDiploma);
 
-  ///Books (Bibliotheque)
+  ///Books (Bibliothèque)
   Future<Either<Failure, List<BookEntity>>> getBooks();
   Future<Either<Failure, List<BookEntity>>> searchBooks(String query);
 

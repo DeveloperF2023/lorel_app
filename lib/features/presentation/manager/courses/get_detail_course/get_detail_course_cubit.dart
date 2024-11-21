@@ -10,17 +10,24 @@ part 'get_detail_course_state.dart';
 
 class GetDetailCourseCubit extends Cubit<GetDetailCourseState> {
   final FetchDetailCourseUseCase fetchDetailCourseUseCase;
-  GetDetailCourseCubit({required this.fetchDetailCourseUseCase})
+  final List<DetailCourseEntity> courses;
+  int currentIndex = 0;
+  GetDetailCourseCubit(
+      {required this.fetchDetailCourseUseCase, required this.courses})
       : super(GetDetailCourseInitial());
 
-  Future<void> fetchDetailCourse(
-      {required int courseId, required int formationId}) async {
+  Future<void> fetchDetailCourse() async {
     emit(GetDetailCourseLoading());
+    final currentCourse = courses[currentIndex];
     try {
-      final result =
-          await fetchDetailCourseUseCase.callback(courseId, formationId);
-      result.fold((l) => emit(GetDetailCourseFailure(message: l.message)),
-          (r) => emit(GetDetailCourseLoaded(detailCourse: r)));
+      final result = await fetchDetailCourseUseCase.callback(
+          currentCourse.id!, currentCourse.formationId!);
+      result.fold(
+          (l) => emit(GetDetailCourseFailure(message: l.message)),
+          (r) => emit(GetDetailCourseLoaded(
+                detailCourse: r,
+                isLastCourse: currentIndex == courses.length - 1,
+              )));
     } on SocketException catch (e) {
       print("this is error $e");
       print("failed registration");
@@ -29,6 +36,13 @@ class GetDetailCourseCubit extends Cubit<GetDetailCourseState> {
       print("this is error $e");
       print("failed registration");
       emit(GetDetailCourseFailure(message: e.toString()));
+    }
+  }
+
+  void loadNextCourse() {
+    if (currentIndex < courses.length - 1) {
+      currentIndex++;
+      fetchDetailCourse();
     }
   }
 }

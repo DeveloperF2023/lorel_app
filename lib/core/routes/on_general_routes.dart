@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:school_test_online/core/routes/routes.dart';
 import 'package:school_test_online/features/domain/entities/user/user_entity.dart';
 import 'package:school_test_online/features/presentation/pages/auth/login_screen.dart';
+import 'package:school_test_online/features/presentation/pages/detail_my_courses/courses_list_screen.dart';
 import 'package:school_test_online/features/presentation/pages/lives/lives_screen.dart';
 import 'package:school_test_online/features/presentation/pages/main/main_screen.dart';
 import 'package:school_test_online/features/presentation/pages/my_courses/my_courses_screen.dart';
@@ -18,7 +19,6 @@ import '../../features/presentation/pages/book/books_screen.dart';
 import '../../features/presentation/pages/book/read_pdf_screen.dart';
 import '../../features/presentation/pages/chat/detail_conversation_screen.dart';
 import '../../features/presentation/pages/detail_course/detail_course_screen.dart';
-import '../../features/presentation/pages/detail_my_courses/detail_my_courses_screen.dart';
 import '../../features/presentation/pages/offers/detail_offer_screen.dart';
 import '../../features/presentation/pages/offers/offers_screen.dart';
 import '../../features/presentation/pages/payment/payment_screen.dart';
@@ -83,19 +83,21 @@ class OnGenerateRoute {
         {
           return routeBuilder(const SuccessRegistrationScreen());
         }
-      case NavigationStrings.detailMyCourse:
-        {
-          if (args is Map<String, dynamic>) {
-            final int courseId = args['courseId'];
-            final int formationId = args['formationId'];
-            final String title = args['title'];
-            return routeBuilder(DetailMyCoursesScreen(
-              courseId: courseId,
-              formationId: formationId,
-              title: title,
-            ));
-          }
-        }
+      //case NavigationStrings.detailMyCourse:
+      //         {
+      //           if (args is Map<String, dynamic>) {
+      //             final int courseId = args['courseId'];
+      //             final int formationId = args['formationId'];
+      //             final String title = args['title'];
+      //             final List<CurrentCoursesEntity> courseList = args['courses'];
+      //             return routeBuilder(DetailMyCoursesScreen(
+      //               courseId: courseId,
+      //               formationId: formationId,
+      //               title: title,
+      //               courses: courseList,
+      //             ));
+      //           }
+      //         }
       case NavigationStrings.zoom:
         if (args is Map<String, dynamic>) {
           final String joinUrl1 = args['joinUrl1'];
@@ -209,6 +211,15 @@ class OnGenerateRoute {
       case NavigationStrings.noNetwork:
         {
           return routeBuilder(NoNetworkPage());
+        }
+      case NavigationStrings.coursesList:
+        {
+          if (args is Map<String, dynamic>) {
+            final int formationId = args['formationId'];
+            return routeBuilder(CoursesListScreen(
+              formationId: formationId,
+            ));
+          }
         }
     }
   }

@@ -150,7 +150,7 @@ class MyCoursesContent extends StatelessWidget {
                       children: [
                         Expanded(
                           child: LinearProgressIndicator(
-                            value: double.parse(myCourses.progress!),
+                            value: double.parse(myCourses.progress!) / 100,
                             color: AppColors.primaryColor,
                           ),
                         ),

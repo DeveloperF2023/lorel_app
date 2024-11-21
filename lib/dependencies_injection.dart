@@ -3,6 +3,8 @@ import 'package:get_it/get_it.dart';
 import 'package:school_test_online/core/api/api_client.dart';
 import 'package:school_test_online/core/utils/helpers/preferences_helpers.dart';
 import 'package:school_test_online/features/domain/use_cases/chat/attach_file_to_conversation_use_case.dart';
+import 'package:school_test_online/features/domain/use_cases/courses/fetch_course_of_formation_use_case.dart';
+import 'package:school_test_online/features/domain/use_cases/courses/start_course_use_case.dart';
 import 'package:school_test_online/features/domain/use_cases/lives/fetch_lives_use_case.dart';
 import 'package:school_test_online/features/domain/use_cases/notifications/fetch_notifications_use_case.dart';
 import 'package:school_test_online/features/domain/use_cases/offers/apply_to_offer_use_case.dart';
@@ -14,6 +16,8 @@ import 'package:school_test_online/features/domain/use_cases/user/update_passwor
 import 'package:school_test_online/features/domain/use_cases/user/update_profile_use_case.dart';
 import 'package:school_test_online/features/domain/use_cases/user/upload_avatar_use_case.dart';
 import 'package:school_test_online/features/presentation/manager/chat/attach_file_to_conversation/attach_file_to_conversation_cubit.dart';
+import 'package:school_test_online/features/presentation/manager/courses/get_courses_of_formation/get_courses_of_formation_cubit.dart';
+import 'package:school_test_online/features/presentation/manager/courses/start_course/start_course_cubit.dart';
 import 'package:school_test_online/features/presentation/manager/lives/get_lives/get_lives_cubit.dart';
 import 'package:school_test_online/features/presentation/manager/notifications/get_notifications/get_notifications_cubit.dart';
 import 'package:school_test_online/features/presentation/manager/offers/apply_to_offer/apply_to_offer_cubit.dart';
@@ -38,6 +42,7 @@ import 'features/domain/use_cases/chat/send_message_use_case.dart';
 import 'features/domain/use_cases/courses/fetch_courses_by_status_use_case.dart';
 import 'features/domain/use_cases/courses/fetch_detail_course_use_case.dart';
 import 'features/domain/use_cases/courses/fetch_detail_formation_use_case.dart';
+import 'features/domain/use_cases/courses/finish_course_use_case.dart';
 import 'features/domain/use_cases/domain/fetch_courses_by_domains_use_case.dart';
 import 'features/domain/use_cases/domain/fetch_domains_use_case.dart';
 import 'features/domain/use_cases/offers/add_to_favorite_list_use_case.dart';
@@ -57,6 +62,7 @@ import 'features/presentation/manager/books/search_book/search_book_cubit.dart';
 import 'features/presentation/manager/chat/get_conversations/get_conversations_cubit.dart';
 import 'features/presentation/manager/chat/get_messages/get_messages_cubit.dart';
 import 'features/presentation/manager/chat/send_message/send_message_cubit.dart';
+import 'features/presentation/manager/courses/finish_course/finish_course_cubit.dart';
 import 'features/presentation/manager/courses/get_courses_by_domain/get_courses_by_domain_cubit.dart';
 import 'features/presentation/manager/courses/get_courses_by_status/get_courses_by_status_cubit.dart';
 import 'features/presentation/manager/courses/get_detail_course/get_detail_course_cubit.dart';
@@ -108,8 +114,7 @@ Future<void> setupLocator() async {
       ));
   locator.registerFactory(() => ToggleButtonsCubit());
   locator.registerFactory(() => GetDetailCourseCubit(
-        fetchDetailCourseUseCase: locator.call(),
-      ));
+      fetchDetailCourseUseCase: locator.call(), courses: locator()));
   locator.registerFactory(() => RequestDiplomaCubit(
         requestDiplomaUseCase: locator.call(),
       ));
@@ -185,6 +190,15 @@ Future<void> setupLocator() async {
   locator.registerFactory(() => UploadAvatarCubit(
         uploadAvatarUseCase: locator.call(),
       ));
+  locator.registerFactory(() => StartCourseCubit(
+        startCourseUseCase: locator.call(),
+      ));
+  locator.registerFactory(() => FinishCourseCubit(
+        finishCourseUseCase: locator.call(),
+      ));
+  locator.registerFactory(() => GetCoursesOfFormationCubit(
+        fetchCoursesOfFormationUseCase: locator.call(),
+      ));
   // Use Case
   locator.registerLazySingleton(
       () => LoginUserUseCase(repository: locator.call()));
@@ -252,6 +266,12 @@ Future<void> setupLocator() async {
       () => UpdateProfileUserUseCase(repository: locator.call()));
   locator.registerLazySingleton(
       () => UploadAvatarUseCase(repository: locator.call()));
+  locator.registerLazySingleton(
+      () => StartCourseUseCase(repository: locator.call()));
+  locator.registerLazySingleton(
+      () => FinishCourseUseCase(repository: locator.call()));
+  locator.registerLazySingleton(
+      () => FetchCoursesOfFormationUseCase(repository: locator.call()));
 
   ///Repository
   locator.registerLazySingleton<Repository>(
