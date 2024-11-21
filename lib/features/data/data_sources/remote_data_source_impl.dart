@@ -609,6 +609,8 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     final token = await preferencesHelper.getToken();
     final response = await apiClient.getRequest(
         "${EndpointsConstants.baseUrl}formations/$formationId/courses", token);
+    print(response.data);
+    print(response.statusCode);
     if (response.statusCode == 200) {
       return DetailCourseModel.fromJsonList(response.data);
     } else {

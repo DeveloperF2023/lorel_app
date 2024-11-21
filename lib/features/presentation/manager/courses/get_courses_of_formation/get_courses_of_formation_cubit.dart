@@ -16,6 +16,7 @@ class GetCoursesOfFormationCubit extends Cubit<GetCoursesOfFormationState> {
     emit(GetCoursesOfFormationLoading());
     try {
       final result = await fetchCoursesOfFormationUseCase.callback(formationId);
+      print("Result from cubit $result");
       result.fold((l) => emit(GetCoursesOfFormationFailure(message: l.message)),
           (r) => emit(GetCoursesOfFormationLoaded(courses: r)));
     } on SocketException catch (e) {

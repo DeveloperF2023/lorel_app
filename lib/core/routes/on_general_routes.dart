@@ -217,7 +217,9 @@ class OnGenerateRoute {
         {
           if (args is Map<String, dynamic>) {
             final int formationId = args['formationId'];
+            final String status = args['status'];
             return routeBuilder(CoursesListScreen(
+              status: status,
               formationId: formationId,
             ));
           }

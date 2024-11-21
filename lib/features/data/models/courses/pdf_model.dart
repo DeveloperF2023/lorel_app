@@ -6,8 +6,10 @@ class PdfModel extends PdfEntity {
 
   PdfModel({this.name, this.url});
 
-  PdfModel.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    url = json['url'];
+  factory PdfModel.fromJson(Map<String, dynamic> json) {
+    return PdfModel(
+      name: json['name'],
+      url: json['url'],
+    );
   }
 }

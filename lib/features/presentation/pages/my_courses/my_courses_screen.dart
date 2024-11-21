@@ -177,6 +177,7 @@ class _MyCoursesScreenState extends State<MyCoursesScreen> {
                                       NavigationStrings.coursesList,
                                       arguments: {
                                         "formationId": course.id,
+                                        "status": course.status
                                       },
                                     );
                                   } else {

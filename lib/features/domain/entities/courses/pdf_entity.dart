@@ -7,5 +7,5 @@ class PdfEntity extends Equatable {
   PdfEntity({this.name, this.url});
   @override
   // TODO: implement props
-  List<Object?> get props => [];
+  List<Object?> get props => [name, url];
 }

@@ -10,6 +10,7 @@ import '../../widgets/detail_my_courses/widgets_imports.dart';
 
 class FinishedCourseScreen extends StatefulWidget {
   final int formationId;
+
   const FinishedCourseScreen({super.key, required this.formationId});
 
   @override
@@ -17,25 +18,25 @@ class FinishedCourseScreen extends StatefulWidget {
 }
 
 class _FinishedCourseScreenState extends State<FinishedCourseScreen> {
+  int currentIndex = 0;
+  void _nextCourse(List courses) {
+    if (currentIndex < courses.length - 1) {
+      setState(() {
+        currentIndex++;
+      });
+    }
+  }
+
+  void _previousCourse(List courses) {
+    if (currentIndex > 0) {
+      setState(() {
+        currentIndex--;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    int currentIndex = 0;
-    void _nextCourse(List courses) {
-      if (currentIndex < courses.length - 1) {
-        setState(() {
-          currentIndex++;
-        });
-      }
-    }
-
-    void _previousCourse(List courses) {
-      if (currentIndex > 0) {
-        setState(() {
-          currentIndex--;
-        });
-      }
-    }
-
     return Scaffold(
       backgroundColor: AppColors.lavendarBlush,
       appBar: const AppBarDetailMyCourse(
@@ -56,16 +57,19 @@ class _FinishedCourseScreenState extends State<FinishedCourseScreen> {
               if (courses.isEmpty) {
                 return const Center(child: Text('No courses available.'));
               }
-
               final currentCourse = courses[currentIndex];
+              print("Courses $currentCourse");
               return DetailMyCourseContent(
                 detailCourse: currentCourse,
                 onNext: currentIndex < courses.length - 1
                     ? () {
                         _nextCourse(courses);
+                        print("Courses id:${currentCourse.id}");
                       }
                     : () {
-                        Navigator.pushNamed(context, NavigationStrings.lives);
+                        Navigator.pushNamed(
+                            context, NavigationStrings.requestDiploma,
+                            arguments: widget.formationId);
                       },
                 onPrevious:
                     currentIndex > 0 ? () => _previousCourse(courses) : null,

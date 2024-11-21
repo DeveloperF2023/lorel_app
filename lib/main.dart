@@ -71,7 +71,7 @@ void main() async {
   PreferencesHelper preferences = PreferencesHelper(_preferences);
   RemoteDataSource remoteDataSource = RemoteDataSourceImpl(
       client: client, apiClient: apiClient, preferencesHelper: preferences);
-  print(remoteDataSource.getCoursesOfFormation(1));
+  print("Courses of Formation ${remoteDataSource.getCoursesOfFormation(1)}");
   runApp(const MyApp());
 }
 

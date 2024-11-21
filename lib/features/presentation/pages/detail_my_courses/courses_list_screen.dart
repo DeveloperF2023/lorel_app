@@ -11,7 +11,9 @@ import '../../widgets/detail_my_courses/widgets_imports.dart';
 
 class CoursesListScreen extends StatefulWidget {
   final int formationId;
-  const CoursesListScreen({super.key, required this.formationId});
+  final String status;
+  const CoursesListScreen(
+      {super.key, required this.formationId, required this.status});
 
   @override
   State<CoursesListScreen> createState() => _CoursesListScreenState();
@@ -66,17 +68,23 @@ class _CoursesListScreenState extends State<CoursesListScreen> {
                 onNext: currentIndex < courses.length - 1
                     ? () {
                         _nextCourse(courses);
-                        BlocProvider.of<FinishCourseCubit>(context)
-                            .finishCourse(
-                                courseId: currentCourse.id!,
-                                formationId: widget.formationId);
+                        widget.status == "finished"
+                            ? null
+                            : BlocProvider.of<FinishCourseCubit>(context)
+                                .finishCourse(
+                                    courseId: currentCourse.id!,
+                                    formationId: widget.formationId);
                       }
                     : () {
-                        BlocProvider.of<FinishCourseCubit>(context)
-                            .finishCourse(
-                                courseId: currentCourse.id!,
-                                formationId: widget.formationId);
-                        Navigator.pushNamed(context, NavigationStrings.lives);
+                        widget.status == "finished"
+                            ? null
+                            : BlocProvider.of<FinishCourseCubit>(context)
+                                .finishCourse(
+                                    courseId: currentCourse.id!,
+                                    formationId: widget.formationId);
+                        Navigator.pushNamed(
+                            context, NavigationStrings.requestDiploma,
+                            arguments: widget.formationId);
                       },
                 onPrevious:
                     currentIndex > 0 ? () => _previousCourse(courses) : null,
