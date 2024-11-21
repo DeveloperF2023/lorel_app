@@ -6,42 +6,39 @@ import 'package:school_test_online/features/presentation/manager/courses/get_cou
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/utils/helpers/locale_service.dart';
 import '../../../../dependencies_injection.dart';
-import '../../manager/courses/finish_course/finish_course_cubit.dart';
 import '../../widgets/detail_my_courses/widgets_imports.dart';
 
-class CoursesListScreen extends StatefulWidget {
+class FinishedCourseScreen extends StatefulWidget {
   final int formationId;
-  const CoursesListScreen({super.key, required this.formationId});
+  const FinishedCourseScreen({super.key, required this.formationId});
 
   @override
-  State<CoursesListScreen> createState() => _CoursesListScreenState();
+  State<FinishedCourseScreen> createState() => _FinishedCourseScreenState();
 }
 
-class _CoursesListScreenState extends State<CoursesListScreen> {
-  int currentIndex = 0;
-  void _nextCourse(List courses) {
-    if (currentIndex < courses.length - 1) {
-      setState(() {
-        currentIndex++;
-      });
-    } else {
-      Navigator.pushNamed(context, NavigationStrings.lives);
-    }
-  }
-
-  void _previousCourse(List courses) {
-    if (currentIndex > 0) {
-      setState(() {
-        currentIndex--;
-      });
-    }
-  }
-
+class _FinishedCourseScreenState extends State<FinishedCourseScreen> {
   @override
   Widget build(BuildContext context) {
+    int currentIndex = 0;
+    void _nextCourse(List courses) {
+      if (currentIndex < courses.length - 1) {
+        setState(() {
+          currentIndex++;
+        });
+      }
+    }
+
+    void _previousCourse(List courses) {
+      if (currentIndex > 0) {
+        setState(() {
+          currentIndex--;
+        });
+      }
+    }
+
     return Scaffold(
       backgroundColor: AppColors.lavendarBlush,
-      appBar: AppBarDetailMyCourse(
+      appBar: const AppBarDetailMyCourse(
         backgroundColor: AppColors.harp,
         title: "My courses",
       ),
@@ -66,16 +63,8 @@ class _CoursesListScreenState extends State<CoursesListScreen> {
                 onNext: currentIndex < courses.length - 1
                     ? () {
                         _nextCourse(courses);
-                        BlocProvider.of<FinishCourseCubit>(context)
-                            .finishCourse(
-                                courseId: currentCourse.id!,
-                                formationId: widget.formationId);
                       }
                     : () {
-                        BlocProvider.of<FinishCourseCubit>(context)
-                            .finishCourse(
-                                courseId: currentCourse.id!,
-                                formationId: widget.formationId);
                         Navigator.pushNamed(context, NavigationStrings.lives);
                       },
                 onPrevious:

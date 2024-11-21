@@ -183,7 +183,7 @@ class _MyCoursesScreenState extends State<MyCoursesScreen> {
                                     if (course.status == "finished") {
                                       Navigator.pushNamed(
                                         context,
-                                        NavigationStrings.coursesList,
+                                        NavigationStrings.finishedCourse,
                                         arguments: {
                                           "formationId": course.id,
                                         },

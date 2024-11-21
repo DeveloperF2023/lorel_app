@@ -3,7 +3,9 @@ part of 'widgets_imports.dart';
 class NavigationMyCourses extends StatelessWidget {
   final void Function()? onNavigate;
   final bool? isBack;
-  const NavigationMyCourses({super.key, this.onNavigate, this.isBack = true});
+  final String? nextText;
+  const NavigationMyCourses(
+      {super.key, this.onNavigate, this.isBack = true, this.nextText});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,9 @@ class NavigationMyCourses extends StatelessWidget {
               : Row(
                   children: [
                     Text(
-                      AppLocalization.of(context)!.translate("next"),
+                      nextText == null
+                          ? AppLocalization.of(context)!.translate("next")
+                          : nextText!,
                       style: GoogleFonts.poppins(
                           fontSize: 16.sp, color: AppColors.geyser),
                     ),

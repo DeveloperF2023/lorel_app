@@ -34,5 +34,6 @@ class NavigationStrings {
   static const uploadAvatar = "uploadAvatar";
   static const noNetwork = "noNetwork";
   static const coursesList = "coursesList";
+  static const finishedCourse = "finishedCourse";
   //scan
 }

@@ -3,6 +3,7 @@ import 'package:school_test_online/core/routes/routes.dart';
 import 'package:school_test_online/features/domain/entities/user/user_entity.dart';
 import 'package:school_test_online/features/presentation/pages/auth/login_screen.dart';
 import 'package:school_test_online/features/presentation/pages/detail_my_courses/courses_list_screen.dart';
+import 'package:school_test_online/features/presentation/pages/detail_my_courses/finished_course_screen.dart';
 import 'package:school_test_online/features/presentation/pages/lives/lives_screen.dart';
 import 'package:school_test_online/features/presentation/pages/main/main_screen.dart';
 import 'package:school_test_online/features/presentation/pages/my_courses/my_courses_screen.dart';
@@ -217,6 +218,15 @@ class OnGenerateRoute {
           if (args is Map<String, dynamic>) {
             final int formationId = args['formationId'];
             return routeBuilder(CoursesListScreen(
+              formationId: formationId,
+            ));
+          }
+        }
+      case NavigationStrings.finishedCourse:
+        {
+          if (args is Map<String, dynamic>) {
+            final int formationId = args['formationId'];
+            return routeBuilder(FinishedCourseScreen(
               formationId: formationId,
             ));
           }

@@ -4,11 +4,13 @@ class DetailMyCourseContent extends StatefulWidget {
   final DetailCourseEntity detailCourse;
   final void Function()? onNext;
   final void Function()? onPrevious;
+  final String nextText;
   const DetailMyCourseContent({
     super.key,
     required this.detailCourse,
     required this.onNext,
     this.onPrevious,
+    required this.nextText,
   });
 
   @override
@@ -271,6 +273,7 @@ class _DetailMyCourseContentState extends State<DetailMyCourseContent> {
                   NavigationMyCourses(
                     onNavigate: widget.onNext,
                     isBack: false,
+                    nextText: widget.nextText,
                   ),
                 ],
               ),
