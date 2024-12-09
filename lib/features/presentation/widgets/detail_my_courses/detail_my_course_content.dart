@@ -267,11 +267,27 @@ class _DetailMyCourseContentState extends State<DetailMyCourseContent> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   NavigationMyCourses(
-                    onNavigate: widget.onPrevious,
+                    onNavigate: () {
+                      setState(() {
+                        _isPlaying = false;
+                      });
+                      _controller.pause();
+                      if (widget.onPrevious != null) {
+                        widget.onPrevious!();
+                      }
+                    },
                     isBack: true,
                   ),
                   NavigationMyCourses(
-                    onNavigate: widget.onNext,
+                    onNavigate: () {
+                      setState(() {
+                        _isPlaying = false;
+                      });
+                      _controller.pause();
+                      if (widget.onNext != null) {
+                        widget.onNext!();
+                      }
+                    },
                     isBack: false,
                     nextText: widget.nextText,
                   ),

@@ -48,7 +48,6 @@ class FavoritesScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final favorite = state.favorites[index];
                   final isFavorite = favorite.isFavorite;
-
                   return BlocProvider<FavoriteStatusCubit>(
                     create: (context) => FavoriteStatusCubit(isFavorite!),
                     child: FavoriteContent(

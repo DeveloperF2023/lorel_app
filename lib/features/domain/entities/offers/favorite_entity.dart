@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:school_test_online/features/data/models/offers/offers_model.dart';
 import 'package:school_test_online/features/domain/entities/offers/pivot_entity.dart';
 
 class FavoriteEntity extends Equatable {
@@ -7,7 +8,7 @@ class FavoriteEntity extends Equatable {
   final String? image;
   final String? company;
   final String? city;
-  final String? salary;
+  final SalaryModel? salary;
   final String? type;
   final String? contract;
   final String? nature;

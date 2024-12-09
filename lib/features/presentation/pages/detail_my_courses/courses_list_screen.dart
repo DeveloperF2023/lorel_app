@@ -63,7 +63,6 @@ class _CoursesListScreenState extends State<CoursesListScreen> {
               if (courses.isEmpty) {
                 return const Center(child: Text('No courses available.'));
               }
-
               final currentCourse = courses[currentIndex];
               return DetailMyCourseContent(
                 detailCourse: currentCourse,

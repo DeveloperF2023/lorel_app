@@ -72,7 +72,7 @@ void main() async {
   PreferencesHelper preferences = PreferencesHelper(_preferences);
   RemoteDataSource remoteDataSource = RemoteDataSourceImpl(
       apiClient: apiClient, preferencesHelper: preferences);
-  //print("Get Offers ${remoteDataSource.getDetailOffer(4)}");
+  print("Get Offers ${remoteDataSource.getFavorites()}");
   runApp(const MyApp());
 }
 

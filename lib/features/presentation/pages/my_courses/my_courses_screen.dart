@@ -180,7 +180,8 @@ class _MyCoursesScreenState extends State<MyCoursesScreen> {
                               final course = state.coursesByStatus[index];
                               return MyCoursesContent(
                                 onTap: () {
-                                  if (course.currentCourse != null) {
+                                  if (course.currentCourse != null ||
+                                      course.currentCourse == null) {
                                     Navigator.pushNamed(
                                       context,
                                       NavigationStrings.coursesList,
@@ -198,8 +199,6 @@ class _MyCoursesScreenState extends State<MyCoursesScreen> {
                                           "formationId": course.id,
                                         },
                                       );
-                                    } else {
-                                      _showMyDialog(context, course.title!);
                                     }
                                   }
                                 },

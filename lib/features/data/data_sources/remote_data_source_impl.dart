@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:school_test_online/core/api/api_client.dart';
 import 'package:school_test_online/core/api/constants_api.dart';
@@ -430,7 +431,10 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   Future<String> addToFavoriteList(int offerId) async {
     final token = await preferencesHelper.getToken();
     final response = await apiClient.postRequest(
-        "${EndpointsConstants.baseUrl}offers/$offerId", null, token, false);
+        "${EndpointsConstants.baseUrl}offers/$offerId/favorites",
+        null,
+        token,
+        false);
     if (response.statusCode == 200) {
       return response.data['message'];
     } else if (response.statusCode == 403) {

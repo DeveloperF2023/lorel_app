@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:school_test_online/features/data/models/offers/offers_model.dart';
 import 'package:school_test_online/features/data/models/offers/pivot_model.dart';
 import 'package:school_test_online/features/domain/entities/offers/favorite_entity.dart';
 
@@ -7,7 +10,7 @@ class FavoriteModel extends FavoriteEntity {
   String? image;
   String? company;
   String? city;
-  String? salary;
+  SalaryModel? salary;
   String? type;
   String? contract;
   String? nature;
@@ -49,7 +52,18 @@ class FavoriteModel extends FavoriteEntity {
     image = json['image'];
     company = json['company'];
     city = json['city'];
-    salary = json['salary'];
+    if (json['salary'] is String) {
+      try {
+        Map<String, dynamic> parsedSalary = jsonDecode(json['salary']);
+        salary = SalaryModel.fromJson(parsedSalary);
+      } catch (e) {
+        salary = null;
+      }
+    } else if (json['salary'] is Map<String, dynamic>) {
+      salary = SalaryModel.fromJson(json['salary']);
+    } else {
+      salary = null;
+    }
     type = json['type'];
     contract = json['contract'];
     nature = json['nature'];
