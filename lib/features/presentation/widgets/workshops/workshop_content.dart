@@ -98,7 +98,7 @@ class WorkshopContent extends StatelessWidget {
                       fontWeight: FontWeight.w500),
                 ),
                 SizedBox(
-                  width: HelperFunctions.screenWidth(context) * .68.w,
+                  width: HelperFunctions.screenWidth(context) * .66.w,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

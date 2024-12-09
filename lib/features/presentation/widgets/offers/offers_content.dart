@@ -97,7 +97,7 @@ class OffersContent extends StatelessWidget {
                               fontWeight: FontWeight.w300),
                         ),
                         Text(
-                          "$period ${units == "months" ? AppLocalization.of(context)!.translate("months") : units == "years" ? AppLocalization.of(context)!.translate("years") : AppLocalization.of(context)!.translate("days")}",
+                          "$period ${units == "month" ? AppLocalization.of(context)!.translate("months") : units == "year" ? AppLocalization.of(context)!.translate("years") : AppLocalization.of(context)!.translate("days")}",
                           style: GoogleFonts.robotoCondensed(
                               color: AppColors.gullGrey,
                               fontSize: 14.sp,

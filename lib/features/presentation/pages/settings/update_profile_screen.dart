@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:school_test_online/features/presentation/manager/user/update_profile/update_profile_cubit.dart';
+import 'package:school_test_online/features/presentation/pages/settings/settings_screen.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/utils/helpers/locale_service.dart';
@@ -27,7 +28,10 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarAllCourses(
-          title: AppLocalization.of(context)!.translate('updateProfile')),
+        title: AppLocalization.of(context)!.translate('updateProfile'),
+        onTap: () => Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => SettingsScreen())),
+      ),
       body: SafeArea(
           child: Form(
         key: _formKey,

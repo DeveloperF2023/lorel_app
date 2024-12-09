@@ -3,8 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:school_test_online/core/utils/helpers/locale_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/constants/app_colors.dart';
+import '../../../../core/routes/routes.dart';
 import '../../../../core/utils/helpers/helper_functions.dart';
 import '../../widgets/global/widgets_imports.dart';
 import '../../widgets/payment/widgets_imports.dart';
@@ -36,10 +38,24 @@ class PaymentScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   BackButtonWidget(
-                    backgroundColor: Colors.white,
-                    iconColor: AppColors.primaryColor,
-                    onTap: () => Navigator.pop(context),
-                  ),
+                      backgroundColor: Colors.white,
+                      iconColor: AppColors.primaryColor,
+                      onTap: () async {
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        final token = prefs.getString("token");
+                        if (token == null) {
+                          Navigator.pushReplacementNamed(
+                              context, NavigationStrings.registrationCourse,
+                              arguments: {
+                                "selectedDiplomas": selectedDiploma,
+                                "formationId": formationId
+                              });
+                        } else {
+                          Navigator.pushReplacementNamed(
+                              context, NavigationStrings.allCourses);
+                        }
+                      }),
                   SizedBox(
                     width: 60.w,
                   ),

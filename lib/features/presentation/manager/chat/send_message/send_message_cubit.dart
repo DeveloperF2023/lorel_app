@@ -19,7 +19,9 @@ class SendMessageCubit extends Cubit<SendMessageState> {
 
   Future<void> sendMessage(
       {required int conversationId, required String content}) async {
-    emit(SendMessageLoading());
+    if (state is SendMessageLoading) {
+      return;
+    }
     try {
       final result =
           await sendMessagesUseCase.callback(conversationId, content);
@@ -27,7 +29,7 @@ class SendMessageCubit extends Cubit<SendMessageState> {
         (l) => emit(SendMessageFailure(message: l.message)),
         (r) {
           emit(SendMessageLoaded(sendMessage: r));
-          _messageSentController.add(null); // Notify listeners
+          _messageSentController.add(null);
         },
       );
     } on SocketException catch (e) {

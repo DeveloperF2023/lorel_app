@@ -1,12 +1,14 @@
 import 'package:equatable/equatable.dart';
 
+import '../../../data/models/offers/offers_model.dart';
+
 class DetailOfferEntity extends Equatable {
   final int? id;
   final String? title;
   final String? image;
   final String? company;
   final String? city;
-  final String? salary;
+  final SalaryModel? salary;
   final String? type;
   final String? contract;
   final String? nature;
@@ -62,4 +64,13 @@ class DetailOfferEntity extends Equatable {
         updatedAt,
         ifFavorite
       ];
+}
+
+class SalaryEntity extends Equatable {
+  final String? min;
+  final String? max;
+
+  const SalaryEntity({this.min, this.max});
+  @override
+  List<Object?> get props => [min, max];
 }

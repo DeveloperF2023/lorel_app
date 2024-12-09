@@ -27,7 +27,7 @@ class SuccessRegistrationContent extends StatelessWidget {
             height: 20.h,
           ),
           Text(
-            "Félicitations, votre demande a été dûment enregistrée. Votre certificat vous sera délivré dans un délai de 15 jours",
+            AppLocalization.of(context)!.translate("successPayment"),
             textAlign: TextAlign.center,
             style: GoogleFonts.poppins(fontSize: 18),
           ),
@@ -35,7 +35,17 @@ class SuccessRegistrationContent extends StatelessWidget {
             height: 20.h,
           ),
           PrimaryButton(
-            textButton: "D’accord",
+            textButton: AppLocalization.of(context)!.translate("ok"),
+            onTap: () async {
+              final prefs = await SharedPreferences.getInstance();
+              final token = prefs.getString("token");
+              if (token != null) {
+                Navigator.pushReplacementNamed(context, NavigationStrings.main,
+                    arguments: token);
+              } else {
+                debugPrint("Token it's null ");
+              }
+            },
           )
         ],
       ),

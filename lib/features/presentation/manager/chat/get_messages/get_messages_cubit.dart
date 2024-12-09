@@ -5,6 +5,8 @@ import 'package:equatable/equatable.dart';
 import 'package:school_test_online/features/domain/entities/chat/message_entity.dart';
 import 'package:school_test_online/features/domain/use_cases/chat/get_messages_use_case.dart';
 
+import '../../../../data/models/chat/message_model.dart';
+
 part 'get_messages_state.dart';
 
 class GetMessagesCubit extends Cubit<GetMessagesState> {
@@ -26,6 +28,19 @@ class GetMessagesCubit extends Cubit<GetMessagesState> {
       print("this is error $e");
       print("failed registration");
       emit(GetMessagesFailure(message: e.toString()));
+    }
+  }
+
+  void addMessage(MessagesModel newMessage) {
+    if (state is GetMessagesLoaded) {
+      final currentMessages = (state as GetMessagesLoaded).messages;
+
+      final updatedMessages = List<MessageEntity>.from(currentMessages)
+        ..add(newMessage);
+
+      emit(GetMessagesLoaded(messages: updatedMessages));
+    } else {
+      print("Cannot add message because the state is not GetMessagesLoaded");
     }
   }
 }

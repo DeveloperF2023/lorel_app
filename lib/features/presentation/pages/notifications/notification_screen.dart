@@ -17,9 +17,10 @@ class NotificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarDetailMyCourse(
+      appBar: AppBarDetailMyCourse(
         backgroundColor: AppColors.harp,
         title: "Notifications",
+        onTap: () => Navigator.pop(context),
       ),
       body: BlocProvider(
         create: (context) =>

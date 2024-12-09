@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:school_test_online/features/presentation/widgets/global/widgets_imports.dart';
 
 import '../../../../core/constants/app_colors.dart';
+import '../../../../core/routes/routes.dart';
 import '../../../../core/utils/helpers/helper_functions.dart';
 import '../../widgets/success/widgets_imports.dart';
 
@@ -30,7 +31,8 @@ class SuccessRequestDiplomaScreen extends StatelessWidget {
                   BackButtonWidget(
                     backgroundColor: Colors.white,
                     iconColor: AppColors.primaryColor,
-                    onTap: () => Navigator.pop(context),
+                    onTap: () => Navigator.pushReplacementNamed(
+                        context, NavigationStrings.myCourses),
                   ),
                   SizedBox(
                     width: 60.w,

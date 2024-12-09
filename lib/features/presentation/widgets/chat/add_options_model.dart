@@ -8,19 +8,17 @@ import '../../../../core/utils/helpers/helper_functions.dart';
 class AddOptionsModal extends StatelessWidget {
   final void Function() onAddDocument;
   final void Function() onAddImage;
-  final void Function() onAddText;
 
   const AddOptionsModal({
     Key? key,
     required this.onAddDocument,
     required this.onAddImage,
-    required this.onAddText,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(5.0),
+      padding: const EdgeInsets.all(5.0),
       height: HelperFunctions.screenHeight(context) * .1.h,
       child: Row(
         children: [

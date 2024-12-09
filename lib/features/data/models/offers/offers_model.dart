@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:school_test_online/features/domain/entities/offers/offers_entity.dart';
 
 class OffersModel extends OffersEntity {
@@ -6,7 +8,7 @@ class OffersModel extends OffersEntity {
   String? image;
   String? company;
   String? city;
-  String? salary;
+  SalaryModel? salaries;
   String? type;
   String? contract;
   String? nature;
@@ -26,7 +28,7 @@ class OffersModel extends OffersEntity {
       this.image,
       this.company,
       this.city,
-      this.salary,
+      this.salaries,
       this.type,
       this.contract,
       this.nature,
@@ -46,7 +48,18 @@ class OffersModel extends OffersEntity {
     image = json['image'];
     company = json['company'];
     city = json['city'];
-    salary = json['salary'];
+    if (json['salary'] is String) {
+      try {
+        Map<String, dynamic> parsedSalary = jsonDecode(json['salary']);
+        salaries = SalaryModel.fromJson(parsedSalary);
+      } catch (e) {
+        salaries = null;
+      }
+    } else if (json['salary'] is Map<String, dynamic>) {
+      salaries = SalaryModel.fromJson(json['salary']);
+    } else {
+      salaries = null;
+    }
     type = json['type'];
     contract = json['contract'];
     nature = json['nature'];
@@ -63,5 +76,17 @@ class OffersModel extends OffersEntity {
 
   static List<OffersModel> fromJsonList(List<dynamic> jsonList) {
     return jsonList.map((json) => OffersModel.fromJson(json)).toList();
+  }
+}
+
+class SalaryModel extends SalaryEntity {
+  final String? min;
+  final String? max;
+  const SalaryModel({this.min, this.max}) : super(max: max, min: min);
+  factory SalaryModel.fromJson(Map<String, dynamic> json) {
+    return SalaryModel(
+      min: json['min'],
+      max: json['max'],
+    );
   }
 }

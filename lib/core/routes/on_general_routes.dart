@@ -45,7 +45,7 @@ class OnGenerateRoute {
         {
           if (args is String) {
             return routeBuilder(MainScreen(
-              token: token!,
+              token: token,
             ));
           }
         }
@@ -72,6 +72,7 @@ class OnGenerateRoute {
           }
         }
       case NavigationStrings.payment:
+      case NavigationStrings.payment:
         {
           if (args is Map<String, dynamic>) {
             return routeBuilder(PaymentScreen(
@@ -84,21 +85,6 @@ class OnGenerateRoute {
         {
           return routeBuilder(const SuccessRegistrationScreen());
         }
-      //case NavigationStrings.detailMyCourse:
-      //         {
-      //           if (args is Map<String, dynamic>) {
-      //             final int courseId = args['courseId'];
-      //             final int formationId = args['formationId'];
-      //             final String title = args['title'];
-      //             final List<CurrentCoursesEntity> courseList = args['courses'];
-      //             return routeBuilder(DetailMyCoursesScreen(
-      //               courseId: courseId,
-      //               formationId: formationId,
-      //               title: title,
-      //               courses: courseList,
-      //             ));
-      //           }
-      //         }
       case NavigationStrings.zoom:
         if (args is Map<String, dynamic>) {
           final String joinUrl1 = args['joinUrl1'];

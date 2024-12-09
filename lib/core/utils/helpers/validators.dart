@@ -36,13 +36,45 @@ class Validators {
     String pattern = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$&*~]).{8,}$';
     RegExp regex = RegExp(pattern);
 
+    List<String> errors = [];
+
+    /// Check for empty password
     if (value == null || value.isEmpty) {
-      return AppLocalization.of(context)!.translate("emptyPassword");
-    } else if (value.length < 8) {
-      return AppLocalization.of(context)!.translate("passwordTooShort");
-    } else if (!regex.hasMatch(value)) {
-      return AppLocalization.of(context)!.translate("invalidPassword");
+      errors.add(AppLocalization.of(context)!.translate("emptyPassword"));
     }
+
+    /// Check for password length
+    if (value != null && value.length < 8) {
+      errors.add(AppLocalization.of(context)!.translate("passwordTooShort"));
+    }
+
+    /// Check for missing lowercase
+    if (value != null && !RegExp(r'[a-z]').hasMatch(value)) {
+      errors.add(AppLocalization.of(context)!.translate("missingLowercase"));
+    }
+
+    /// Check for missing uppercase
+    if (value != null && !RegExp(r'[A-Z]').hasMatch(value)) {
+      errors.add(AppLocalization.of(context)!.translate("missingUppercase"));
+    }
+
+    /// Check for missing digit
+    if (value != null && !RegExp(r'\d').hasMatch(value)) {
+      errors.add(AppLocalization.of(context)!.translate("missingDigit"));
+    }
+
+    /// Check for missing special character
+    if (value != null && !RegExp(r'[!@#\$&*~]').hasMatch(value)) {
+      errors.add(
+          AppLocalization.of(context)!.translate("missingSpecialCharacter"));
+    }
+
+    /// If there are errors, concatenate them and return as a single string
+    if (errors.isNotEmpty) {
+      return errors.join('\n');
+    }
+
+    /// If no errors, return null
     return null;
   }
 

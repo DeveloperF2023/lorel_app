@@ -94,7 +94,8 @@ class _RequestDiplomaScreenState extends State<RequestDiplomaScreen> {
                       Padding(
                         padding: EdgeInsets.only(left: 10.w, top: 5.h),
                         child: BackButtonWidget(
-                          onTap: () => Navigator.pop(context),
+                          onTap: () => Navigator.pushReplacementNamed(
+                              context, NavigationStrings.myCourses),
                         ),
                       ),
                       SizedBox(

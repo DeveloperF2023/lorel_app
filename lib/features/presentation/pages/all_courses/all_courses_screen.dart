@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:school_test_online/core/utils/helpers/locale_service.dart';
 import 'package:school_test_online/features/presentation/widgets/all_courses/all_courses_loading.dart';
 import 'package:school_test_online/features/presentation/widgets/all_courses/widgets_imports.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/routes/routes.dart';
@@ -27,6 +28,16 @@ class _AllCoursesScreenState extends State<AllCoursesScreen> {
     return Scaffold(
       appBar: AppBarAllCourses(
         title: AppLocalization.of(context)!.translate("allFormations"),
+        onTap: () async {
+          final prefs = await SharedPreferences.getInstance();
+          final token = prefs.getString("token");
+          if (token != null) {
+            Navigator.pushReplacementNamed(context, NavigationStrings.main,
+                arguments: token);
+          } else {
+            debugPrint("Token it's null ");
+          }
+        },
       ),
       body: SafeArea(
           child: Column(
@@ -56,24 +67,49 @@ class _AllCoursesScreenState extends State<AllCoursesScreen> {
                       border:
                           const Border(bottom: BorderSide(color: Colors.grey)),
                     ),
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: state.domains.length,
-                      itemBuilder: (context, index) {
-                        final domain = state.domains[index];
-                        return DomainContent(
-                          domainName: domain.title!,
-                          isSelected: selectedDomainIndex == index,
-                          onTap: () {
-                            setState(() {
-                              selectedDomainIndex = index;
-                            });
-                            context
-                                .read<GetCoursesByDomainCubit>()
-                                .fetchCourses(domainId: domain.id!);
-                          },
-                        );
-                      },
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 73.h,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: state.domains.length,
+                            itemBuilder: (context, index) {
+                              final domain = state.domains[index];
+                              return DomainContent(
+                                domainName: domain.title!,
+                                isSelected: selectedDomainIndex == index,
+                                onTap: () {
+                                  setState(() {
+                                    selectedDomainIndex = index;
+                                  });
+                                  context
+                                      .read<GetCoursesByDomainCubit>()
+                                      .fetchCourses(domainId: domain.id!);
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children:
+                              List.generate(state.domains.length, (index) {
+                            return Container(
+                              height: 6,
+                              width: 6,
+                              margin: EdgeInsets.only(right: 3.w),
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: selectedDomainIndex == index
+                                      ? AppColors.butterflyBush
+                                      : AppColors.catskillWhite,
+                                  border: Border.all(
+                                      color: AppColors.butterflyBush)),
+                            );
+                          }),
+                        )
+                      ],
                     ),
                   );
                 } else if (state is GetDomainsFailure) {

@@ -22,7 +22,17 @@ class HeaderOffers extends StatelessWidget {
               BackButtonWidget(
                 backgroundColor: Colors.white,
                 iconColor: AppColors.primaryColor,
-                onTap: () => Navigator.pop(context),
+                onTap: () async {
+                  final prefs = await SharedPreferences.getInstance();
+                  final token = prefs.getString("token");
+                  if (token != null) {
+                    Navigator.pushReplacementNamed(
+                        context, NavigationStrings.main,
+                        arguments: token);
+                  } else {
+                    debugPrint("Token it's null ");
+                  }
+                },
               ),
               Text(
                 AppLocalization.of(context)!.translate("offers"),

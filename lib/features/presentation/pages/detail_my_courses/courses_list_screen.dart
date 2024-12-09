@@ -46,6 +46,8 @@ class _CoursesListScreenState extends State<CoursesListScreen> {
       appBar: AppBarDetailMyCourse(
         backgroundColor: AppColors.harp,
         title: "My courses",
+        onTap: () => Navigator.pushReplacementNamed(
+            context, NavigationStrings.myCourses),
       ),
       body: SafeArea(
           child: BlocProvider(

@@ -15,7 +15,16 @@ class AppBarBooks extends StatelessWidget implements PreferredSizeWidget {
                 ? 10.w
                 : 0.w),
         child: BackButtonWidget(
-          onTap: () => Navigator.pop(context),
+          onTap: () async {
+            final prefs = await SharedPreferences.getInstance();
+            final token = prefs.getString("token");
+            if (token != null) {
+              Navigator.pushReplacementNamed(context, NavigationStrings.main,
+                  arguments: token);
+            } else {
+              debugPrint("Token it's null ");
+            }
+          },
         ),
       ),
       title: Text(

@@ -101,6 +101,7 @@ class PaymentContent extends StatelessWidget {
   void manualPayment(BuildContext context) async {
     print("Formation ID: ${formationId.runtimeType}");
     print("Selected Diploma: ${selectedDiploma.runtimeType}");
+    print("Selected Diploma: $selectedDiploma");
     selectedDiploma == ""
         ? BlocProvider.of<ManualPaymentCubit>(context)
             .manualPayment(formationId: formationId, additionalDiploma: "maroc")

@@ -6,6 +6,7 @@ import 'package:school_test_online/core/constants/app_colors.dart';
 import 'package:school_test_online/features/presentation/manager/timetable/get_schedule/get_schedule_cubit.dart';
 import 'package:school_test_online/features/presentation/widgets/global/widgets_imports.dart';
 import 'package:school_test_online/features/presentation/widgets/timetable/widgets_imports.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/routes/routes.dart';
 import '../../../../core/utils/helpers/locale_service.dart';
@@ -34,7 +35,16 @@ class _TimetableScreenState extends State<TimetableScreen> {
                   ? 10.w
                   : 0.w),
           child: BackButtonWidget(
-            onTap: () => Navigator.pop(context),
+            onTap: () async {
+              final prefs = await SharedPreferences.getInstance();
+              final token = prefs.getString("token");
+              if (token != null) {
+                Navigator.pushReplacementNamed(context, NavigationStrings.main,
+                    arguments: token);
+              } else {
+                debugPrint("Token it's null ");
+              }
+            },
           ),
         ),
         title: Text(

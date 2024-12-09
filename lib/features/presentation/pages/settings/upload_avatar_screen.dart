@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:school_test_online/core/constants/app_assets.dart';
 import 'package:school_test_online/core/constants/app_colors.dart';
 import 'package:school_test_online/features/presentation/manager/user/upload_avatar/upload_avatar_cubit.dart';
+import 'package:school_test_online/features/presentation/pages/settings/settings_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/utils/helpers/locale_service.dart';
@@ -67,6 +68,8 @@ class _UploadAvatarScreenState extends State<UploadAvatarScreen> {
     return Scaffold(
       appBar: AppBarAllCourses(
         title: AppLocalization.of(context)!.translate('uploadAvatar'),
+        onTap: () => Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => SettingsScreen())),
       ),
       body: SafeArea(
           child: Column(

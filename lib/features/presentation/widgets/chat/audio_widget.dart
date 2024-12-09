@@ -141,9 +141,9 @@ class _AudioWidgetState extends State<AudioWidget> {
                       data: SliderTheme.of(context).copyWith(
                         thumbShape: const RoundSliderThumbShape(
                             enabledThumbRadius: 8.0), // Adjust size
-                        trackHeight: 2.0, // Adjust track height
-                        overlayShape: const RoundSliderOverlayShape(
-                            overlayRadius: 20.0), // Adjust the overlay size
+                        trackHeight: 2.0,
+                        overlayShape:
+                            const RoundSliderOverlayShape(overlayRadius: 20.0),
                       ),
                       child: Slider(
                         min: 0,

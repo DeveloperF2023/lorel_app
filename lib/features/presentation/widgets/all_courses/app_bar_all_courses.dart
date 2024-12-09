@@ -3,8 +3,12 @@ part of 'widgets_imports.dart';
 class AppBarAllCourses extends StatelessWidget implements PreferredSizeWidget {
   final Color? backgroundColor;
   final String? title;
+  final void Function() onTap;
   const AppBarAllCourses(
-      {super.key, this.backgroundColor = Colors.white, this.title});
+      {super.key,
+      this.backgroundColor = Colors.white,
+      this.title,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +22,7 @@ class AppBarAllCourses extends StatelessWidget implements PreferredSizeWidget {
             left: AppLocalization.of(context)!.isArabicSelected(context)
                 ? 0.w
                 : 10.w),
-        child: BackButtonWidget(
-          onTap: () => Navigator.pop(context),
-        ),
+        child: BackButtonWidget(onTap: onTap),
       ),
       automaticallyImplyLeading: false,
       title: Text(

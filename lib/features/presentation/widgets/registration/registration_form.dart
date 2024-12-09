@@ -43,7 +43,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
               ),
               TextFieldApp(
                 icon: FontAwesomeIcons.user,
-                hintText: AppLocalization.of(context)!.translate("lastName"),
+                hintText: AppLocalization.of(context)!.translate("name"),
                 controller: nameController,
                 validator: (value) => Validators.nameValidator(value, context),
               ),

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:school_test_online/features/presentation/manager/user/update_password/update_password_cubit.dart';
+import 'package:school_test_online/features/presentation/pages/settings/settings_screen.dart';
 import 'package:school_test_online/features/presentation/widgets/all_courses/widgets_imports.dart';
 import 'package:school_test_online/features/presentation/widgets/global/widgets_imports.dart';
 
@@ -34,6 +35,8 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
     return Scaffold(
       appBar: AppBarAllCourses(
         title: AppLocalization.of(context)!.translate('updatePassword'),
+        onTap: () => Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => SettingsScreen())),
       ),
       body: SafeArea(
           child: Form(

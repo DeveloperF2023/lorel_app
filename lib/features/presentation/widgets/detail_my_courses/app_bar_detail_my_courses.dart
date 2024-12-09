@@ -4,8 +4,12 @@ class AppBarDetailMyCourse extends StatelessWidget
     implements PreferredSizeWidget {
   final Color? backgroundColor;
   final String? title;
+  final void Function() onTap;
   const AppBarDetailMyCourse(
-      {super.key, this.backgroundColor = Colors.white, this.title});
+      {super.key,
+      this.backgroundColor = Colors.white,
+      this.title,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +18,7 @@ class AppBarDetailMyCourse extends StatelessWidget
       leading: Padding(
         padding: EdgeInsets.only(left: 10.w),
         child: BackButtonWidget(
-          onTap: () => Navigator.pop(context),
+          onTap: onTap,
         ),
       ),
       automaticallyImplyLeading: false,

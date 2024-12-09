@@ -280,14 +280,12 @@ Future<void> setupLocator() async {
 
   ///Data Source
   locator.registerLazySingleton<RemoteDataSource>(() => RemoteDataSourceImpl(
-        client: locator.call(),
         apiClient: locator<ApiClient>(),
         preferencesHelper: locator<PreferencesHelper>(),
       ));
 
   locator.registerLazySingleton<RemoteDataSourceImpl>(
     () => RemoteDataSourceImpl(
-        client: locator.call(),
         apiClient: locator<ApiClient>(),
         preferencesHelper: locator<PreferencesHelper>()),
   );

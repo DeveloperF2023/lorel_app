@@ -34,7 +34,9 @@ class DetailOfferScreen extends StatelessWidget {
               right: AppLocalization.of(context)!.isArabicSelected(context)
                   ? 10.w
                   : 0.w),
-          child: BackButtonWidget(onTap: () => Navigator.pop(context)),
+          child: BackButtonWidget(
+              onTap: () => Navigator.pushReplacementNamed(
+                  context, NavigationStrings.offers)),
         ),
         title: Text(
           AppLocalization.of(context)!.translate("offers"),
@@ -77,17 +79,7 @@ class DetailOfferScreen extends StatelessWidget {
                   } else if (state is GetDetailOfferLoaded) {
                     final detailOffer = state.offer;
                     return DetailOfferContent(
-                      imageUrl: detailOffer.image!,
-                      title: detailOffer.title!,
-                      company: detailOffer.company!,
-                      city: detailOffer.city!,
-                      salary: detailOffer.salary!,
-                      contract: detailOffer.contract!,
-                      missions: detailOffer.missions!,
-                      skills: detailOffer.skills!,
-                      experience: detailOffer.experience!,
-                      offerId: detailOffer.id!,
-                      isFavorite: detailOffer.ifFavorite!,
+                      detailOffer: detailOffer,
                     );
                   } else if (state is GetDetailOfferFailure) {
                     return Center(child: Text(state.message));

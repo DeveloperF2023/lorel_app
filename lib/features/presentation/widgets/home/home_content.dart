@@ -55,9 +55,13 @@ class _HomeContentState extends State<HomeContent> {
                             backgroundImage = NetworkImage(profilePicture);
                           }
 
-                          return CircleAvatar(
-                            radius: 38,
-                            backgroundImage: backgroundImage,
+                          return GestureDetector(
+                            onTap: () => Navigator.pushNamed(
+                                context, NavigationStrings.uploadAvatar),
+                            child: CircleAvatar(
+                              radius: 38,
+                              backgroundImage: backgroundImage,
+                            ),
                           );
                         },
                       ),
@@ -170,49 +174,46 @@ class _HomeContentState extends State<HomeContent> {
                     Positioned(
                         right: -10.w,
                         top: -10.h,
-                        child: Container(
-                          child: BlocProvider(
-                            create: (context) =>
-                                locator<GetLivesCubit>()..getLives(),
-                            child: BlocBuilder<GetLivesCubit, GetLivesState>(
-                              builder: (context, state) {
-                                if (state is GetLivesLoaded) {
-                                  final upcomingLives =
-                                      state.lives.where((live) {
-                                    final startTime = live.startTime;
-                                    if (startTime == null) return false;
-                                    final liveDateTime =
-                                        DateTime.parse(startTime);
-                                    final sixHoursLater =
-                                        DateTime.now().add(Duration(hours: 6));
-                                    return liveDateTime.isBefore(sixHoursLater);
-                                  }).toList();
-                                  if (upcomingLives.isNotEmpty) {
-                                    return Container(
-                                      padding: const EdgeInsets.all(10),
-                                      decoration: const BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: AppColors.primaryColor),
-                                      child: Center(
-                                        child: Text(
-                                          "${upcomingLives.length}",
-                                          style: GoogleFonts.robotoCondensed(
-                                              fontSize: 15.sp,
-                                              color: Colors.white),
-                                        ),
+                        child: BlocProvider(
+                          create: (context) =>
+                              locator<GetLivesCubit>()..getLives(),
+                          child: BlocBuilder<GetLivesCubit, GetLivesState>(
+                            builder: (context, state) {
+                              if (state is GetLivesLoaded) {
+                                final upcomingLives = state.lives.where((live) {
+                                  final startTime = live.startTime;
+                                  if (startTime == null) return false;
+                                  final liveDateTime =
+                                      DateTime.parse(startTime);
+                                  final sixHoursLater =
+                                      DateTime.now().add(Duration(hours: 6));
+                                  return liveDateTime.isBefore(sixHoursLater);
+                                }).toList();
+                                if (upcomingLives.isNotEmpty) {
+                                  return Container(
+                                    padding: const EdgeInsets.all(10),
+                                    decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: AppColors.primaryColor),
+                                    child: Center(
+                                      child: Text(
+                                        "${upcomingLives.length}",
+                                        style: GoogleFonts.robotoCondensed(
+                                            fontSize: 15.sp,
+                                            color: Colors.white),
                                       ),
-                                    );
-                                  }
-                                } else if (state is GetLivesLoading) {
-                                  return Container();
-                                } else if (state is GetLivesFailure) {
-                                  return Center(
-                                    child: Text("Error:${state.message}"),
+                                    ),
                                   );
                                 }
+                              } else if (state is GetLivesLoading) {
                                 return Container();
-                              },
-                            ),
+                              } else if (state is GetLivesFailure) {
+                                return Center(
+                                  child: Text("Error:${state.message}"),
+                                );
+                              }
+                              return Container();
+                            },
                           ),
                         ))
                   ],

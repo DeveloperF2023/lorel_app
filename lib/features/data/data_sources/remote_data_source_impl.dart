@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:school_test_online/core/api/api_client.dart';
 import 'package:school_test_online/core/api/constants_api.dart';
@@ -34,13 +33,10 @@ import '../models/request_diploma/request_diploma_model.dart';
 import '../models/user/user_model.dart';
 
 class RemoteDataSourceImpl implements RemoteDataSource {
-  final Dio client;
   final ApiClient apiClient;
   final PreferencesHelper preferencesHelper;
   RemoteDataSourceImpl(
-      {required this.client,
-      required this.apiClient,
-      required this.preferencesHelper});
+      {required this.apiClient, required this.preferencesHelper});
 
   /// --------------------Start Users-----------------------------
   /// ************************************************************

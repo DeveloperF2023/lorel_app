@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:school_test_online/core/constants/app_assets.dart';
 import 'package:school_test_online/core/utils/helpers/helper_functions.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../core/constants/app_colors.dart';
@@ -50,9 +51,19 @@ class _ZoomScreenState extends State<ZoomScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.lavendarBlush,
-      appBar: const AppBarDetailMyCourse(
+      appBar: AppBarDetailMyCourse(
         backgroundColor: AppColors.harp,
         title: "Zoom lives",
+        onTap: () async {
+          final prefs = await SharedPreferences.getInstance();
+          final token = prefs.getString("token");
+          if (token != null) {
+            Navigator.pushReplacementNamed(context, NavigationStrings.main,
+                arguments: token);
+          } else {
+            debugPrint("Token it's null ");
+          }
+        },
       ),
       body: SafeArea(
           child: Column(

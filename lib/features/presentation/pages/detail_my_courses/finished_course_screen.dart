@@ -39,9 +39,11 @@ class _FinishedCourseScreenState extends State<FinishedCourseScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.lavendarBlush,
-      appBar: const AppBarDetailMyCourse(
+      appBar: AppBarDetailMyCourse(
         backgroundColor: AppColors.harp,
         title: "My courses",
+        onTap: () => Navigator.pushReplacementNamed(
+            context, NavigationStrings.myCourses),
       ),
       body: SafeArea(
           child: BlocProvider(

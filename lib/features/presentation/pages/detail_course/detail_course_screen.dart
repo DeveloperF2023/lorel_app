@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:school_test_online/core/constants/app_colors.dart';
+import 'package:school_test_online/core/routes/routes.dart';
 import 'package:school_test_online/features/presentation/widgets/all_courses/widgets_imports.dart';
 
 import '../../../../dependencies_injection.dart';
@@ -16,9 +17,11 @@ class DetailCourseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarAllCourses(
+      appBar: AppBarAllCourses(
         backgroundColor: AppColors.harp,
         title: "All courses",
+        onTap: () => Navigator.pushReplacementNamed(
+            context, NavigationStrings.allCourses),
       ),
       body: SafeArea(
           child: BlocProvider(

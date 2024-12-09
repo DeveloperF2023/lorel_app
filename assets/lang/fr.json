@@ -24,6 +24,7 @@
   "certificateRequest": "Demande de certificat",
   "firstName": "Prénom",
   "lastName": "Nom",
+  "name": "Nom complet",
   "phone": "Téléphone",
   "address": "Adresse complète",
   "birthday": "Date de naissance",
@@ -132,5 +133,12 @@
   "avatarUploaded": "Avatar téléchargé avec succès!",
   "courseNotFoundYet": "Cours Pas Encore Disponible",
   "messageErrorCourseNotFound": "Il semble que l'enseignant n'ait pas encore créé ou attribué ce cours",
-  "cancel": "Annuler"
+  "cancel": "Annuler",
+  "missingLowercase": "Le mot de passe doit contenir au moins une lettre minuscule.",
+  "missingUppercase": "Le mot de passe doit contenir au moins une lettre majiscule.",
+  "missingDigit": "Le mot de passe doit contenir au moins un chiffre",
+  "missingSpecialCharacter": "Le mot de passe doit inclure au moins un caractère spécial (!@#\\$&*~).",
+  "successPayment": "Félicitations, votre demande a bien été enregistrée, notre équipe vous contactera dans les plus brefs délais.",
+  "ok": "D'accord",
+  "emptyWorkshops": "Aucun atelier n'est disponible pour le moment. Veuillez revenir plus tard ou essayer de sélectionner une autre date."
 }

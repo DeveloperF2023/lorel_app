@@ -75,7 +75,17 @@ class _MyCoursesScreenState extends State<MyCoursesScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    BackButtonWidget(onTap: () => Navigator.pop(context)),
+                    BackButtonWidget(onTap: () async {
+                      final prefs = await SharedPreferences.getInstance();
+                      final token = prefs.getString("token");
+                      if (token != null) {
+                        Navigator.pushReplacementNamed(
+                            context, NavigationStrings.main,
+                            arguments: token);
+                      } else {
+                        debugPrint("Token it's null ");
+                      }
+                    }),
                     Text(
                       AppLocalization.of(context)!.translate('myFormations'),
                       style: GoogleFonts.poppins(

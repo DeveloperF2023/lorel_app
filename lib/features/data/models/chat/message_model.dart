@@ -26,18 +26,45 @@ class MessagesModel extends MessageEntity {
       this.lastRead,
       this.user});
 
-  MessagesModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    conversationId = json['conversation_id'];
-    userId = json['user_id'];
-    type = json['type'];
-    file = json['file'];
-    body = json['body'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    lastRead = json['last_read'];
-    user =
-        json['user'] != null ? new UserDataModel.fromJson(json['user']) : null;
+  factory MessagesModel.fromJson(Map<String, dynamic> json) {
+    //print('Raw API Response: $json');
+    //     final messageData = json['message'] ?? {};
+    //     print('Message Data: $messageData');
+    //     final userData = messageData['user'] != null
+    //         ? UserDataModel.fromJson(messageData['user'])
+    //         : null;
+    //     if (userData != null) {
+    //       print('User Data: ${userData.toJson()}');
+    //     } else {
+    //       print('User data is null');
+    //     }
+    return MessagesModel(
+      id: json['id'] ?? 0,
+      conversationId: json['conversation_id'] ?? 0,
+      userId: json['user_id'] ?? 0,
+      type: json['type'] ?? "text",
+      file: json['file'] ?? "",
+      body: json['body'] ?? "",
+      createdAt: json['created_at'] ?? "",
+      updatedAt: json['updated_at'] ?? "",
+      lastRead: json['last_read'] ?? "",
+      user: json['user'] != null ? UserDataModel.fromJson(json['user']) : null,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'conversation_id': conversationId,
+      'user_id': userId,
+      'type': type,
+      'file': file,
+      'body': body,
+      "created_at": createdAt,
+      'updated_at': updatedAt,
+      'last_read': lastRead,
+      'user': user
+    };
   }
 
   static List<MessagesModel> fromJsonList(List<dynamic> jsonList) {

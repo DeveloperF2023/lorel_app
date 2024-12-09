@@ -22,16 +22,17 @@ class UserDataModel extends UserDataEntity {
       this.createdAt,
       this.updatedAt});
 
-  UserDataModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    role = json['role'];
-    address = json['address'];
-    country = json['country'];
-    image = json['image'];
-    active = json['active'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
+  factory UserDataModel.fromJson(Map<String, dynamic> json) {
+    return UserDataModel(
+        id: json['id'],
+        name: json['name'],
+        role: json['role'],
+        address: json['address'],
+        country: json['country'],
+        image: json['image'],
+        active: json['active'],
+        createdAt: json['created_at'],
+        updatedAt: json['updated_at']);
   }
 
   Map<String, dynamic> toJson() {

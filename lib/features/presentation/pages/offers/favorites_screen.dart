@@ -6,6 +6,7 @@ import 'package:school_test_online/dependencies_injection.dart';
 import 'package:school_test_online/features/presentation/manager/offers/get_favorites/get_favorites_cubit.dart';
 import 'package:school_test_online/features/presentation/widgets/all_courses/widgets_imports.dart';
 
+import '../../../../core/routes/routes.dart';
 import '../../manager/offers/add_to_favorite_list/add_to_favorite_list_cubit.dart';
 import '../../manager/offers/favorite_status_cubit.dart';
 import '../../manager/offers/remove_from_favorite_list/remove_from_favorite_list_cubit.dart';
@@ -19,6 +20,8 @@ class FavoritesScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBarAllCourses(
         title: AppLocalization.of(context)!.translate("favorites"),
+        onTap: () =>
+            Navigator.pushReplacementNamed(context, NavigationStrings.offers),
       ),
       body: SafeArea(
           child: MultiBlocProvider(

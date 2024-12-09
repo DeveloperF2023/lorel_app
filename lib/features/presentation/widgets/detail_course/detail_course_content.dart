@@ -125,6 +125,7 @@ class _DetailCourseContentState extends State<DetailCourseContent> {
                       await SharedPreferences.getInstance();
                   final token = preferences.getString("token");
                   print("Token: $token");
+
                   if (token == null) {
                     Navigator.pushNamed(
                       context,

@@ -11,7 +11,7 @@ import '../settings/settings_screen.dart';
 import '../timetable/timetable_screen.dart';
 
 class MainScreen extends StatefulWidget {
-  final String token;
+  final String? token;
   final Function(String)? onLocaleChange;
   const MainScreen({super.key, required this.token, this.onLocaleChange});
 
@@ -53,10 +53,10 @@ class _MainScreenState extends State<MainScreen> {
         child: IndexedStack(
           index: _selectedIndex,
           children: <Widget>[
-            HomeScreen(),
-            MyCoursesScreen(),
-            TimetableScreen(),
-            ChatScreen(),
+            const HomeScreen(),
+            const MyCoursesScreen(),
+            const TimetableScreen(),
+            const ChatScreen(),
             SettingsScreen(
               onLocaleChange: widget.onLocaleChange,
             )

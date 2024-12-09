@@ -104,15 +104,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               backgroundImage =
                                   NetworkImage(avatarState.uploadAvatar);
                             } else {
-                              backgroundImage = AssetImage(AppAssets.logo);
+                              backgroundImage =
+                                  const AssetImage(AppAssets.logo);
                             }
                           } else {
                             backgroundImage = NetworkImage(profilePicture);
                           }
 
-                          return CircleAvatar(
-                            radius: 38,
-                            backgroundImage: backgroundImage,
+                          return GestureDetector(
+                            onTap: () => Navigator.pushNamed(
+                                context, NavigationStrings.uploadAvatar),
+                            child: CircleAvatar(
+                              radius: 38,
+                              backgroundImage: backgroundImage,
+                            ),
                           );
                         },
                       ),
@@ -198,7 +203,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     Navigator.pushNamed(
                         context, NavigationStrings.updatePassword);
                   },
-                  icon: FontAwesomeIcons.chevronRight,
+                  icon: AppLocalization.of(context)!.isArabicSelected(context)
+                      ? FontAwesomeIcons.chevronLeft
+                      : FontAwesomeIcons.chevronRight,
                   title:
                       AppLocalization.of(context)!.translate('updatePassword')),
               SettingsTile(
@@ -207,7 +214,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     Navigator.pushNamed(
                         context, NavigationStrings.uploadAvatar);
                   },
-                  icon: FontAwesomeIcons.chevronRight,
+                  icon: AppLocalization.of(context)!.isArabicSelected(context)
+                      ? FontAwesomeIcons.chevronLeft
+                      : FontAwesomeIcons.chevronRight,
                   title:
                       AppLocalization.of(context)!.translate('uploadAvatar')),
               SettingsTile(
@@ -216,7 +225,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     Navigator.pushNamed(
                         context, NavigationStrings.updateProfile);
                   },
-                  icon: FontAwesomeIcons.chevronRight,
+                  icon: AppLocalization.of(context)!.isArabicSelected(context)
+                      ? FontAwesomeIcons.chevronLeft
+                      : FontAwesomeIcons.chevronRight,
                   title:
                       AppLocalization.of(context)!.translate('updateProfile')),
               SettingsTile(
@@ -224,7 +235,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   onPressed: () {
                     Navigator.pushNamed(context, NavigationStrings.myCourses);
                   },
-                  icon: FontAwesomeIcons.chevronRight,
+                  icon: AppLocalization.of(context)!.isArabicSelected(context)
+                      ? FontAwesomeIcons.chevronLeft
+                      : FontAwesomeIcons.chevronRight,
                   title:
                       AppLocalization.of(context)!.translate('myFormations')),
               SettingsTile(
@@ -232,28 +245,36 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   onPressed: () {
                     Navigator.pushNamed(context, NavigationStrings.timetable);
                   },
-                  icon: FontAwesomeIcons.chevronRight,
+                  icon: AppLocalization.of(context)!.isArabicSelected(context)
+                      ? FontAwesomeIcons.chevronLeft
+                      : FontAwesomeIcons.chevronRight,
                   title: AppLocalization.of(context)!.translate('timetable')),
               SettingsTile(
                   leading: Icons.book,
                   onPressed: () {
                     Navigator.pushNamed(context, NavigationStrings.books);
                   },
-                  icon: FontAwesomeIcons.chevronRight,
+                  icon: AppLocalization.of(context)!.isArabicSelected(context)
+                      ? FontAwesomeIcons.chevronLeft
+                      : FontAwesomeIcons.chevronRight,
                   title: AppLocalization.of(context)!.translate('books')),
               SettingsTile(
                   leading: Icons.local_offer_outlined,
                   onPressed: () {
                     Navigator.pushNamed(context, NavigationStrings.offers);
                   },
-                  icon: FontAwesomeIcons.chevronRight,
+                  icon: AppLocalization.of(context)!.isArabicSelected(context)
+                      ? FontAwesomeIcons.chevronLeft
+                      : FontAwesomeIcons.chevronRight,
                   title: AppLocalization.of(context)!.translate('offers')),
               SettingsTile(
                   leading: Icons.meeting_room,
                   onPressed: () {
                     Navigator.pushNamed(context, NavigationStrings.workshop);
                   },
-                  icon: FontAwesomeIcons.chevronRight,
+                  icon: AppLocalization.of(context)!.isArabicSelected(context)
+                      ? FontAwesomeIcons.chevronLeft
+                      : FontAwesomeIcons.chevronRight,
                   title: AppLocalization.of(context)!.translate('conference')),
               SettingsTile(
                 leading: Icons.logout,
@@ -277,7 +298,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   print("Token : $token");
                   //restartApp();
                 },
-                icon: FontAwesomeIcons.chevronRight,
+                icon: AppLocalization.of(context)!.isArabicSelected(context)
+                    ? FontAwesomeIcons.chevronLeft
+                    : FontAwesomeIcons.chevronRight,
                 title: AppLocalization.of(context)!.translate('logout'),
               ),
             ],

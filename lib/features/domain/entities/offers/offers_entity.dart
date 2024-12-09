@@ -6,7 +6,7 @@ class OffersEntity extends Equatable {
   final String? image;
   final String? company;
   final String? city;
-  final String? salary;
+  final SalaryEntity? salary;
   final String? type;
   final String? contract;
   final String? nature;
@@ -62,4 +62,14 @@ class OffersEntity extends Equatable {
         updatedAt,
         isFavorite
       ];
+}
+
+class SalaryEntity extends Equatable {
+  final String? min;
+  final String? max;
+
+  const SalaryEntity({this.min, this.max});
+  @override
+  // TODO: implement props
+  List<Object?> get props => [min, max];
 }

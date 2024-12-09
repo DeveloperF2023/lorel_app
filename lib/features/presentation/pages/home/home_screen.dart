@@ -34,13 +34,10 @@ class _HomeScreenState extends State<HomeScreen> {
             color: AppColors.primaryColor,
           ),
 
-          // BlocProvider for lives notifications, simplified by moving the BlocProvider to an upper level
           if (!isClosed) _buildLivesNotification(context),
 
-          // Home Screen header with navigation and notification icon
           _buildHomeHeader(context),
 
-          // Main content area
           _buildMainContent(context),
         ],
       ),
@@ -52,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Positioned(
       top: 10,
       left: 10,
+      right: 10,
       child: BlocProvider(
         create: (context) => locator<GetLivesCubit>()..getLives(),
         child: BlocBuilder<GetLivesCubit, GetLivesState>(
@@ -127,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
   // Header widget for Home Screen
   Widget _buildHomeHeader(BuildContext context) {
     return Positioned(
-      top: 30.h,
+      top: 35.h,
       left: AppLocalization.of(context)!.isArabicSelected(context) ? 10.w : 0.w,
       right:
           AppLocalization.of(context)!.isArabicSelected(context) ? 0.w : 10.w,

@@ -44,6 +44,7 @@ import 'package:school_test_online/features/presentation/manager/user/update_pro
 import 'package:school_test_online/features/presentation/manager/user/upload_avatar/upload_avatar_cubit.dart';
 import 'package:school_test_online/features/presentation/manager/workshops/get_detail_workshop/get_detail_workshop_cubit.dart';
 import 'package:school_test_online/features/presentation/manager/workshops/get_workshops/get_workshops_cubit.dart';
+import 'package:school_test_online/features/presentation/pages/chat/detail_conversation_screen.dart';
 import 'package:school_test_online/features/presentation/pages/language/language_screen.dart';
 import 'package:school_test_online/features/presentation/pages/main/main_screen.dart';
 import 'package:school_test_online/features/presentation/pages/no_network/no_network_screen.dart';
@@ -70,10 +71,12 @@ void main() async {
   SharedPreferences _preferences = await SharedPreferences.getInstance();
   PreferencesHelper preferences = PreferencesHelper(_preferences);
   RemoteDataSource remoteDataSource = RemoteDataSourceImpl(
-      client: client, apiClient: apiClient, preferencesHelper: preferences);
-  print("Courses of Formation ${remoteDataSource.getCoursesOfFormation(1)}");
+      apiClient: apiClient, preferencesHelper: preferences);
+  //print("Get Offers ${remoteDataSource.getDetailOffer(4)}");
   runApp(const MyApp());
 }
+
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatefulWidget {
   final Locale? locale;
@@ -182,7 +185,30 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         AndroidInitializationSettings('@mipmap/ic_notification');
     const InitializationSettings initializationSettings =
         InitializationSettings(android: initializationSettingsAndroid);
-    flutterLocalNotificationsPlugin.initialize(initializationSettings);
+    flutterLocalNotificationsPlugin.initialize(
+      initializationSettings,
+      onDidReceiveNotificationResponse: (NotificationResponse response) {
+        if (response.payload != null) {
+          // Parse the JSON payload
+          final data = jsonDecode(response.payload!);
+
+          final conversationId = data['conversationId'] as int;
+          final groupName = data['groupName'] as String;
+          final currentUser = data['currentUser'] as int;
+
+          // Navigate to the DetailConversationScreen
+          navigatorKey.currentState?.push(
+            MaterialPageRoute(
+              builder: (context) => DetailConversationScreen(
+                conversationId: conversationId,
+                groupName: groupName,
+                currentUser: currentUser,
+              ),
+            ),
+          );
+        }
+      },
+    );
 
     initializePusherAndNotifications();
     requestNotificationPermission();
@@ -345,7 +371,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         splitScreenMode: true,
         child: MaterialApp(
           navigatorKey: navigatorKey,
-          title: 'Flutter Demo',
+          title: 'Lorel',
           debugShowCheckedModeBanner: false,
           locale: _locale,
           supportedLocales: const [

@@ -9,23 +9,30 @@ part 'get_workshops_state.dart';
 
 class GetWorkshopsCubit extends Cubit<GetWorkshopsState> {
   final FetchWorkshopsUseCase fetchWorkshopsUseCase;
+
   GetWorkshopsCubit({required this.fetchWorkshopsUseCase})
       : super(GetWorkshopsInitial());
+
   Future<void> getWorkshops(DateTime selectedDate) async {
     emit(GetWorkshopsLoading());
     try {
       final result = await fetchWorkshopsUseCase.callback();
-      result.fold((l) => emit(GetWorkshopsFailure(message: l.message)), (r) {
-        // Filter workshops based on the selected date
-        List<WorkshopEntity> filteredWorkshops = r.where((workshop) {
-          // Check if the date_from matches the selected date
-          return DateTime.parse(workshop.dateFrom!).year == selectedDate.year &&
-              DateTime.parse(workshop.dateFrom!).month == selectedDate.month &&
-              DateTime.parse(workshop.dateFrom!).day == selectedDate.day;
-        }).toList();
 
-        emit(GetWorkshopsLoaded(workshops: filteredWorkshops));
-      });
+      result.fold(
+        (failure) => emit(GetWorkshopsFailure(message: failure.message)),
+        (workshops) {
+          List<WorkshopEntity> filteredWorkshops = workshops.where((workshop) {
+            DateTime createdAt = DateTime.parse(workshop.createdAt!);
+            DateTime dateFrom = DateTime.parse(workshop.dateFrom!);
+
+            return selectedDate
+                    .isAfter(createdAt.subtract(const Duration(days: 1))) &&
+                selectedDate.isBefore(dateFrom.add(const Duration(days: 1)));
+          }).toList();
+
+          emit(GetWorkshopsLoaded(workshops: filteredWorkshops));
+        },
+      );
     } on SocketException catch (e) {
       emit(GetWorkshopsFailure(message: e.toString()));
     } catch (e) {

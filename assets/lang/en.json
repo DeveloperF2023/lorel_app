@@ -24,6 +24,7 @@
   "certificateRequest": "Certificate Request",
   "firstName": "First Name",
   "lastName": "Last Name",
+  "name": "Full name",
   "phone": "Phone",
   "address": "Address",
   "birthday": "Birthday",
@@ -67,6 +68,7 @@
   "jobTime": "Job Time",
   "jobDuties": "Job duties",
   "profileRequested": "Profile requested",
+  "experience": "Experience",
   "partTime": "Part Time",
   "fullTime": "Full Time",
   "perMonth": "per month",
@@ -131,5 +133,12 @@
   "avatarUploaded": "Avatar uploaded successfully!",
   "courseNotFoundYet": "Course Not Available Yet",
   "messageErrorCourseNotFound": "It seems the teacher hasn’t created or assigned this course yet",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "missingLowercase": "Password must include at least one lowercase letter.",
+  "missingUppercase": "Password must include at least one uppercase letter.",
+  "missingDigit": "Password must include at least one digit.",
+  "missingSpecialCharacter": "Password must include at least one special character (!@#\\$&*~).",
+  "successPayment": "Congratulations, your request has been registered, our team will contact you as soon as possible.",
+  "ok": "Ok",
+  "emptyWorkshops": "No workshops are available at the moment. Please check back later or try selecting a different date."
 }

@@ -9,7 +9,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:school_test_online/core/constants/app_colors.dart';
 import 'package:school_test_online/core/utils/helpers/locale_service.dart';
+import 'package:school_test_online/features/domain/entities/offers/detail_offer_entity.dart';
 import 'package:school_test_online/features/presentation/manager/offers/apply_to_offer/apply_to_offer_cubit.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/routes/routes.dart';
 import '../../../../core/utils/helpers/helper_functions.dart';

@@ -14,35 +14,38 @@ class SettingsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          children: [
-            Icon(
-              leading,
-              color: AppColors.primaryColor,
-            ),
-            SizedBox(width: 10.w),
-            Text(
-              title,
-              style: GoogleFonts.robotoCondensed(
-                color: AppColors.carbonGrey,
-                fontSize: 18.sp,
-                fontWeight: FontWeight.w400,
+    return GestureDetector(
+      onTap: onPressed,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              Icon(
+                leading,
+                color: AppColors.primaryColor,
               ),
-            ),
-          ],
-        ),
-        IconButton(
-          onPressed: onPressed,
-          icon: Icon(
-            icon,
-            color: Colors.black,
-            size: 18.sp,
+              SizedBox(width: 10.w),
+              Text(
+                title,
+                style: GoogleFonts.robotoCondensed(
+                  color: AppColors.carbonGrey,
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ],
           ),
-        ),
-      ],
+          IconButton(
+            onPressed: onPressed,
+            icon: Icon(
+              icon,
+              color: Colors.black,
+              size: 18.sp,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -3,9 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:school_test_online/core/utils/helpers/helper_functions.dart';
 import 'package:school_test_online/core/utils/helpers/locale_service.dart';
 import 'package:school_test_online/features/presentation/manager/lives/get_lives/get_lives_cubit.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../core/constants/app_colors.dart';
+import '../../../../core/routes/routes.dart';
 import '../../../../dependencies_injection.dart';
 import '../../widgets/detail_my_courses/widgets_imports.dart';
 import '../../widgets/lives/widgets_imports.dart';
@@ -27,6 +29,16 @@ class LivesScreen extends StatelessWidget {
       appBar: AppBarDetailMyCourse(
         backgroundColor: AppColors.harp,
         title: AppLocalization.of(context)!.translate("lives"),
+        onTap: () async {
+          final prefs = await SharedPreferences.getInstance();
+          final token = prefs.getString("token");
+          if (token != null) {
+            Navigator.pushReplacementNamed(context, NavigationStrings.main,
+                arguments: token);
+          } else {
+            debugPrint("Token it's null");
+          }
+        },
       ),
       body: SafeArea(
           child: BlocProvider(

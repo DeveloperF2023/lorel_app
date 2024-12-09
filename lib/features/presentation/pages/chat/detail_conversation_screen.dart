@@ -68,9 +68,30 @@ class _DetailConversationScreenState extends State<DetailConversationScreen> {
         _isTyping = _textController.text.isNotEmpty;
       });
     });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _scrollToBottom();
+    });
+    flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+    const AndroidInitializationSettings initializationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/ic_notification');
+    const InitializationSettings initializationSettings =
+        InitializationSettings(android: initializationSettingsAndroid);
+    flutterLocalNotificationsPlugin.initialize(
+      initializationSettings,
+    );
     _initializeRecorder();
     initializePusher();
     _fetchMessages();
+  }
+
+  void _scrollToBottom() {
+    if (_scrollController.hasClients) {
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
+    }
   }
 
   void _startTimer() {
@@ -98,6 +119,7 @@ class _DetailConversationScreenState extends State<DetailConversationScreen> {
   }
 
   Future<void> pickDocument() async {
+    // Show file picker dialog and get the result
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['pdf', 'doc', 'docx', 'txt'],
@@ -110,45 +132,50 @@ class _DetailConversationScreenState extends State<DetailConversationScreen> {
       return;
     }
 
+    // If a document is selected
     if (result != null && result.files.single.path != null) {
       File documentFile = File(result.files.single.path!);
 
-      final newMessage = MessagesModel(
-        body: 'Document: ${result.files.single.name}',
-        file: documentFile.path,
-        type: 'file',
-        user: UserDataModel(id: widget.currentUser, name: name),
-      );
+      // Check if the document has already been uploaded
+      if (!messagesList.any((message) => message.file == documentFile.path)) {
+        //final newMessage = MessagesModel(
+        //           body: 'Document: ${result.files.single.name}',
+        //           file: documentFile.path,
+        //           type: 'file',
+        //           user: UserDataModel(id: widget.currentUser, name: name),
+        //         );
+        //
+        //         setState(() {
+        //           messagesList.add(newMessage); // Add message before sending
+        //                  });
 
-      setState(() {
-        messagesList.add(newMessage);
-      });
-
-      if (result.files.single.extension?.toLowerCase() == 'pdf') {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ShowDocumentPicked(
-              pickedFile: documentFile,
-              onSend: () async {
-                await context.read<AttachFileToConversationCubit>().attachFile(
-                      conversationId: widget.conversationId,
-                      file: documentFile,
-                      type: "file",
-                    );
-                Navigator.pop(context);
-
-                // Refresh messages only after attaching the document
-                _fetchMessages();
-              },
+        if (result.files.single.extension?.toLowerCase() == 'pdf') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ShowDocumentPicked(
+                pickedFile: documentFile,
+                onSend: () async {
+                  // Send the document after the user confirms
+                  await context
+                      .read<AttachFileToConversationCubit>()
+                      .attachFile(
+                        conversationId: widget.conversationId,
+                        file: documentFile,
+                        type: "file",
+                      );
+                  Navigator.pop(context);
+                  _fetchMessages();
+                },
+              ),
             ),
-          ),
-        );
+          );
+        } else {
+          print("Image is already uploaded.");
+        }
       } else {
-        print("Non-PDF documents cannot be previewed.");
+        print("Document is already uploaded.");
       }
-
-      initializePusher(); // Initialize Pusher once if not already initialized
     } else {
       print("Document picking cancelled or file path is null");
     }
@@ -159,19 +186,45 @@ class _DetailConversationScreenState extends State<DetailConversationScreen> {
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String name = preferences.getString("name")!;
+
     if (image != null) {
       File imageFile = File(image.path);
       print('image file ${imageFile}');
-      final newMessage = MessagesModel(
-        body: 'Image: ${image.name}',
-        file: imageFile.path,
-        type: 'image',
-        user: UserDataModel(id: widget.currentUser, name: name),
-      );
 
-      setState(() {
-        messagesList.add(newMessage);
-      });
+      if (!messagesList.any((message) => message.file == imageFile.path)) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ShowImagePicked(
+              file: imageFile,
+              onSend: () async {
+                await context.read<AttachFileToConversationCubit>().attachFile(
+                      conversationId: widget.conversationId,
+                      file: imageFile,
+                      type: "image",
+                    );
+                Navigator.pop(context);
+                _fetchMessages();
+              },
+            ),
+          ),
+        );
+      } else {
+        print("Image is already uploaded.");
+      }
+    } else {
+      print("Image picking cancelled");
+    }
+  }
+
+  Future<void> pickImageSecond() async {
+    final ImagePicker _picker = ImagePicker();
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String name = preferences.getString("name")!;
+    if (!messagesList.any((message) => message.file == image!.path)) {
+      File imageFile = File(image!.path);
+      print('image file $imageFile');
 
       Navigator.push(
         context,
@@ -179,23 +232,27 @@ class _DetailConversationScreenState extends State<DetailConversationScreen> {
           builder: (context) => ShowImagePicked(
             file: imageFile,
             onSend: () async {
+              final newMessage = MessagesModel(
+                body: 'Image: ${image.name}',
+                file: imageFile.path,
+                type: 'image',
+                user: UserDataModel(id: widget.currentUser, name: name),
+              );
               await context.read<AttachFileToConversationCubit>().attachFile(
                     conversationId: widget.conversationId,
-                    file: imageFile,
-                    type: "image",
+                    file: File(newMessage.file!),
+                    type: newMessage.type!,
                   );
+
               Navigator.pop(context);
 
-              // Refresh messages only after attaching the image
               _fetchMessages();
             },
           ),
         ),
       );
 
-      initializePusher(); // Ensure Pusher is initialized only once
-    } else {
-      print("Image picking cancelled");
+      initializePusher();
     }
   }
 
@@ -211,12 +268,11 @@ class _DetailConversationScreenState extends State<DetailConversationScreen> {
       builder: (BuildContext context) {
         return AddOptionsModal(
           onAddDocument: () async {
-            await pickDocument(); // Pick document when this option is tapped
+            await pickDocument();
           },
           onAddImage: () async {
-            await pickImage(); // Pick image when this option is tapped
+            await pickImageSecond();
           },
-          onAddText: () {},
         );
       },
     );
@@ -265,20 +321,7 @@ class _DetailConversationScreenState extends State<DetailConversationScreen> {
 
         if (!_cancelledRecording) {
           if (path != null) {
-            // Create a file from the path
             File audioFile = File(path);
-            final newMessage = MessagesModel(
-              body: 'Audio: ${audioFile.path}',
-              file: audioFile.path,
-              type: 'audio', // Define type accordingly
-              user: UserDataModel(
-                  id: widget.currentUser, name: name), // Change as necessary
-            );
-
-            setState(() {
-              messagesList.add(newMessage);
-            });
-            // Send the audio file to the conversation
             context
                 .read<AttachFileToConversationCubit>()
                 .attachFile(
@@ -313,19 +356,26 @@ class _DetailConversationScreenState extends State<DetailConversationScreen> {
 
   Future<void> initializePusher() async {
     pusherService = PusherService("2d18b004034647ac52b3", "eu");
-    pusherService!.subscribeToChannel('messages', {
-      'conversations.messages.student.${widget.conversationId}': ''
-    }, (event) {
+    pusherService!.subscribeToChannel('conversations', {
+      'conversations.messages.${widget.conversationId}':
+          '${widget.conversationId}'
+    }, (event) async {
+      print('Event received: $event');
       if (event != null) {
-        print('Event name: ${event.eventName}');
         print('Event data: ${event.data}');
         final Map<String, dynamic> jsonData = jsonDecode(event.data!);
+        print('Decoded JSON: $jsonData');
         final newMessage = MessagesModel.fromJson(jsonData);
+        print('Parsed message: ${newMessage.body}');
+        if (newMessage.user!.id != widget.currentUser) {
+          showNotification(
+              "Message from ${newMessage.user!.name}", "${newMessage.body}");
+        }
         setState(() {
           messagesList.add(newMessage);
         });
-        showNotification(
-            "Message from ${newMessage.user!.name}", "${newMessage.body}");
+
+        BlocProvider.of<GetMessagesCubit>(context).addMessage(newMessage);
       } else {
         print('Received null event');
       }
@@ -342,6 +392,11 @@ class _DetailConversationScreenState extends State<DetailConversationScreen> {
       priority: Priority.high,
       showWhen: false,
     );
+    final payload = jsonEncode({
+      'conversationId': widget.conversationId,
+      'groupName': widget.groupName,
+      'currentUser': widget.currentUser,
+    });
     const NotificationDetails platformChannelSpecifics =
         NotificationDetails(android: androidPlatformChannelSpecifics);
     await flutterLocalNotificationsPlugin.show(
@@ -349,7 +404,7 @@ class _DetailConversationScreenState extends State<DetailConversationScreen> {
       title,
       body,
       platformChannelSpecifics,
-      payload: 'item id 2',
+      payload: payload,
     );
   }
 
@@ -387,21 +442,25 @@ class _DetailConversationScreenState extends State<DetailConversationScreen> {
                       return const Center(child: CircularProgressIndicator());
                     } else if (state is GetMessagesLoaded) {
                       messagesList = state.messages as List<MessagesModel>;
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        _scrollToBottom();
+                      });
                       return Stack(
                         children: [
                           Container(
                             color: AppColors.harp,
                             child: ListView.builder(
-                              controller:
-                                  _scrollController, // Attach ScrollController
+                              controller: _scrollController,
                               padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
                               itemCount: messagesList.length,
                               itemBuilder: (context, index) {
                                 final message = messagesList[index];
+                                print("Messages $message");
                                 final isCurrentUser =
                                     message.user!.id == widget.currentUser;
                                 final isUserImage = message.user!.image == null;
-
+                                print(
+                                    'Message received: ${jsonEncode(message.toJson())}');
                                 return DetailMessageContent(
                                   userImage: !isUserImage
                                       ? message.user!.image!
@@ -539,25 +598,14 @@ class _DetailConversationScreenState extends State<DetailConversationScreen> {
                                   SharedPreferences preferences =
                                       await SharedPreferences.getInstance();
                                   final name = preferences.getString("name");
-                                  context
+                                  await context
                                       .read<SendMessageCubit>()
                                       .sendMessage(
                                         conversationId: widget.conversationId,
                                         content: _textController.text,
-                                      )
-                                      .then((_) {
-                                    // Append the newly sent message to the local list
-                                    setState(() {
-                                      messagesList.add(MessagesModel(
-                                        body: _textController.text,
-                                        user: UserDataModel(
-                                            id: widget.currentUser, name: name),
-                                      ));
-                                      _textController.clear();
-                                    });
-
-                                    initializePusher(); // Reinitialize Pusher to listen for updates
-                                  });
+                                      );
+                                  //_fetchMessages();
+                                  _textController.clear();
                                 }
                               : null,
                           child: AnimatedContainer(
@@ -575,26 +623,12 @@ class _DetailConversationScreenState extends State<DetailConversationScreen> {
                             child: Icon(
                               _isTyping
                                   ? Icons.send
-                                  : (_isRecording
-                                      ? Icons.mic
-                                      : Icons
-                                          .mic), // Change the icon based on the state
+                                  : (_isRecording ? Icons.mic : Icons.mic),
                               color: Colors.white,
                               size: 20.sp,
                             ),
                           ),
                         );
-                      },
-                    ),
-                    StreamBuilder<void>(
-                      stream:
-                          context.read<SendMessageCubit>().messageSentStream,
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.active) {
-                          _fetchMessages();
-                        }
-                        return Container(); // Empty container
                       },
                     ),
                   ],

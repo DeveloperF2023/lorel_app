@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:school_test_online/core/utils/helpers/locale_service.dart';
 import 'package:school_test_online/features/presentation/widgets/global/widgets_imports.dart';
 
 import '../../../../core/constants/app_colors.dart';
+import '../../../../core/routes/routes.dart';
 import '../../../../core/utils/helpers/helper_functions.dart';
 import '../../widgets/success/widgets_imports.dart';
 
@@ -31,13 +33,14 @@ class SuccessRegistrationScreen extends StatelessWidget {
                   BackButtonWidget(
                     backgroundColor: Colors.white,
                     iconColor: AppColors.primaryColor,
-                    onTap: () => Navigator.pop(context),
+                    onTap: () => Navigator.pushReplacementNamed(
+                        context, NavigationStrings.allCourses),
                   ),
                   SizedBox(
                     width: 60.w,
                   ),
                   Text(
-                    "S’Inscrire",
+                    AppLocalization.of(context)!.translate("register"),
                     style: GoogleFonts.robotoCondensed(
                         fontSize: 24.sp, color: Colors.white),
                   ),
@@ -56,7 +59,7 @@ class SuccessRegistrationScreen extends StatelessWidget {
                       topRight: Radius.circular(30.r),
                       topLeft: Radius.circular(30.r),
                     )),
-                child: SuccessRegistrationContent(),
+                child: const SuccessRegistrationContent(),
               )),
           Positioned(
               top: 80.h,
