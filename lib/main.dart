@@ -113,7 +113,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   /// Changes the language and updates the locale in SharedPreferences
   void _changeLanguage(Locale locale) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('locale', locale.languageCode); // Save language code
+    prefs.setString('locale', locale.languageCode);
     setState(() {
       _locale = locale;
     });

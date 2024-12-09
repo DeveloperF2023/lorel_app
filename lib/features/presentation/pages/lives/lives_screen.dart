@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:school_test_online/core/utils/helpers/helper_functions.dart';
 import 'package:school_test_online/core/utils/helpers/locale_service.dart';
 import 'package:school_test_online/features/presentation/manager/lives/get_lives/get_lives_cubit.dart';
@@ -9,6 +10,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/routes/routes.dart';
 import '../../../../dependencies_injection.dart';
+import '../../widgets/chat/custom_shimmer_loading.dart';
 import '../../widgets/detail_my_courses/widgets_imports.dart';
 import '../../widgets/lives/widgets_imports.dart';
 
@@ -46,7 +48,18 @@ class LivesScreen extends StatelessWidget {
         child: BlocBuilder<GetLivesCubit, GetLivesState>(
           builder: (context, state) {
             if (state is GetLivesLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return ListView.builder(
+                  itemCount: 8,
+                  padding: EdgeInsets.only(top: 10.h),
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: EdgeInsets.only(
+                          bottom: 10.h, left: 10.w, right: 10.w),
+                      child: CustomShimmer(
+                          height: 80,
+                          width: HelperFunctions.screenWidth(context).w),
+                    );
+                  });
             } else if (state is GetLivesLoaded) {
               final upcomingLives = state.lives.where((live) {
                 final startTime = live.startTime;
