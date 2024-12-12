@@ -23,7 +23,7 @@ class FavoriteEntity extends Equatable {
   final bool? isFavorite;
   final PivotFavoriteEntity? pivot;
 
-  FavoriteEntity(
+  const FavoriteEntity(
       {this.id,
       this.title,
       this.image,

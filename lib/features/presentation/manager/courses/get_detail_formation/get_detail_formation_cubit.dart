@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:school_test_online/features/domain/entities/courses/courses_entity.dart';
 
 import '../../../../domain/use_cases/courses/fetch_detail_formation_use_case.dart';
@@ -21,12 +22,12 @@ class GetDetailFormationCubit extends Cubit<GetDetailFormationState> {
       result.fold((l) => emit(GetDetailFormationFailure(message: l.message)),
           (r) => emit(GetDetailFormationLoaded(detailFormation: r)));
     } on SocketException catch (e) {
-      print("this is error $e");
-      print("failed registration");
+      debugPrint("this is error $e");
+      debugPrint("failed registration");
       emit(GetDetailFormationFailure(message: e.toString()));
     } catch (e) {
-      print("this is error $e");
-      print("failed registration");
+      debugPrint("this is error $e");
+      debugPrint("failed registration");
       emit(GetDetailFormationFailure(message: e.toString()));
     }
   }

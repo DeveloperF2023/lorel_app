@@ -2,11 +2,17 @@ import 'package:school_test_online/features/domain/entities/user/request_registe
 
 class RequestRegisterUserModel extends RequestRegisterUserEntity {
   String? name;
+
   String? email;
+
   String? password;
+
   String? passwordConfirmation;
+
   String? address;
+
   String? phone;
+
   String? country;
 
   RequestRegisterUserModel(

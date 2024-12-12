@@ -2,22 +2,39 @@ import 'package:school_test_online/features/domain/entities/workshop/workshop_en
 
 class WorkshopModel extends WorkshopEntity {
   int? id;
+
   String? title;
+
   String? dateFrom;
+
   String? dateTo;
+
   String? description;
+
   String? image;
-  Null? participants;
+
+  Null participants;
+
   String? price;
+
   String? address;
+
   String? about;
+
   String? link;
+
   String? video;
-  Null? publishedAt;
+
+  Null publishedAt;
+
   int? active;
+
   String? createdAt;
+
   String? updatedAt;
+
   int? participantsCount;
+
   bool? free;
 
   WorkshopModel(

@@ -22,7 +22,7 @@ final class AddToFavoriteListLoaded extends AddToFavoriteListState {
 final class AddToFavoriteListFailure extends AddToFavoriteListState {
   final String message;
 
-  AddToFavoriteListFailure({required this.message});
+  const AddToFavoriteListFailure({required this.message});
   @override
   List<Object> get props => [message];
 }

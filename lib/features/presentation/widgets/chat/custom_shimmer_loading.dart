@@ -4,8 +4,7 @@ class CustomShimmer extends StatelessWidget {
   final double height;
   final double width;
 
-  const CustomShimmer({Key? key, required this.height, required this.width})
-      : super(key: key);
+  const CustomShimmer({super.key, required this.height, required this.width});
 
   @override
   Widget build(BuildContext context) {

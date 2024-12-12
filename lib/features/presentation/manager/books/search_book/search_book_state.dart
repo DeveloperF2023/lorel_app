@@ -17,7 +17,7 @@ final class SearchBookLoading extends SearchBookState {
 final class SearchBookLoaded extends SearchBookState {
   final List<BookEntity> book;
 
-  SearchBookLoaded({required this.book});
+  const SearchBookLoaded({required this.book});
   @override
   List<Object> get props => [book];
 }
@@ -25,7 +25,7 @@ final class SearchBookLoaded extends SearchBookState {
 final class SearchBookFailure extends SearchBookState {
   final String message;
 
-  SearchBookFailure({required this.message});
+  const SearchBookFailure({required this.message});
   @override
   List<Object> get props => [message];
 }

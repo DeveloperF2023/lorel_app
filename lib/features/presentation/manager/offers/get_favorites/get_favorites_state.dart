@@ -17,7 +17,7 @@ final class GetFavoritesLoading extends GetFavoritesState {
 final class GetFavoritesLoaded extends GetFavoritesState {
   final List<FavoriteEntity> favorites;
 
-  GetFavoritesLoaded({required this.favorites});
+  const GetFavoritesLoaded({required this.favorites});
   @override
   List<Object> get props => [favorites];
 }
@@ -25,7 +25,7 @@ final class GetFavoritesLoaded extends GetFavoritesState {
 final class GetFavoritesFailure extends GetFavoritesState {
   final String message;
 
-  GetFavoritesFailure({required this.message});
+  const GetFavoritesFailure({required this.message});
   @override
   List<Object> get props => [message];
 }

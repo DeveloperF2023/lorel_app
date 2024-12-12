@@ -2,13 +2,21 @@ import 'package:school_test_online/features/domain/entities/user/user_data_entit
 
 class UserDataModel extends UserDataEntity {
   int? id;
+
   String? name;
+
   String? role;
+
   String? address;
+
   String? country;
+
   String? image;
+
   bool? active;
+
   String? createdAt;
+
   String? updatedAt;
 
   UserDataModel(

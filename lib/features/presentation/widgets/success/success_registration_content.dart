@@ -13,9 +13,9 @@ class SuccessRegistrationContent extends StatelessWidget {
           Container(
             height: 45.h,
             width: 45.w,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 shape: BoxShape.circle, color: AppColors.yellowGreen),
-            child: Center(
+            child: const Center(
               child: Icon(
                 Icons.check,
                 color: Colors.white,
@@ -39,7 +39,7 @@ class SuccessRegistrationContent extends StatelessWidget {
             onTap: () async {
               final prefs = await SharedPreferences.getInstance();
               final token = prefs.getString("token");
-              if (token != null) {
+              if (token != null && context.mounted) {
                 Navigator.pushReplacementNamed(context, NavigationStrings.main,
                     arguments: token);
               } else {

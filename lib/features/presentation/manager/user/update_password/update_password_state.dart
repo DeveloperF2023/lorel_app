@@ -17,7 +17,7 @@ final class UpdatePasswordLoading extends UpdatePasswordState {
 final class UpdatePasswordLoaded extends UpdatePasswordState {
   final String message;
 
-  UpdatePasswordLoaded({required this.message});
+  const UpdatePasswordLoaded({required this.message});
   @override
   List<Object> get props => [message];
 }
@@ -25,7 +25,7 @@ final class UpdatePasswordLoaded extends UpdatePasswordState {
 final class UpdatePasswordFailure extends UpdatePasswordState {
   final String message;
 
-  UpdatePasswordFailure({required this.message});
+  const UpdatePasswordFailure({required this.message});
   @override
   List<Object> get props => [message];
 }

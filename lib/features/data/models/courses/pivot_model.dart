@@ -4,8 +4,8 @@ class PivotModel extends PivotEntity {
   int? userId;
   int? courseId;
   String? startedAt;
-  Null? finishedAt;
-  Null? expiredAt;
+  Null finishedAt;
+  Null expiredAt;
 
   PivotModel(
       {this.userId,

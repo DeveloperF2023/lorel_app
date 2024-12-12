@@ -29,21 +29,19 @@ class TextFieldRequest extends StatelessWidget {
                   fontWeight: FontWeight.w400),
             ),
           ),
-          Container(
-            child: TextFormField(
-              controller: controller,
-              validator: validator,
-              keyboardType: keyboardType,
-              decoration: InputDecoration(
-                  fillColor: Colors.white,
-                  filled: true,
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.white),
-                      borderRadius: BorderRadius.circular(30.r)),
-                  border: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.white),
-                      borderRadius: BorderRadius.circular(30.r))),
-            ),
+          TextFormField(
+            controller: controller,
+            validator: validator,
+            keyboardType: keyboardType,
+            decoration: InputDecoration(
+                fillColor: Colors.white,
+                filled: true,
+                enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.white),
+                    borderRadius: BorderRadius.circular(30.r)),
+                border: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.white),
+                    borderRadius: BorderRadius.circular(30.r))),
           )
         ],
       ),

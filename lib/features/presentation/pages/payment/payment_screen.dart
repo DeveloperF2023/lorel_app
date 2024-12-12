@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:school_test_online/core/utils/helpers/locale_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,8 +18,8 @@ class PaymentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("The selected diploma: $selectedDiploma");
-    print("Formation ID: $formationId");
+    debugPrint("The selected diploma: $selectedDiploma");
+    debugPrint("Formation ID: $formationId");
     return Scaffold(
       body: Stack(
         clipBehavior: Clip.none,
@@ -44,7 +43,7 @@ class PaymentScreen extends StatelessWidget {
                         SharedPreferences prefs =
                             await SharedPreferences.getInstance();
                         final token = prefs.getString("token");
-                        if (token == null) {
+                        if (token == null && context.mounted) {
                           Navigator.pushReplacementNamed(
                               context, NavigationStrings.registrationCourse,
                               arguments: {
@@ -82,30 +81,6 @@ class PaymentScreen extends StatelessWidget {
                 child: PaymentContent(
                   selectedDiploma: selectedDiploma ?? "maroc",
                   formationId: formationId,
-                ),
-              )),
-          Positioned(
-              top: 65.h,
-              left: 100.w,
-              right: 100.w,
-              child: Container(
-                height: 55.h,
-                width: 55.w,
-                decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 8,
-                          offset: Offset(1, 1))
-                    ]),
-                child: Center(
-                  child: Icon(
-                    FontAwesomeIcons.solidUser,
-                    color: AppColors.darkGrey,
-                    size: 25.sp,
-                  ),
                 ),
               )),
         ],

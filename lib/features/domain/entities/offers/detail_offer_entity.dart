@@ -22,7 +22,7 @@ class DetailOfferEntity extends Equatable {
   final String? updatedAt;
   final bool? ifFavorite;
 
-  DetailOfferEntity(
+  const DetailOfferEntity(
       {this.id,
       this.title,
       this.image,

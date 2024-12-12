@@ -4,10 +4,10 @@ class PivotEntity extends Equatable {
   final int? userId;
   final int? courseId;
   final String? startedAt;
-  final Null? finishedAt;
-  final Null? expiredAt;
+  final Null finishedAt;
+  final Null expiredAt;
 
-  PivotEntity(
+  const PivotEntity(
       {this.userId,
       this.courseId,
       this.startedAt,
@@ -15,5 +15,6 @@ class PivotEntity extends Equatable {
       this.expiredAt});
   @override
   // TODO: implement props
-  List<Object?> get props => [];
+  List<Object?> get props =>
+      [userId, courseId, startedAt, finishedAt, expiredAt];
 }

@@ -23,7 +23,7 @@ class CoursesByStatusEntity extends Equatable {
   final CurrentCoursesEntity? currentCourse;
   final DomainEntity? domain;
 
-  CoursesByStatusEntity(
+  const CoursesByStatusEntity(
       {this.id,
       this.title,
       this.image,

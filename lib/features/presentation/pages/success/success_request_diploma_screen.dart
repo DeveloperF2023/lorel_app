@@ -57,7 +57,7 @@ class SuccessRequestDiplomaScreen extends StatelessWidget {
                       topRight: Radius.circular(30.r),
                       topLeft: Radius.circular(30.r),
                     )),
-                child: SuccessRegistrationContent(),
+                child: const SuccessRegistrationContent(),
               )),
         ],
       ),

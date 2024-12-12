@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:school_test_online/features/domain/use_cases/timetable/fetch_schedules_use_case.dart';
 
@@ -24,7 +25,7 @@ class GetScheduleCubit extends Cubit<GetScheduleState> {
         (failure) => emit(GetScheduleFailure(message: failure.message)),
         (schedules) => emit(GetScheduleLoaded(schedules: schedules)),
       );
-      print("Result Get Schedule : $schedulesResult  $weekKey");
+      debugPrint("Result Get Schedule : $schedulesResult  $weekKey");
     } catch (e) {
       emit(GetScheduleFailure(message: e.toString()));
     }

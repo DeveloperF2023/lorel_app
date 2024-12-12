@@ -13,9 +13,9 @@ class SuccessRequestDiplomaContent extends StatelessWidget {
           Container(
             height: 45.h,
             width: 45.w,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 shape: BoxShape.circle, color: AppColors.yellowGreen),
-            child: Center(
+            child: const Center(
               child: Icon(
                 Icons.check,
                 color: Colors.white,
@@ -37,7 +37,7 @@ class SuccessRequestDiplomaContent extends StatelessWidget {
           SizedBox(
             height: 20.h,
           ),
-          PrimaryButton(
+          const PrimaryButton(
             textButton: "D’accord",
           )
         ],

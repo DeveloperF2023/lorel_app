@@ -20,7 +20,7 @@ final class AttachFileToConversationLoaded
     extends AttachFileToConversationState {
   final SendMessageResponseEntity attachFile;
 
-  AttachFileToConversationLoaded({required this.attachFile});
+  const AttachFileToConversationLoaded({required this.attachFile});
   @override
   List<Object> get props => [attachFile];
 }
@@ -29,7 +29,7 @@ final class AttachFileToConversationFailure
     extends AttachFileToConversationState {
   final String message;
 
-  AttachFileToConversationFailure({required this.message});
+  const AttachFileToConversationFailure({required this.message});
   @override
   List<Object> get props => [message];
 }

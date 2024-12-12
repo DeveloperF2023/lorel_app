@@ -47,7 +47,7 @@ class SettingsLivesEntity extends Equatable {
   final ApprovedOrDeniedCountriesOrRegions? signLanguageInterpretation;
   final bool? emailInAttendeeReport;
 
-  SettingsLivesEntity(
+  const SettingsLivesEntity(
       {this.hostVideo,
       this.participantVideo,
       this.cnMeeting,

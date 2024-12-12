@@ -49,7 +49,7 @@ class AppBarGlobal extends StatelessWidget implements PreferredSizeWidget {
                     Navigator.pushNamed(
                         context, NavigationStrings.notification);
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.notifications,
                     color: Colors.white,
                   ))
@@ -60,5 +60,5 @@ class AppBarGlobal extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   // TODO: implement preferredSize
-  Size get preferredSize => Size(0, 70);
+  Size get preferredSize => const Size(0, 70);
 }

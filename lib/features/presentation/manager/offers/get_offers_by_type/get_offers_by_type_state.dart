@@ -25,7 +25,7 @@ final class GetOffersByTypeLoaded extends GetOffersByTypeState {
 final class GetOffersByTypeFailure extends GetOffersByTypeState {
   final String message;
 
-  GetOffersByTypeFailure({required this.message});
+  const GetOffersByTypeFailure({required this.message});
   @override
   List<Object> get props => [message];
 }

@@ -140,5 +140,13 @@
   "missingSpecialCharacter": "Le mot de passe doit inclure au moins un caractère spécial (!@#\\$&*~).",
   "successPayment": "Félicitations, votre demande a bien été enregistrée, notre équipe vous contactera dans les plus brefs délais.",
   "ok": "D'accord",
-  "emptyWorkshops": "Aucun atelier n'est disponible pour le moment. Veuillez revenir plus tard ou essayer de sélectionner une autre date."
+  "emptyWorkshops": "Aucun atelier n'est disponible pour le moment. Veuillez revenir plus tard ou essayer de sélectionner une autre date.",
+  "newBook": "Nouveau livre👋",
+  "newBookCreated": "Nouveau livre créé, vous pouvez le consulter maintenant👌",
+  "newCourse": "Nouvelle Formation👋",
+  "newCourseCreated": "Nouvelle Formation créée, vous pouvez vérifier maintenant👌",
+  "newEnrollment": "Nouvelle inscription👋",
+  "newEnrollmentCreated": "Nouvelle inscription, vous pouvez vérifier maintenant👌",
+  "newLive": "Nouveau live👋",
+  "newLiveCreated": "Nouveau live créé, vous pouvez vérifier maintenant👌"
 }

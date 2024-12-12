@@ -4,10 +4,15 @@ import 'package:school_test_online/features/domain/entities/timetable/schedule_e
 
 class ScheduleModel extends ScheduleEntity {
   final String? start;
+
   final String? end;
+
   final String? day;
+
   final String? date;
+
   final CoursesModel? formation;
+
   final GroupModel? group;
 
   const ScheduleModel(

@@ -30,7 +30,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       appBar: AppBarAllCourses(
         title: AppLocalization.of(context)!.translate('updateProfile'),
         onTap: () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => SettingsScreen())),
+            context, MaterialPageRoute(builder: (context) => const SettingsScreen())),
       ),
       body: SafeArea(
           child: Form(

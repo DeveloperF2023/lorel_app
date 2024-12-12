@@ -13,11 +13,10 @@ class ShowImageSelected extends StatefulWidget {
 
 class _ShowImageSelectedState extends State<ShowImageSelected> {
   bool _isDownloading = false;
-  double _downloadProgress = 0.0;
   Future<void> _downloadImage(Uint8List? imageData) async {
     if (imageData == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('No image data available to download')),
+        const SnackBar(content: Text('No image data available to download')),
       );
       return;
     }
@@ -99,7 +98,7 @@ class _ShowImageSelectedState extends State<ShowImageSelected> {
             ],
           ),
           if (_isDownloading)
-            Align(
+            const Align(
               alignment: Alignment.topCenter,
               child: LinearProgressIndicator(),
             ),

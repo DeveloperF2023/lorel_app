@@ -51,9 +51,9 @@ class _LoginScreenState extends State<LoginScreen> {
               setState(() {
                 _isSigningIn = true;
               });
-              print("Login successful, transitioning to main screen");
+              debugPrint("Login successful, transitioning to main screen");
             } else if (credentialState is CredentialLoading) {
-              print("Credential loading...");
+              debugPrint("Credential loading...");
               const CircularProgressIndicator();
             } else if (credentialState is CredentialFailure) {
               setState(() {
@@ -63,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 content: Text(AppLocalization.of(context)!
                     .translate("incorrectPassword")),
               ));
-              print("Login failed ${credentialState.message}");
+              debugPrint("Login failed ${credentialState.message}");
             }
           },
           builder: (context, credentialState) {
@@ -72,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
               return BlocBuilder<AuthCubit, AuthState>(
                   builder: (context, authState) {
                 if (authState is Authenticated && authState.userToken != null) {
-                  print(
+                  debugPrint(
                       "Authenticated state detected, redirecting to MainScreen");
                   return MainScreen(
                     token: authState.userToken!,

@@ -4,22 +4,38 @@ import 'package:school_test_online/features/domain/entities/offers/offers_entity
 
 class OffersModel extends OffersEntity {
   int? id;
+
   String? title;
+
   String? image;
+
   String? company;
+
   String? city;
   SalaryModel? salaries;
+
   String? type;
+
   String? contract;
+
   String? nature;
+
   String? missions;
+
   String? skills;
+
   String? experience;
+
   int? periode;
+
   String? unit;
+
   bool? active;
+
   String? createdAt;
+
   String? updatedAt;
+
   bool? isFavorite;
 
   OffersModel(
@@ -81,6 +97,7 @@ class OffersModel extends OffersEntity {
 
 class SalaryModel extends SalaryEntity {
   final String? min;
+
   final String? max;
   const SalaryModel({this.min, this.max}) : super(max: max, min: min);
   factory SalaryModel.fromJson(Map<String, dynamic> json) {

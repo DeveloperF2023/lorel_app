@@ -140,5 +140,13 @@
   "missingSpecialCharacter": "Password must include at least one special character (!@#\\$&*~).",
   "successPayment": "Congratulations, your request has been registered, our team will contact you as soon as possible.",
   "ok": "Ok",
-  "emptyWorkshops": "No workshops are available at the moment. Please check back later or try selecting a different date."
+  "emptyWorkshops": "No workshops are available at the moment. Please check back later or try selecting a different date.",
+  "newBook": "New book👋",
+  "newBookCreated": "New book created, you can check now👌",
+  "newCourse": "New course👋",
+  "newCourseCreated": "New Course created, you can check now👌",
+  "newEnrollment": "New enrollment👋",
+  "newEnrollmentCreated": "New enrollment, you can check now👌",
+  "newLive": "New live👋",
+  "newLiveCreated": "New live created, you can check now👌"
 }

@@ -19,7 +19,7 @@ class _HomeContentState extends State<HomeContent> {
       profilePicture = preferences.getString("profilePicture") ?? "";
       isLoading = false;
     });
-    print(profilePicture);
+    debugPrint(profilePicture);
   }
 
   @override
@@ -49,7 +49,8 @@ class _HomeContentState extends State<HomeContent> {
                               backgroundImage =
                                   NetworkImage(avatarState.uploadAvatar);
                             } else {
-                              backgroundImage = AssetImage(AppAssets.logo);
+                              backgroundImage =
+                                  const AssetImage(AppAssets.logo);
                             }
                           } else {
                             backgroundImage = NetworkImage(profilePicture);
@@ -185,8 +186,8 @@ class _HomeContentState extends State<HomeContent> {
                                   if (startTime == null) return false;
                                   final liveDateTime =
                                       DateTime.parse(startTime);
-                                  final sixHoursLater =
-                                      DateTime.now().add(Duration(hours: 6));
+                                  final sixHoursLater = DateTime.now()
+                                      .add(const Duration(hours: 6));
                                   return liveDateTime.isBefore(sixHoursLater);
                                 }).toList();
                                 if (upcomingLives.isNotEmpty) {

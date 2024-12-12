@@ -38,7 +38,7 @@ class _TimetableScreenState extends State<TimetableScreen> {
             onTap: () async {
               final prefs = await SharedPreferences.getInstance();
               final token = prefs.getString("token");
-              if (token != null) {
+              if (token != null && context.mounted) {
                 Navigator.pushReplacementNamed(context, NavigationStrings.main,
                     arguments: token);
               } else {
@@ -58,7 +58,7 @@ class _TimetableScreenState extends State<TimetableScreen> {
               onPressed: () {
                 Navigator.pushNamed(context, NavigationStrings.notification);
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.notifications,
                 color: AppColors.davyGrey,
               ))
@@ -125,9 +125,9 @@ class _TimetableScreenState extends State<TimetableScreen> {
                     itemCount: schedules[currentSemKey]!.length,
                     itemBuilder: (context, index) {
                       final weekSchedules = schedules[currentSemKey]![index];
-                      print("Week Schedule: ${weekSchedules.group}");
-                      print("Teacher: ${weekSchedules.group?.teacher}");
-                      print(
+                      debugPrint("Week Schedule: ${weekSchedules.group}");
+                      debugPrint("Teacher: ${weekSchedules.group?.teacher}");
+                      debugPrint(
                           "Teacher Name: ${weekSchedules.group?.teacher?.name}");
 
                       final group = weekSchedules.group;

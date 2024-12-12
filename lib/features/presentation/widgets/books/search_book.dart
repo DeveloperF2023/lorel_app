@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:school_test_online/core/utils/helpers/locale_service.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/utils/helpers/helper_functions.dart';
@@ -25,7 +26,8 @@ class SearchBook extends StatelessWidget {
               controller: searchController,
               onChanged: onChanged,
               decoration: InputDecoration(
-                  hintText: "Rechercher ici",
+                  hintText:
+                      AppLocalization.of(context)!.translate("searchHere"),
                   hintStyle: GoogleFonts.poppins(
                       fontSize: 13.sp, color: AppColors.darkGrey),
                   filled: true,

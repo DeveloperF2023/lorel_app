@@ -192,20 +192,8 @@ class _RegistrationFormState extends State<RegistrationForm> {
         },
       );
 
-      print("This is email ${emailController.text}");
-      print("This is password ${passwordController.text}");
+      debugPrint("This is email ${emailController.text}");
+      debugPrint("This is password ${passwordController.text}");
     }
-  }
-
-  _clear() {
-    setState(() {
-      nameController.clear();
-      emailController.clear();
-      phoneController.clear();
-      confirmPasswordController.clear();
-      passwordController.clear();
-      countryController.clear();
-      addressController.clear();
-    });
   }
 }

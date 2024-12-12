@@ -46,7 +46,7 @@ class _WorkshopScreenState extends State<WorkshopScreen> {
           child: BackButtonWidget(onTap: () async {
             final prefs = await SharedPreferences.getInstance();
             final token = prefs.getString("token");
-            if (token != null) {
+            if (token != null && context.mounted) {
               Navigator.pushReplacementNamed(context, NavigationStrings.main,
                   arguments: token);
             } else {
@@ -77,7 +77,7 @@ class _WorkshopScreenState extends State<WorkshopScreen> {
             Expanded(
               child: BlocBuilder<GetWorkshopsCubit, GetWorkshopsState>(
                 builder: (context, state) {
-                  print("Workshop State : $state");
+                  debugPrint("Workshop State : $state");
                   if (state is GetWorkshopsLoading) {
                     return const Center(child: CircularProgressIndicator());
                   } else if (state is GetWorkshopsLoaded) {

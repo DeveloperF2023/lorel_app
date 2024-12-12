@@ -135,7 +135,7 @@ class ScheduleItem extends StatelessWidget {
         translatedDay = "Invalid day";
     }
 
-    print('Day: $day, Translated: $translatedDay');
+    debugPrint('Day: $day, Translated: $translatedDay');
     return translatedDay;
   }
 }

@@ -63,7 +63,7 @@ class _DetailMessageContentState extends State<DetailMessageContent> {
         });
       }
     } catch (e) {
-      print('Error fetching PDF: $e');
+      debugPrint('Error fetching PDF: $e');
       setState(() => isLoading = false);
     }
   }
@@ -82,7 +82,7 @@ class _DetailMessageContentState extends State<DetailMessageContent> {
         });
       }
     } catch (e) {
-      print('Error fetching image: $e');
+      debugPrint('Error fetching image: $e');
     }
   }
 

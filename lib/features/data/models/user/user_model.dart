@@ -3,7 +3,9 @@ import 'package:school_test_online/features/domain/entities/user/user_entity.dar
 
 class UserModel extends UserEntity {
   UserDataModel? users;
+
   String? token;
+
   String? tokenType;
 
   UserModel({this.users, this.token, this.tokenType});

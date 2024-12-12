@@ -25,7 +25,7 @@ class HeaderOffers extends StatelessWidget {
                 onTap: () async {
                   final prefs = await SharedPreferences.getInstance();
                   final token = prefs.getString("token");
-                  if (token != null) {
+                  if (token != null && context.mounted) {
                     Navigator.pushReplacementNamed(
                         context, NavigationStrings.main,
                         arguments: token);

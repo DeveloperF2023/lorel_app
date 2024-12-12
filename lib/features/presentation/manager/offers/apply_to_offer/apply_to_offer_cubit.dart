@@ -28,7 +28,7 @@ class ApplyToOfferCubit extends Cubit<ApplyToOfferState> {
           emit(ApplyToOfferLoaded(message: successMessage));
         },
       );
-    } on SocketException catch (e) {
+    } on SocketException {
       // Handle network errors
       emit(const ApplyToOfferFailure(
           message: "No internet connection. Please try again."));

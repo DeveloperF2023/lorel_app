@@ -7,12 +7,12 @@ class CheckboxItem extends StatefulWidget {
   final bool isChecked; // Add this line to hold the checked state
 
   const CheckboxItem({
-    Key? key,
+    super.key,
     required this.diploma,
     this.onChanged,
     required this.price,
     this.isChecked = false, // Default value for checked state
-  }) : super(key: key);
+  });
 
   @override
   _CheckboxItemState createState() => _CheckboxItemState();
@@ -58,7 +58,7 @@ class _CheckboxItemState extends State<CheckboxItem> {
             ],
           )),
         ),
-        Container(
+        SizedBox(
           height: 20.h,
           child: Checkbox(
             side: const BorderSide(color: AppColors.paleSlate),

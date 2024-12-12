@@ -27,12 +27,12 @@ class ToggleButtonsWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: Text(AppLocalization.of(context)!.translate('inProgress'),
-                  style: TextStyle(fontSize: 22)),
+                  style: const TextStyle(fontSize: 22)),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: Text(AppLocalization.of(context)!.translate('finished'),
-                  style: TextStyle(fontSize: 22)),
+                  style: const TextStyle(fontSize: 22)),
             ),
           ],
         );

@@ -90,7 +90,7 @@ class _DetailCourseContentState extends State<DetailCourseContent> {
                             value,
                             widget
                                 .detailCourse.additionalDiplomas![0].diploma!);
-                        print(
+                        debugPrint(
                             widget.detailCourse.additionalDiplomas![0].diploma);
                       },
                       price: widget.detailCourse.additionalDiplomas![0].price!,
@@ -108,7 +108,7 @@ class _DetailCourseContentState extends State<DetailCourseContent> {
                             value,
                             widget
                                 .detailCourse.additionalDiplomas![1].diploma!);
-                        print(
+                        debugPrint(
                             widget.detailCourse.additionalDiplomas![1].diploma);
                       },
                       price: widget.detailCourse.additionalDiplomas![1].price!,
@@ -124,9 +124,9 @@ class _DetailCourseContentState extends State<DetailCourseContent> {
                   SharedPreferences preferences =
                       await SharedPreferences.getInstance();
                   final token = preferences.getString("token");
-                  print("Token: $token");
+                  debugPrint("Token: $token");
 
-                  if (token == null) {
+                  if (token == null && context.mounted) {
                     Navigator.pushNamed(
                       context,
                       NavigationStrings.registrationCourse,
@@ -135,7 +135,7 @@ class _DetailCourseContentState extends State<DetailCourseContent> {
                         "formationId": widget.detailCourse.id.toString()
                       },
                     );
-                  } else {
+                  } else if (token != null && context.mounted) {
                     Navigator.pushNamed(
                       context,
                       NavigationStrings.payment,

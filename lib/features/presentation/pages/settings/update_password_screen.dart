@@ -25,9 +25,6 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
   TextEditingController newPasswordController = TextEditingController();
   TextEditingController confirmationPasswordController =
       TextEditingController();
-  String _email = '';
-  String _password = '';
-  bool _rememberMe = false;
   bool isShow = false;
 
   @override
@@ -35,8 +32,8 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
     return Scaffold(
       appBar: AppBarAllCourses(
         title: AppLocalization.of(context)!.translate('updatePassword'),
-        onTap: () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => SettingsScreen())),
+        onTap: () => Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => const SettingsScreen())),
       ),
       body: SafeArea(
           child: Form(
@@ -174,7 +171,7 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
             listener: (context, state) {
               if (state is UpdatePasswordFailure) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
+                  const SnackBar(
                       backgroundColor: Colors.red,
                       content: Text("Old Password is incorrect")),
                 );

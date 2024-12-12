@@ -14,7 +14,7 @@ class GroupModel extends GroupEntity {
   final TeacherModel? teachers;
   final CoursesModel? courses;
 
-  GroupModel(
+  const GroupModel(
       {this.id,
       this.name,
       this.active,

@@ -10,7 +10,7 @@ class ToggleOffersWidget extends StatelessWidget {
         return ToggleButtons(
           isSelected: toggleState.isSelected,
           onPressed: (int index) {
-            print("Toggle button pressed: $index");
+            debugPrint("Toggle button pressed: $index");
             context.read<ToggleOffersCubit>().toggleButton(index);
             context.read<GetOffersByTypeCubit>().getOffersByType(
                   type: index == 0 ? 'internship' : 'job',

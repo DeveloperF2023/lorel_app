@@ -5,7 +5,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:school_test_online/core/utils/helpers/locale_service.dart';
 import 'package:school_test_online/core/utils/helpers/validators.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/routes/routes.dart';
 import '../../../data/models/user/requests_register_model.dart';

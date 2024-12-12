@@ -17,7 +17,7 @@ final class GetDetailWorkshopLoading extends GetDetailWorkshopState {
 final class GetDetailWorkshopLoaded extends GetDetailWorkshopState {
   final WorkshopEntity workshop;
 
-  GetDetailWorkshopLoaded({required this.workshop});
+  const GetDetailWorkshopLoaded({required this.workshop});
   @override
   List<Object> get props => [workshop];
 }
@@ -25,7 +25,7 @@ final class GetDetailWorkshopLoaded extends GetDetailWorkshopState {
 final class GetDetailWorkshopFailure extends GetDetailWorkshopState {
   final String message;
 
-  GetDetailWorkshopFailure({required this.message});
+  const GetDetailWorkshopFailure({required this.message});
   @override
   List<Object> get props => [message];
 }

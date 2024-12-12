@@ -5,22 +5,38 @@ import 'package:school_test_online/features/domain/entities/offers/detail_offer_
 
 class DetailOfferModel extends DetailOfferEntity {
   int? id;
+
   String? title;
+
   String? image;
+
   String? company;
+
   String? city;
   SalaryModel salaries;
+
   String? type;
+
   String? contract;
+
   String? nature;
+
   String? missions;
+
   String? skills;
+
   String? experience;
+
   int? periode;
+
   String? unit;
+
   bool? active;
+
   String? createdAt;
+
   String? updatedAt;
+
   bool? ifFavorite;
 
   DetailOfferModel({

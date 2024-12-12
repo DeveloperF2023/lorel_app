@@ -68,11 +68,11 @@ void main() async {
   await initializeDateFormatting();
   Dio client = Dio();
   ApiClient apiClient = ApiClient(client);
-  SharedPreferences _preferences = await SharedPreferences.getInstance();
-  PreferencesHelper preferences = PreferencesHelper(_preferences);
+  SharedPreferences preferences0 = await SharedPreferences.getInstance();
+  PreferencesHelper preferences = PreferencesHelper(preferences0);
   RemoteDataSource remoteDataSource = RemoteDataSourceImpl(
       apiClient: apiClient, preferencesHelper: preferences);
-  print("Get Offers ${remoteDataSource.getFavorites()}");
+  debugPrint("Get Offers ${remoteDataSource.getFavorites()}");
   runApp(const MyApp());
 }
 
@@ -146,14 +146,14 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
   /// Updates the UI and handles navigation based on connection status
   void _updateConnectionStatus(bool isConnected) async {
-    //print("Current connection status: $_isConnected, New status: $isConnected");
+    //debugPrint("Current connection status: $_isConnected, New status: $isConnected");
     if (_isConnected != isConnected) {
       setState(() {
         _isConnected = isConnected;
       });
 
       if (!isConnected && mounted && !_isOnNoNetworkPage) {
-        print("Navigating to NoNetworkPage due to lost connection");
+        debugPrint("Navigating to NoNetworkPage due to lost connection");
         navigatorKey.currentState?.pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => const NoNetworkPage()),
           (route) => false,
@@ -219,22 +219,31 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     userId = prefs.getInt('userId')!;
     groupId = prefs.getString("groupIds");
-    print("user id $userId");
-    print("group id $groupId");
+    debugPrint("user id $userId");
+    debugPrint("group id $groupId");
     if (userId != null) {
       pusherService = PusherService("2d18b004034647ac52b3", "eu");
 
-      subscribeToPusherChannels();
-
       pusherService.subscribeToChannel('formations', {'formations.create': ''},
           (event) {
-        print('Formation created: ${event!.data}');
-        showNotification("Nouvelle Formation",
-            "une nouvelle formation ajouté.N'hésitez pas de vérifier");
+        debugPrint('Formation created: ${event!.data}');
+        showNotification(AppLocalization.of(context)!.translate("newCourse"),
+            AppLocalization.of(context)!.translate("newCourseCreated"));
       });
       pusherService.subscribeToChannel('books', {'books.create': ''}, (event) {
-        print('Book created: ${event!.data}');
-        showNotification('Nouveau Livre', 'A new Books has been added.');
+        debugPrint('Book created: ${event!.data}');
+        showNotification(AppLocalization.of(context)!.translate("newBook"),
+            AppLocalization.of(context)!.translate("newBookCreated"));
+      });
+      pusherService.subscribeToChannel('enrollments', {
+        'enrollments.approve.$userId': userId.toString(),
+        'enrollments.assign.$userId': userId.toString(),
+        'enrollments.reject.$userId': userId.toString(),
+      }, (event) {
+        debugPrint('Enrollment event for user $userId: ${event!.data}');
+        showNotification(
+            AppLocalization.of(context)!.translate("newEnrollment"),
+            AppLocalization.of(context)!.translate("newEnrollmentCreated"));
       });
       if (groupId != null) {
         List<int> groupIds = List<int>.from(jsonDecode(groupId.toString()));
@@ -242,15 +251,16 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         for (int groupId in groupIds) {
           pusherService.subscribeToChannel(
               'lives', {'lives.create.$groupId': groupId.toString()}, (event) {
-            print('Live created for group ID $groupId: ${event!.data}');
-            showNotification("Live created", "New live for group ID $groupId");
+            debugPrint('Live created for group ID $groupId: ${event!.data}');
+            showNotification(AppLocalization.of(context)!.translate("newLive"),
+                AppLocalization.of(context)!.translate("newLiveCreated"));
           });
         }
       } else {
-        print("No group IDs found");
+        debugPrint("No group IDs found");
       }
     } else {
-      print("User ID not found in SharedPreferences.");
+      debugPrint("User ID not found in SharedPreferences.");
     }
   }
 
@@ -262,7 +272,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         false;
 
     if (!granted) {
-      print("Notification permission denied");
+      debugPrint("Notification permission denied");
     }
   }
 
@@ -297,19 +307,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     super.dispose();
   }
 
-  void subscribeToPusherChannels() {
-    if (!pusherService.isSubscribedToChannel('enrollments')) {
-      pusherService.subscribeToChannel('enrollments', {
-        'enrollments.approve.$userId': userId.toString(),
-        'enrollments.assign.$userId': userId.toString(),
-        'enrollments.reject.$userId': userId.toString(),
-      }, (event) {
-        print('Enrollment event for user $userId: ${event!.data}');
-        showNotification("Enrollment Created", "Enrollments test");
-      });
-    }
-  }
-
   /// Loads saved locale from SharedPreferences
   Future<void> _loadLocale() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -324,7 +321,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    print(
+    debugPrint(
         "Height: ${HelperFunctions.screenHeight(context)}, Width: ${HelperFunctions.screenWidth(context)}");
     return MultiBlocProvider(
       providers: [

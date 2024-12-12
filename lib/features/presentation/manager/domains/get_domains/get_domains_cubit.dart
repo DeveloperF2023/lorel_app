@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../../../../domain/entities/domain/domain_entity.dart';
 import '../../../../domain/use_cases/domain/fetch_domains_use_case.dart';
@@ -20,12 +21,12 @@ class GetDomainsCubit extends Cubit<GetDomainsState> {
       result.fold((l) => emit(GetDomainsFailure(message: l.message)),
           (r) => emit(GetDomainsLoaded(domains: r)));
     } on SocketException catch (e) {
-      print("this is error $e");
-      print("failed registration");
+      debugPrint("this is error $e");
+      debugPrint("failed registration");
       emit(GetDomainsFailure(message: e.toString()));
     } catch (e) {
-      print("this is error $e");
-      print("failed registration");
+      debugPrint("this is error $e");
+      debugPrint("failed registration");
       emit(GetDomainsFailure(message: e.toString()));
     }
   }

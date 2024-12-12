@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:school_test_online/features/domain/entities/lives/lives_entity.dart';
 import 'package:school_test_online/features/domain/use_cases/lives/fetch_lives_use_case.dart';
 
@@ -17,12 +18,12 @@ class GetLivesCubit extends Cubit<GetLivesState> {
       result.fold((l) => emit(GetLivesFailure(message: l.message)),
           (r) => emit(GetLivesLoaded(lives: r)));
     } on SocketException catch (e) {
-      print("this is error $e");
-      print("failed registration");
+      debugPrint("this is error $e");
+      debugPrint("failed registration");
       emit(GetLivesFailure(message: e.toString()));
     } catch (e) {
-      print("this is error $e");
-      print("failed registration");
+      debugPrint("this is error $e");
+      debugPrint("failed registration");
       emit(GetLivesFailure(message: e.toString()));
     }
   }

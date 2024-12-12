@@ -25,7 +25,7 @@ final class GetDetailOfferLoaded extends GetDetailOfferState {
 final class GetDetailOfferFailure extends GetDetailOfferState {
   final String message;
 
-  GetDetailOfferFailure({required this.message});
+  const GetDetailOfferFailure({required this.message});
   @override
   List<Object> get props => [message];
 }

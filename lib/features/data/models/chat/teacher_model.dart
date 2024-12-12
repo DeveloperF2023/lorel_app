@@ -11,7 +11,7 @@ class TeacherModel extends TeacherEntity {
   final String? createdAt;
   final String? updatedAt;
 
-  TeacherModel(
+  const TeacherModel(
       {this.id,
       this.name,
       this.role,

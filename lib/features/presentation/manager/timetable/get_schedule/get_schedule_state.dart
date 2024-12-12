@@ -17,7 +17,7 @@ final class GetScheduleLoading extends GetScheduleState {
 final class GetScheduleLoaded extends GetScheduleState {
   final Map<String, List<ScheduleEntity>> schedules;
 
-  GetScheduleLoaded({required this.schedules});
+  const GetScheduleLoaded({required this.schedules});
   @override
   List<Object> get props => [schedules];
 }

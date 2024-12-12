@@ -9,7 +9,6 @@ import 'package:school_test_online/core/utils/helpers/locale_service.dart';
 import 'package:school_test_online/dependencies_injection.dart';
 import 'package:school_test_online/features/presentation/manager/payment/manual_payment/manual_payment_cubit.dart';
 import 'package:school_test_online/features/presentation/widgets/global/widgets_imports.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../manager/payment/get_rib/get_rib_cubit.dart';
 

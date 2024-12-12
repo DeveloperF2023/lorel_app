@@ -17,7 +17,7 @@ final class SendMessageLoading extends SendMessageState {
 final class SendMessageLoaded extends SendMessageState {
   final SendMessageResponseEntity sendMessage;
 
-  SendMessageLoaded({required this.sendMessage});
+  const SendMessageLoaded({required this.sendMessage});
   @override
   List<Object> get props => [];
 }

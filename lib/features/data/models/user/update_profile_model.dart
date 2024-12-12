@@ -3,6 +3,7 @@ import 'package:school_test_online/features/domain/entities/user/update_user_ent
 
 class UpdateProfileModel extends UpdateUserEntity {
   UserDataModel? user;
+
   String? message;
 
   UpdateProfileModel({this.user, this.message})

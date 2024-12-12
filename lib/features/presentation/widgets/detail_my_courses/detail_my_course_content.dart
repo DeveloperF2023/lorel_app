@@ -79,182 +79,187 @@ class _DetailMyCourseContentState extends State<DetailMyCourseContent> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Column(
-          children: [
-            GestureDetector(
-              onTap: _onTap,
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  SizedBox(
-                    height: HelperFunctions.screenHeight(context) * .25.h,
-                    width: HelperFunctions.screenWidth(context),
-                    child: AspectRatio(
-                      aspectRatio: _controller.value.aspectRatio,
-                      child: VideoPlayer(_controller),
-                    ),
-                  ),
-                  if (_showControls)
-                    Positioned(
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      child: Container(
-                        color: Colors.black.withOpacity(0.5),
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 20.h,
-                              child: Slider(
-                                value: currentPosition.inSeconds.toDouble(),
-                                max: totalDuration.inSeconds.toDouble(),
-                                activeColor: AppColors.primaryColor,
-                                onChanged: (value) {
-                                  setState(() {
-                                    _controller.seekTo(
-                                        Duration(seconds: value.toInt()));
-                                  });
-                                },
-                              ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                GestureDetector(
+                  onTap: _onTap,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      SizedBox(
+                        height: HelperFunctions.screenHeight(context) * .25.h,
+                        width: HelperFunctions.screenWidth(context),
+                        child: AspectRatio(
+                          aspectRatio: _controller.value.aspectRatio,
+                          child: VideoPlayer(_controller),
+                        ),
+                      ),
+                      if (_showControls)
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          child: Container(
+                            color: Colors.black.withOpacity(0.5),
+                            child: Column(
                               children: [
-                                Text(
-                                  _formatDuration(currentPosition),
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 14.sp, color: Colors.white),
+                                SizedBox(
+                                  height: 20.h,
+                                  child: Slider(
+                                    value: currentPosition.inSeconds.toDouble(),
+                                    max: totalDuration.inSeconds.toDouble(),
+                                    activeColor: AppColors.primaryColor,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _controller.seekTo(
+                                            Duration(seconds: value.toInt()));
+                                      });
+                                    },
+                                  ),
                                 ),
-                                Text(
-                                  _formatDuration(totalDuration),
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 14.sp, color: Colors.white),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      _formatDuration(currentPosition),
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 14.sp, color: Colors.white),
+                                    ),
+                                    Text(
+                                      _formatDuration(totalDuration),
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 14.sp, color: Colors.white),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
-                  if (!_showControls && !_isPlaying)
-                    Icon(
-                      Icons.play_arrow,
-                      color: Colors.white,
-                      size: 50.sp,
-                    ),
-                  if (_showControls)
-                    Positioned(
-                      child: GestureDetector(
-                        onTap: _togglePlayPause,
-                        child: Icon(
-                          _isPlaying ? Icons.pause : Icons.play_arrow,
+                      if (!_showControls && !_isPlaying)
+                        Icon(
+                          Icons.play_arrow,
                           color: Colors.white,
                           size: 50.sp,
                         ),
-                      ),
-                    ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 10.h,
+                      if (_showControls)
+                        Positioned(
+                          child: GestureDetector(
+                            onTap: _togglePlayPause,
+                            child: Icon(
+                              _isPlaying ? Icons.pause : Icons.play_arrow,
+                              color: Colors.white,
+                              size: 50.sp,
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10.w),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        widget.detailCourse.title!,
-                        style: GoogleFonts.poppins(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w400,
-                        ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            widget.detailCourse.title!,
+                            style: GoogleFonts.poppins(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          Text(
+                            _formatDuration(totalDuration),
+                            style: GoogleFonts.poppins(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10.h,
                       ),
                       Text(
-                        _formatDuration(totalDuration),
+                        AppLocalization.of(context)!
+                            .translate("communicationDiagram"),
                         style: GoogleFonts.poppins(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w400,
-                        ),
+                            fontSize: 18.sp, fontWeight: FontWeight.w500),
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      Text(
+                        "${AppLocalization.of(context)!.translate("description")} :",
+                        style: GoogleFonts.poppins(
+                            fontSize: 18.sp, fontWeight: FontWeight.w500),
+                      ),
+                      Text(
+                        widget.detailCourse.description!,
+                        style: GoogleFonts.poppins(
+                            fontSize: 16.sp, fontWeight: FontWeight.w400),
+                      ),
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      Text(
+                        "${AppLocalization.of(context)!.translate("document")} :",
+                        style: GoogleFonts.poppins(
+                            fontSize: 18.sp, fontWeight: FontWeight.w500),
+                      ),
+                      SizedBox(
+                        height: 15.h,
+                      ),
+                      Column(
+                        children: widget.detailCourse.pdf!
+                            .map((pdf) => Row(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.pushNamed(
+                                            context, NavigationStrings.readPdf,
+                                            arguments: {
+                                              "title": pdf.name,
+                                              "pdfUrl": pdf.url
+                                            });
+                                        setState(() {
+                                          _isPlaying = false;
+                                        });
+                                        _controller.pause();
+                                      },
+                                      child: const Icon(
+                                        FontAwesomeIcons.book,
+                                        color: AppColors.nobel,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 5.w,
+                                    ),
+                                    Text(
+                                      pdf.name!,
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ],
+                                ))
+                            .toList(),
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Text(
-                    AppLocalization.of(context)!
-                        .translate("communicationDiagram"),
-                    style: GoogleFonts.poppins(
-                        fontSize: 18.sp, fontWeight: FontWeight.w500),
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Text(
-                    "${AppLocalization.of(context)!.translate("description")} :",
-                    style: GoogleFonts.poppins(
-                        fontSize: 18.sp, fontWeight: FontWeight.w500),
-                  ),
-                  Text(
-                    widget.detailCourse.description!,
-                    style: GoogleFonts.poppins(
-                        fontSize: 16.sp, fontWeight: FontWeight.w400),
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  Text(
-                    "${AppLocalization.of(context)!.translate("document")} :",
-                    style: GoogleFonts.poppins(
-                        fontSize: 18.sp, fontWeight: FontWeight.w500),
-                  ),
-                  SizedBox(
-                    height: 15.h,
-                  ),
-                  Column(
-                    children: widget.detailCourse.pdf!
-                        .map((pdf) => Row(
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.pushNamed(
-                                        context, NavigationStrings.readPdf,
-                                        arguments: {
-                                          "title": pdf.name,
-                                          "pdfUrl": pdf.url
-                                        });
-                                    setState(() {
-                                      _isPlaying = false;
-                                    });
-                                    _controller.pause();
-                                  },
-                                  child: const Icon(
-                                    FontAwesomeIcons.book,
-                                    color: AppColors.nobel,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 5.w,
-                                ),
-                                Text(
-                                  pdf.name!,
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 16.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ],
-                            ))
-                        .toList(),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
         Align(
           alignment: Alignment.bottomCenter,
@@ -305,7 +310,7 @@ class _DetailMyCourseContentState extends State<DetailMyCourseContent> {
       await launchUrl(Uri.parse(url));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Could not launch URL')),
+        const SnackBar(content: Text('Could not launch URL')),
       );
     }
   }

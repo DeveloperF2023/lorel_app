@@ -6,11 +6,11 @@ class DateSelectionWidget extends StatefulWidget {
   final ValueChanged<DateTime> onDateSelected;
 
   const DateSelectionWidget({
-    Key? key,
+    super.key,
     required this.startOfWeek,
     required this.selectedDate,
     required this.onDateSelected,
-  }) : super(key: key);
+  });
 
   @override
   State<DateSelectionWidget> createState() => _DateSelectionWidgetState();
@@ -62,8 +62,8 @@ class _DateSelectionWidgetState extends State<DateSelectionWidget> {
                   ),
                 ),
                 SizedBox(
-                  height: 5.0,
-                  width: 35.0,
+                  height: 5.h,
+                  width: 35.w,
                   child: const Divider(
                     color: Colors.black,
                   ),

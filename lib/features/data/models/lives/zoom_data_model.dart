@@ -3,24 +3,42 @@ import 'package:school_test_online/features/domain/entities/lives/zoom_data_enti
 
 class ZoomDataModel extends ZoomDataEntity {
   String? uuid;
+
   int? id;
+
   String? hostId;
+
   String? hostEmail;
+
   String? topic;
+
   int? type;
+
   String? status;
+
   String? startTime;
+
   int? duration;
+
   String? timezone;
+
   String? agenda;
+
   String? createdAt;
+
   String? startUrl;
+
   String? joinUrl;
+
   String? password;
+
   String? h323Password;
+
   String? pstnPassword;
+
   String? encryptedPassword;
   SettingsZoomModel? settingsZoom;
+
   bool? preSchedule;
 
   ZoomDataModel(

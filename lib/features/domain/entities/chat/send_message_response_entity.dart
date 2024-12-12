@@ -9,7 +9,7 @@ class SendMessageResponseEntity extends Equatable {
   final int? id;
   final String? lastRead;
 
-  SendMessageResponseEntity(
+  const SendMessageResponseEntity(
       {this.userId,
       this.body,
       this.conversationId,

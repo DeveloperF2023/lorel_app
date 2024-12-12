@@ -7,13 +7,13 @@ class WorkshopEntity extends Equatable {
   final String? dateTo;
   final String? description;
   final String? image;
-  final Null? participants;
+  final Null participants;
   final String? price;
   final String? address;
   final String? about;
   final String? link;
   final String? video;
-  final Null? publishedAt;
+  final Null publishedAt;
   final int? active;
   final String? createdAt;
   final String? updatedAt;

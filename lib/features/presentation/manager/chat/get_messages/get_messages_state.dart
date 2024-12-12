@@ -17,7 +17,7 @@ final class GetMessagesLoading extends GetMessagesState {
 final class GetMessagesLoaded extends GetMessagesState {
   final List<MessageEntity> messages;
 
-  GetMessagesLoaded({required this.messages});
+  const GetMessagesLoaded({required this.messages});
   @override
   List<Object> get props => [];
 }
@@ -25,7 +25,7 @@ final class GetMessagesLoaded extends GetMessagesState {
 final class GetMessagesFailure extends GetMessagesState {
   final String message;
 
-  GetMessagesFailure({required this.message});
+  const GetMessagesFailure({required this.message});
   @override
   List<Object> get props => [message];
 }

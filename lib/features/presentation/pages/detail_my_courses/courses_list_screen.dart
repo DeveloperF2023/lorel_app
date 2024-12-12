@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:school_test_online/core/routes/routes.dart';
 import 'package:school_test_online/features/presentation/manager/courses/get_courses_of_formation/get_courses_of_formation_cubit.dart';
 
@@ -61,7 +63,36 @@ class _CoursesListScreenState extends State<CoursesListScreen> {
             } else if (state is GetCoursesOfFormationLoaded) {
               final courses = state.courses;
               if (courses.isEmpty) {
-                return const Center(child: Text('No courses available.'));
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Center(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.info,
+                              color: AppColors.macaroni,
+                              size: 30.sp,
+                            ),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            Text(
+                              AppLocalization.of(context)!
+                                  .translate("noCoursesFound"),
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.poppins(
+                                  fontSize: 13.sp, fontWeight: FontWeight.w500),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                );
               }
               final currentCourse = courses[currentIndex];
               return DetailMyCourseContent(
@@ -94,7 +125,35 @@ class _CoursesListScreenState extends State<CoursesListScreen> {
                     : AppLocalization.of(context)!.translate("finished"),
               );
             } else if (state is GetCoursesOfFormationFailure) {
-              return Center(child: Text(state.message));
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Center(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.info,
+                            color: AppColors.macaroni,
+                            size: 30.sp,
+                          ),
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                          Text(
+                            state.message,
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.poppins(
+                                fontSize: 13.sp, fontWeight: FontWeight.w500),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              );
             }
             return Container();
           },

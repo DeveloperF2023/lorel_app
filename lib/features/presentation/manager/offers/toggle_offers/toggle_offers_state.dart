@@ -6,7 +6,8 @@ class ToggleOffersState extends Equatable {
   ToggleOffersState({required this.isSelected});
 
   factory ToggleOffersState.initial() {
-    return ToggleOffersState(isSelected: [true, false]); // Default selection
+    return ToggleOffersState(
+        isSelected: const [true, false]); // Default selection
   }
 
   ToggleOffersState copyWith({List<bool>? isSelected}) {

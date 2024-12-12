@@ -25,7 +25,7 @@ final class GetWorkshopsLoaded extends GetWorkshopsState {
 final class GetWorkshopsFailure extends GetWorkshopsState {
   final String message;
 
-  GetWorkshopsFailure({required this.message});
+  const GetWorkshopsFailure({required this.message});
   @override
   List<Object> get props => [message];
 }

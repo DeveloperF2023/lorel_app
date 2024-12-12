@@ -212,16 +212,17 @@ class _DetailOfferContentState extends State<DetailOfferContent> {
                     File? resume = await pickFile();
 
                     // Step 2: Call Cubit's applyToOffer method
-                    if (resume != null) {
+                    if (resume != null && context.mounted) {
                       BlocProvider.of<ApplyToOfferCubit>(context).applyToOffer(
                         offerId: widget.detailOffer.id!,
                         resume: resume,
                       );
                     } else {
-                      // Show a message if no file is selected
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('No file selected')),
-                      );
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('No file selected')),
+                        );
+                      }
                     }
                   },
                   child: BlocListener<ApplyToOfferCubit, ApplyToOfferState>(

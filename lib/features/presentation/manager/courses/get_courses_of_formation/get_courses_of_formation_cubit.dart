@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:school_test_online/features/domain/entities/courses/detail_course_entity.dart';
 import 'package:school_test_online/features/domain/use_cases/courses/fetch_course_of_formation_use_case.dart';
 
@@ -16,16 +17,16 @@ class GetCoursesOfFormationCubit extends Cubit<GetCoursesOfFormationState> {
     emit(GetCoursesOfFormationLoading());
     try {
       final result = await fetchCoursesOfFormationUseCase.callback(formationId);
-      print("Result from cubit $result");
+      debugPrint("Result from cubit $result");
       result.fold((l) => emit(GetCoursesOfFormationFailure(message: l.message)),
           (r) => emit(GetCoursesOfFormationLoaded(courses: r)));
     } on SocketException catch (e) {
-      print("this is error $e");
-      print("failed fetch formation");
+      debugPrint("this is error $e");
+      debugPrint("failed fetch formation");
       emit(GetCoursesOfFormationFailure(message: e.toString()));
     } catch (e) {
-      print("this is error $e");
-      print("failed fetch formation");
+      debugPrint("this is error $e");
+      debugPrint("failed fetch formation");
       emit(GetCoursesOfFormationFailure(message: e.toString()));
     }
   }

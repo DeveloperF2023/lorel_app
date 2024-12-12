@@ -4,16 +4,27 @@ import 'package:school_test_online/features/domain/entities/enrollment/enrollmen
 
 class EnrollmentModel extends EnrollmentEntity {
   int? id;
+
   int? userId;
+
   int? groupId;
+
   int? formationId;
+
   String? enrolledAt;
+
   String? leftAt;
+
   String? additionalDiplomas;
+
   String? status;
+
   String? progress;
+
   bool? finished;
+
   GroupModel? group;
+
   CoursesModel? formation;
 
   EnrollmentModel(

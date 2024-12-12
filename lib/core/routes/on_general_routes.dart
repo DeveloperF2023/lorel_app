@@ -72,7 +72,6 @@ class OnGenerateRoute {
           }
         }
       case NavigationStrings.payment:
-      case NavigationStrings.payment:
         {
           if (args is Map<String, dynamic>) {
             return routeBuilder(PaymentScreen(
@@ -197,7 +196,7 @@ class OnGenerateRoute {
         }
       case NavigationStrings.noNetwork:
         {
-          return routeBuilder(NoNetworkPage());
+          return routeBuilder(const NoNetworkPage());
         }
       case NavigationStrings.coursesList:
         {
@@ -220,6 +219,7 @@ class OnGenerateRoute {
           }
         }
     }
+    return null;
   }
 }
 

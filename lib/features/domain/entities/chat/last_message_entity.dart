@@ -13,7 +13,7 @@ class LastMessageEntity extends Equatable {
   final String? lastRead;
   final UserDataEntity? user;
 
-  LastMessageEntity(
+  const LastMessageEntity(
       {this.id,
       this.conversationId,
       this.userId,

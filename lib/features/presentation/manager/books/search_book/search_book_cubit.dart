@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:school_test_online/features/domain/entities/book/book_entity.dart';
 import 'package:school_test_online/features/domain/use_cases/books/search_book_use_case.dart';
 
@@ -18,12 +19,12 @@ class SearchBookCubit extends Cubit<SearchBookState> {
       result.fold((l) => emit(SearchBookFailure(message: l.message)),
           (r) => emit(SearchBookLoaded(book: r)));
     } on SocketException catch (e) {
-      print("this is error $e");
-      print("failed registration");
+      debugPrint("this is error $e");
+      debugPrint("failed registration");
       emit(SearchBookFailure(message: e.toString()));
     } catch (e) {
-      print("this is error $e");
-      print("failed registration");
+      debugPrint("this is error $e");
+      debugPrint("failed registration");
       emit(SearchBookFailure(message: e.toString()));
     }
   }

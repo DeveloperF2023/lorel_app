@@ -12,9 +12,6 @@ class _FormAuthState extends State<FormAuth> {
   TextEditingController emailController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   TextEditingController passwordController = TextEditingController();
-  String _email = '';
-  String _password = '';
-  bool _rememberMe = false;
   bool isShow = false;
   @override
   Widget build(BuildContext context) {
@@ -126,7 +123,7 @@ class _FormAuthState extends State<FormAuth> {
   }
 
   void _signInUser() {
-    if (_formKey.currentState!.validate()) {
+    if (_formKey.currentState!.validate() && context.mounted) {
       setState(() {
         widget.isSignIn = true;
       });
@@ -143,9 +140,9 @@ class _FormAuthState extends State<FormAuth> {
         );
       }).then((value) => _clear());
     }
-    print("this is email ${emailController.text}");
-    print("this is password ${passwordController.text}");
-    print("isSignIn : ${widget.isSignIn}");
+    debugPrint("this is email ${emailController.text}");
+    debugPrint("this is password ${passwordController.text}");
+    debugPrint("isSignIn : ${widget.isSignIn}");
   }
 
   _clear() {

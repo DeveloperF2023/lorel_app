@@ -24,7 +24,7 @@ class DateUtil {
       // Parse the date string
       return dateFormat.parse(dateString);
     } catch (e) {
-      print("Error parsing date: $e");
+      debugPrint("Error parsing date: $e");
       // Handle the error as needed, e.g., return current date or throw
       return DateTime.now();
     }
@@ -37,7 +37,7 @@ class DateUtil {
       DateFormat dateFormat = DateFormat(pattern, localeCode);
       return dateFormat.format(date);
     } catch (e) {
-      print("Error formatting date: $e");
+      debugPrint("Error formatting date: $e");
       // Handle the error as needed
       return date.toString();
     }

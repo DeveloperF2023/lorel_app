@@ -17,7 +17,7 @@ final class GetLivesLoading extends GetLivesState {
 final class GetLivesLoaded extends GetLivesState {
   final List<LivesEntity> lives;
 
-  GetLivesLoaded({required this.lives});
+  const GetLivesLoaded({required this.lives});
   @override
   List<Object> get props => [lives];
 }

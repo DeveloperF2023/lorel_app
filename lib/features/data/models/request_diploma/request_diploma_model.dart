@@ -2,10 +2,15 @@ import 'package:school_test_online/features/domain/entities/request_diploma/requ
 
 class RequestDiplomaModel extends RequestDiplomaEntity {
   String? firstName;
+
   String? lastName;
+
   String? phone;
+
   String? address;
+
   String? birth;
+
   String? identity;
 
   RequestDiplomaModel(

@@ -3,12 +3,18 @@ import 'package:school_test_online/features/domain/entities/lives/lives_entity.d
 
 class LivesModel extends LivesEntity {
   final int? id;
+
   final String? title;
+
   final String? startTime;
+
   final String? password;
+
   final int? groupId;
   final ZoomResponseModel? zoomResponses;
+
   final String? createdAt;
+
   final String? updatedAt;
 
   const LivesModel(

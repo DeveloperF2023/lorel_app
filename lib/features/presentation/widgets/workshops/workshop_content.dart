@@ -127,7 +127,7 @@ class WorkshopContent extends StatelessWidget {
                                 fontSize: 16.sp, color: AppColors.gullGrey),
                           ),
                           Text(
-                            "${priceAsInt != null ? priceAsInt.toString() : AppLocalization.of(context)!.translate("free")} ${priceAsInt == null ? "" : "${AppLocalization.of(context)!.translate("dirham")}"}",
+                            "${priceAsInt != null ? priceAsInt.toString() : AppLocalization.of(context)!.translate("free")} ${priceAsInt == null ? "" : AppLocalization.of(context)!.translate("dirham")}",
                             style: GoogleFonts.robotoCondensed(
                                 fontSize: 16.sp, color: AppColors.gullGrey),
                           )
@@ -159,7 +159,7 @@ class WorkshopContent extends StatelessWidget {
       return dateFormat.parse(dateString);
     } catch (e) {
       // Handle parsing errors gracefully
-      print("Error parsing date: $e");
+      debugPrint("Error parsing date: $e");
       // Optionally, return a default date or handle the error as needed
       return DateTime.now(); // Fallback date
     }

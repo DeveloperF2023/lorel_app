@@ -4,16 +4,27 @@ import '../courses/courses_model.dart';
 
 class EnrollmentSecondModel extends EnrollmentSecondEntity {
   int? id;
+
   int? userId;
+
   int? groupId;
+
   String? formationId;
+
   String? enrolledAt;
+
   String? leftAt;
+
   String? additionalDiplomas;
+
   String? status;
+
   String? progress;
+
   bool? finished;
+
   GroupModel? group;
+
   CoursesModel? formation;
 
   EnrollmentSecondModel(

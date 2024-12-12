@@ -24,7 +24,7 @@ class MenuItem extends StatelessWidget {
               BoxShadow(
                   color: AppColors.gainsboro,
                   blurRadius: 10.r,
-                  offset: Offset(1, 1))
+                  offset: const Offset(1, 1))
             ]),
         child: Container(
           height: 125.h,

@@ -43,7 +43,7 @@ class RepositoryImpl implements Repository {
       final result = await remoteDataSourceImpl.loginUser(email, password);
       return Right(result);
     } on Exception {
-      return const Left(ServerFailure(message: 'An error has occurred'));
+      return const Left(ServerFailure(serverMessage: 'An error has occurred'));
     }
   }
 
@@ -60,7 +60,7 @@ class RepositoryImpl implements Repository {
       final result = await remoteDataSourceImpl.getDomains();
       return Right(result);
     } on Exception {
-      return const Left(ServerFailure(message: 'An error has occurred'));
+      return const Left(ServerFailure(serverMessage: 'An error has occurred'));
     }
   }
 
@@ -71,7 +71,7 @@ class RepositoryImpl implements Repository {
       final result = await remoteDataSourceImpl.getCoursesByDomain(domainId);
       return Right(result);
     } on Exception {
-      return const Left(ServerFailure(message: 'An error has occurred'));
+      return const Left(ServerFailure(serverMessage: 'An error has occurred'));
     }
   }
 
@@ -83,7 +83,7 @@ class RepositoryImpl implements Repository {
           await remoteDataSourceImpl.getDetailFormation(domainId, formationId);
       return Right(result);
     } on Exception {
-      return const Left(ServerFailure(message: 'An error has occurred'));
+      return const Left(ServerFailure(serverMessage: 'An error has occurred'));
     }
   }
 
@@ -95,7 +95,7 @@ class RepositoryImpl implements Repository {
           .registerUser(requests as RequestRegisterUserModel);
       return Right(result);
     } on Exception {
-      return const Left(ServerFailure(message: 'An error has occurred'));
+      return const Left(ServerFailure(serverMessage: 'An error has occurred'));
     }
   }
 
@@ -105,7 +105,7 @@ class RepositoryImpl implements Repository {
       final result = await remoteDataSourceImpl.getRib();
       return Right(result);
     } on Exception {
-      return const Left(ServerFailure(message: 'An error has occurred'));
+      return const Left(ServerFailure(serverMessage: 'An error has occurred'));
     }
   }
 
@@ -116,7 +116,7 @@ class RepositoryImpl implements Repository {
       final result = await remoteDataSourceImpl.getCoursesByStatus(status);
       return Right(result);
     } on Exception {
-      return const Left(ServerFailure(message: 'An error has occurred'));
+      return const Left(ServerFailure(serverMessage: 'An error has occurred'));
     }
   }
 
@@ -134,7 +134,7 @@ class RepositoryImpl implements Repository {
           await remoteDataSourceImpl.getDetailCourse(courseId, formationId);
       return Right(result);
     } on Exception {
-      return const Left(ServerFailure(message: 'An error has occurred'));
+      return const Left(ServerFailure(serverMessage: 'An error has occurred'));
     }
   }
 
@@ -144,7 +144,7 @@ class RepositoryImpl implements Repository {
       final result = await remoteDataSourceImpl.getBooks();
       return Right(result);
     } on Exception {
-      return const Left(ServerFailure(message: 'An error has occurred'));
+      return const Left(ServerFailure(serverMessage: 'An error has occurred'));
     }
   }
 
@@ -154,7 +154,7 @@ class RepositoryImpl implements Repository {
       final result = await remoteDataSourceImpl.searchBooks(query);
       return Right(result);
     } on Exception {
-      return const Left(ServerFailure(message: 'An error has occurred'));
+      return const Left(ServerFailure(serverMessage: 'An error has occurred'));
     }
   }
 
@@ -165,7 +165,7 @@ class RepositoryImpl implements Repository {
       final result = await remoteDataSourceImpl.getWorkshopsById(workshopId);
       return Right(result);
     } on Exception {
-      return const Left(ServerFailure(message: 'An error has occurred'));
+      return const Left(ServerFailure(serverMessage: 'An error has occurred'));
     }
   }
 
@@ -176,7 +176,7 @@ class RepositoryImpl implements Repository {
       final result = await remoteDataSourceImpl.getOffersByType(type);
       return Right(result);
     } on Exception {
-      return const Left(ServerFailure(message: 'An error has occurred'));
+      return const Left(ServerFailure(serverMessage: 'An error has occurred'));
     }
   }
 
@@ -186,7 +186,7 @@ class RepositoryImpl implements Repository {
       final result = await remoteDataSourceImpl.getDetailOffer(offerId);
       return Right(result);
     } on Exception {
-      return const Left(ServerFailure(message: 'An error has occurred'));
+      return const Left(ServerFailure(serverMessage: 'An error has occurred'));
     }
   }
 
@@ -204,7 +204,7 @@ class RepositoryImpl implements Repository {
       final result = await remoteDataSourceImpl.getChat();
       return Right(result);
     } on Exception {
-      return const Left(ServerFailure(message: 'An error has occurred'));
+      return const Left(ServerFailure(serverMessage: 'An error has occurred'));
     }
   }
 
@@ -215,7 +215,7 @@ class RepositoryImpl implements Repository {
       final result = await remoteDataSourceImpl.getMessages(conversationId);
       return Right(result);
     } on Exception {
-      return const Left(ServerFailure(message: 'An error has occurred'));
+      return const Left(ServerFailure(serverMessage: 'An error has occurred'));
     }
   }
 
@@ -227,7 +227,7 @@ class RepositoryImpl implements Repository {
           await remoteDataSourceImpl.sendMessage(conversationId, content);
       return Right(result);
     } on Exception {
-      return const Left(ServerFailure(message: 'An error has occurred'));
+      return const Left(ServerFailure(serverMessage: 'An error has occurred'));
     }
   }
 
@@ -238,7 +238,7 @@ class RepositoryImpl implements Repository {
       final result = await remoteDataSourceImpl.getSchedule(weekKey);
       return Right(result);
     } on Exception {
-      return const Left(ServerFailure(message: 'An error has occurred'));
+      return const Left(ServerFailure(serverMessage: 'An error has occurred'));
     }
   }
 
@@ -250,7 +250,7 @@ class RepositoryImpl implements Repository {
           await remoteDataSourceImpl.attachFile(conversationId, file, type);
       return Right(result);
     } on Exception {
-      return const Left(ServerFailure(message: 'An error has occurred'));
+      return const Left(ServerFailure(serverMessage: 'An error has occurred'));
     }
   }
 
@@ -260,7 +260,7 @@ class RepositoryImpl implements Repository {
       final result = await remoteDataSourceImpl.applyToOffer(offerId, resume);
       return Right(result);
     } on Exception {
-      return const Left(ServerFailure(message: 'An error has occurred'));
+      return const Left(ServerFailure(serverMessage: 'An error has occurred'));
     }
   }
 
@@ -274,9 +274,9 @@ class RepositoryImpl implements Repository {
     } on DioException catch (e) {
       // Extract the error message from the response if available
       final errorMessage = e.response?.data['message'];
-      return Left(ServerFailure(message: errorMessage));
+      return Left(ServerFailure(serverMessage: errorMessage));
     } catch (e) {
-      return const Left(ServerFailure(message: 'An error has occurred'));
+      return const Left(ServerFailure(serverMessage: 'An error has occurred'));
     }
   }
 
@@ -286,7 +286,7 @@ class RepositoryImpl implements Repository {
       final result = await remoteDataSourceImpl.searchOffers(query);
       return Right(result);
     } on Exception {
-      return const Left(ServerFailure(message: 'An error has occurred'));
+      return const Left(ServerFailure(serverMessage: 'An error has occurred'));
     }
   }
 
@@ -296,7 +296,7 @@ class RepositoryImpl implements Repository {
       final workshops = await remoteDataSourceImpl.getWorkshops();
       return Right(workshops);
     } catch (error) {
-      return Left(ServerFailure(message: error.toString()));
+      return Left(ServerFailure(serverMessage: error.toString()));
     }
   }
 
@@ -312,7 +312,7 @@ class RepositoryImpl implements Repository {
       final workshops = await remoteDataSourceImpl.getAllNotification();
       return Right(workshops);
     } catch (error) {
-      return Left(ServerFailure(message: error.toString()));
+      return Left(ServerFailure(serverMessage: error.toString()));
     }
   }
 
@@ -322,7 +322,7 @@ class RepositoryImpl implements Repository {
       final workshops = await remoteDataSourceImpl.getEnrollment();
       return Right(workshops);
     } catch (error) {
-      return Left(ServerFailure(message: error.toString()));
+      return Left(ServerFailure(serverMessage: error.toString()));
     }
   }
 
@@ -332,7 +332,7 @@ class RepositoryImpl implements Repository {
       final lives = await remoteDataSourceImpl.getAllLives();
       return Right(lives);
     } catch (error) {
-      return Left(ServerFailure(message: error.toString()));
+      return Left(ServerFailure(serverMessage: error.toString()));
     }
   }
 
@@ -342,7 +342,7 @@ class RepositoryImpl implements Repository {
       final lives = await remoteDataSourceImpl.getFavorites();
       return Right(lives);
     } catch (error) {
-      return Left(ServerFailure(message: error.toString()));
+      return Left(ServerFailure(serverMessage: error.toString()));
     }
   }
 
@@ -360,7 +360,7 @@ class RepositoryImpl implements Repository {
           lastName, address, phone, country);
       return Right(updateProfile);
     } catch (error) {
-      return Left(ServerFailure(message: error.toString()));
+      return Left(ServerFailure(serverMessage: error.toString()));
     }
   }
 
@@ -371,7 +371,7 @@ class RepositoryImpl implements Repository {
       final updateProfile = await remoteDataSourceImpl.uploadAvatar(avatar);
       return Right(updateProfile);
     } catch (error) {
-      return Left(ServerFailure(message: error.toString()));
+      return Left(ServerFailure(serverMessage: error.toString()));
     }
   }
 
@@ -383,7 +383,7 @@ class RepositoryImpl implements Repository {
           await remoteDataSourceImpl.startCourse(courseId, formationId);
       return Right(startCourse);
     } catch (error) {
-      return Left(ServerFailure(message: error.toString()));
+      return Left(ServerFailure(serverMessage: error.toString()));
     }
   }
 
@@ -395,7 +395,7 @@ class RepositoryImpl implements Repository {
           await remoteDataSourceImpl.finishCourse(courseId, formationId);
       return Right(finishCourse);
     } catch (error) {
-      return Left(ServerFailure(message: error.toString()));
+      return Left(ServerFailure(serverMessage: error.toString()));
     }
   }
 
@@ -407,7 +407,7 @@ class RepositoryImpl implements Repository {
           await remoteDataSourceImpl.getCoursesOfFormation(formationId);
       return Right(finishCourse);
     } catch (error) {
-      return Left(ServerFailure(message: error.toString()));
+      return Left(ServerFailure(serverMessage: error.toString()));
     }
   }
 }

@@ -35,7 +35,7 @@ class PaymentContent extends StatelessWidget {
             create: (context) => locator<GetRibCubit>()..getRib(),
             child: BlocBuilder<GetRibCubit, GetRibState>(
               builder: (context, state) {
-                print("State Rib: $state");
+                debugPrint("State Rib: $state");
                 if (state is GetRibLoading) {
                   return const CircularProgressIndicator();
                 } else if (state is GetRibLoaded) {
@@ -43,6 +43,9 @@ class PaymentContent extends StatelessWidget {
                   return GestureDetector(
                     onLongPress: () {
                       Clipboard.setData(ClipboardData(text: rib.rib!));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Copied to clipboard')),
+                      );
                     },
                     child: Container(
                       height: 34.h,
@@ -99,9 +102,9 @@ class PaymentContent extends StatelessWidget {
   }
 
   void manualPayment(BuildContext context) async {
-    print("Formation ID: ${formationId.runtimeType}");
-    print("Selected Diploma: ${selectedDiploma.runtimeType}");
-    print("Selected Diploma: $selectedDiploma");
+    debugPrint("Formation ID: ${formationId.runtimeType}");
+    debugPrint("Selected Diploma: ${selectedDiploma.runtimeType}");
+    debugPrint("Selected Diploma: $selectedDiploma");
     selectedDiploma == ""
         ? BlocProvider.of<ManualPaymentCubit>(context)
             .manualPayment(formationId: formationId, additionalDiploma: "maroc")

@@ -17,7 +17,7 @@ final class GetBooksLoading extends GetBooksState {
 final class GetBooksLoaded extends GetBooksState {
   final List<BookEntity> books;
 
-  GetBooksLoaded({required this.books});
+  const GetBooksLoaded({required this.books});
   @override
   List<Object> get props => [books];
 }
@@ -25,7 +25,7 @@ final class GetBooksLoaded extends GetBooksState {
 final class GetBooksFailure extends GetBooksState {
   final String message;
 
-  GetBooksFailure({required this.message});
+  const GetBooksFailure({required this.message});
   @override
   List<Object> get props => [message];
 }

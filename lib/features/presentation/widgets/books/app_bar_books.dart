@@ -18,7 +18,7 @@ class AppBarBooks extends StatelessWidget implements PreferredSizeWidget {
           onTap: () async {
             final prefs = await SharedPreferences.getInstance();
             final token = prefs.getString("token");
-            if (token != null) {
+            if (token != null && context.mounted) {
               Navigator.pushReplacementNamed(context, NavigationStrings.main,
                   arguments: token);
             } else {
@@ -39,7 +39,7 @@ class AppBarBooks extends StatelessWidget implements PreferredSizeWidget {
             onPressed: () {
               Navigator.pushNamed(context, NavigationStrings.notification);
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.notifications,
               color: AppColors.darkerGrey,
             ))
@@ -49,5 +49,5 @@ class AppBarBooks extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   // TODO: implement preferredSize
-  Size get preferredSize => Size(0, 70);
+  Size get preferredSize => const Size(0, 70);
 }

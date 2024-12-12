@@ -19,36 +19,34 @@ class ShowDocumentPicked extends StatelessWidget {
         ],
       ),
       body: pickedFile.path.endsWith(".pdf")
-          ? Container(
-              child: PDFView(
-                filePath: pickedFile.path,
-                enableSwipe: true,
-                swipeHorizontal: false,
-                autoSpacing: false,
-                pageFling: true,
-                onError: (error) {
-                  print(error.toString());
-                },
-              ),
+          ? PDFView(
+              filePath: pickedFile.path,
+              enableSwipe: true,
+              swipeHorizontal: false,
+              autoSpacing: false,
+              pageFling: true,
+              onError: (error) {
+                debugPrint(error.toString());
+              },
             )
           : Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Selected Document:",
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Text("File Name: ${pickedFile.path.split('/').last}"),
                   Text("File Size: ${pickedFile.lengthSync()} bytes"),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: Text("Cancel"),
+                    child: const Text("Cancel"),
                   ),
                 ],
               ),

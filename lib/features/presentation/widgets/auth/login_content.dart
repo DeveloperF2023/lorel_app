@@ -78,28 +78,6 @@ class _LoginContentState extends State<LoginContent> {
                 isSignIn: widget.isSignIn,
               ),
             )),
-        Positioned(
-            top: 80.h,
-            left: 100.w,
-            right: 100.w,
-            child: Container(
-              height: 55.h,
-              width: 55.w,
-              decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey, blurRadius: 8, offset: Offset(1, 1))
-                  ]),
-              child: Center(
-                child: Icon(
-                  FontAwesomeIcons.solidUser,
-                  color: AppColors.darkGrey,
-                  size: 25.sp,
-                ),
-              ),
-            )),
       ],
     );
   }

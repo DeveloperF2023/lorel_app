@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:school_test_online/features/domain/entities/offers/detail_offer_entity.dart';
 import 'package:school_test_online/features/domain/use_cases/offers/fetch_detail_offer_use_case.dart';
 
@@ -18,23 +19,15 @@ class GetDetailOfferCubit extends Cubit<GetDetailOfferState> {
       final result = await fetchDetailOffersUseCase.callback(offerId);
       result.fold((l) => emit(GetDetailOfferFailure(message: l.message)),
           (r) => emit(GetDetailOfferLoaded(offer: r)));
-      print("Result Offers $result");
+      debugPrint("Result Offers $result");
     } on SocketException catch (e) {
-      print("this is error $e");
-      print("failed registration");
+      debugPrint("this is error $e");
+      debugPrint("failed registration");
       emit(GetDetailOfferFailure(message: e.toString()));
     } catch (e) {
-      print("this is error $e");
-      print("failed registration");
+      debugPrint("this is error $e");
+      debugPrint("failed registration");
       emit(GetDetailOfferFailure(message: e.toString()));
     }
   }
-
-  //void updateFavoriteStatus(bool isFavorite) {
-//     if (state is GetDetailOfferLoaded) {
-//       final loadedState = state as GetDetailOfferLoaded;
-//       final updatedOffer = loadedState.offer.copyWith(isFavorite: isFavorite);
-//       emit(GetDetailOfferLoaded(offer: updatedOffer));
-//     }
-//   }
 }

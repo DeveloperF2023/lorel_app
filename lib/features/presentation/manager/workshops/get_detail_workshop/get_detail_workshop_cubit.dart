@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:school_test_online/features/domain/entities/workshop/workshop_entity.dart';
 import 'package:school_test_online/features/domain/use_cases/workshops/fetch_workshop_by_id_use_case.dart';
 
@@ -18,12 +19,12 @@ class GetDetailWorkshopCubit extends Cubit<GetDetailWorkshopState> {
       result.fold((l) => emit(GetDetailWorkshopFailure(message: l.message)),
           (r) => emit(GetDetailWorkshopLoaded(workshop: r)));
     } on SocketException catch (e) {
-      print("this is error $e");
-      print("failed registration");
+      debugPrint("this is error $e");
+      debugPrint("failed registration");
       emit(GetDetailWorkshopFailure(message: e.toString()));
     } catch (e) {
-      print("this is error $e");
-      print("failed registration");
+      debugPrint("this is error $e");
+      debugPrint("failed registration");
       emit(GetDetailWorkshopFailure(message: e.toString()));
     }
   }

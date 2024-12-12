@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../../../../../core/error/failure.dart';
 import '../../../../domain/use_cases/user/login_user_use_case.dart';
@@ -33,10 +34,10 @@ class CredentialCubit extends Cubit<CredentialState> {
         },
       );
     } on SocketException catch (e) {
-      print("SocketException: $e");
+      debugPrint("SocketException: $e");
       emit(CredentialFailure(message: "Network error: ${e.message}"));
     } catch (e) {
-      print("General error: $e");
+      debugPrint("General error: $e");
       emit(CredentialFailure(message: "Login error: ${e.toString()}"));
     }
   }

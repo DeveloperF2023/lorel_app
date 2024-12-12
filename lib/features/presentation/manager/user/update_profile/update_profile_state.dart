@@ -17,7 +17,7 @@ final class UpdateProfileLoading extends UpdateProfileState {
 final class UpdateProfileLoaded extends UpdateProfileState {
   final UpdateUserEntity updateUserProfile;
 
-  UpdateProfileLoaded({required this.updateUserProfile});
+  const UpdateProfileLoaded({required this.updateUserProfile});
   @override
   List<Object> get props => [updateUserProfile];
 }
@@ -25,7 +25,7 @@ final class UpdateProfileLoaded extends UpdateProfileState {
 final class UpdateProfileFailure extends UpdateProfileState {
   final String message;
 
-  UpdateProfileFailure({required this.message});
+  const UpdateProfileFailure({required this.message});
   @override
   List<Object> get props => [message];
 }

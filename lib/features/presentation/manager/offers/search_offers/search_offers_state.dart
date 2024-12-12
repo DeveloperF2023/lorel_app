@@ -17,7 +17,7 @@ final class SearchOffersLoading extends SearchOffersState {
 final class SearchOffersLoaded extends SearchOffersState {
   final List<OffersEntity> searchOffers;
 
-  SearchOffersLoaded({required this.searchOffers});
+  const SearchOffersLoaded({required this.searchOffers});
   @override
   List<Object> get props => [searchOffers];
 }
@@ -25,7 +25,7 @@ final class SearchOffersLoaded extends SearchOffersState {
 final class SearchOffersFailure extends SearchOffersState {
   final String message;
 
-  SearchOffersFailure({required this.message});
+  const SearchOffersFailure({required this.message});
   @override
   List<Object> get props => [message];
 }

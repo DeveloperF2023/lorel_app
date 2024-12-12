@@ -9,25 +9,31 @@ class Failure extends Equatable {
 }
 
 class ServerFailure extends Failure {
-  final String message;
-  const ServerFailure({required this.message}) : super(message: message);
+  @override
+  final String serverMessage;
+  const ServerFailure({required this.serverMessage})
+      : super(message: serverMessage);
   @override
   // TODO: implement props
-  List<Object?> get props => [message];
+  List<Object?> get props => [serverMessage];
 }
 
 class ConnectionFailure extends Failure {
-  final String message;
-  const ConnectionFailure({required this.message}) : super(message: message);
+  @override
+  final String connectionMessage;
+  const ConnectionFailure({required this.connectionMessage})
+      : super(message: connectionMessage);
   @override
   // TODO: implement props
-  List<Object?> get props => [message];
+  List<Object?> get props => [connectionMessage];
 }
 
 class DatabaseFailure extends Failure {
-  final String message;
-  const DatabaseFailure({required this.message}) : super(message: message);
+  @override
+  final String databaseMessage;
+  const DatabaseFailure({required this.databaseMessage})
+      : super(message: databaseMessage);
   @override
   // TODO: implement props
-  List<Object?> get props => [message];
+  List<Object?> get props => [databaseMessage];
 }

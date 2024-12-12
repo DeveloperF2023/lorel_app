@@ -17,7 +17,7 @@ final class GetDomainsLoading extends GetDomainsState {
 final class GetDomainsLoaded extends GetDomainsState {
   final List<DomainEntity> domains;
 
-  GetDomainsLoaded({required this.domains});
+  const GetDomainsLoaded({required this.domains});
   @override
   List<Object> get props => [domains];
 }
@@ -25,7 +25,7 @@ final class GetDomainsLoaded extends GetDomainsState {
 final class GetDomainsFailure extends GetDomainsState {
   final String message;
 
-  GetDomainsFailure({required this.message});
+  const GetDomainsFailure({required this.message});
   @override
   List<Object> get props => [message];
 }

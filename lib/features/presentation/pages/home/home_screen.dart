@@ -27,17 +27,13 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Stack(
         clipBehavior: Clip.none,
         children: [
-          // Background container
           Container(
             height: HelperFunctions.screenHeight(context) * .86.h,
             width: HelperFunctions.screenWidth(context).w,
             color: AppColors.primaryColor,
           ),
-
           if (!isClosed) _buildLivesNotification(context),
-
           _buildHomeHeader(context),
-
           _buildMainContent(context),
         ],
       ),

@@ -49,7 +49,7 @@ class DetailOfferScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, NavigationStrings.notification);
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.notifications,
                 color: AppColors.darkGrey,
               ))

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:school_test_online/features/domain/entities/courses/detail_course_entity.dart';
 
 import '../../../../domain/use_cases/courses/fetch_detail_course_use_case.dart';
@@ -29,12 +30,12 @@ class GetDetailCourseCubit extends Cubit<GetDetailCourseState> {
                 isLastCourse: currentIndex == courses.length - 1,
               )));
     } on SocketException catch (e) {
-      print("this is error $e");
-      print("failed registration");
+      debugPrint("this is error $e");
+      debugPrint("failed registration");
       emit(GetDetailCourseFailure(message: e.toString()));
     } catch (e) {
-      print("this is error $e");
-      print("failed registration");
+      debugPrint("this is error $e");
+      debugPrint("failed registration");
       emit(GetDetailCourseFailure(message: e.toString()));
     }
   }

@@ -17,7 +17,7 @@ final class UploadAvatarLoading extends UploadAvatarState {
 final class UploadAvatarLoaded extends UploadAvatarState {
   final String uploadAvatar;
 
-  UploadAvatarLoaded({required this.uploadAvatar});
+  const UploadAvatarLoaded({required this.uploadAvatar});
   @override
   List<Object> get props => [uploadAvatar];
 }
@@ -25,7 +25,7 @@ final class UploadAvatarLoaded extends UploadAvatarState {
 final class UploadAvatarFailure extends UploadAvatarState {
   final String message;
 
-  UploadAvatarFailure({required this.message});
+  const UploadAvatarFailure({required this.message});
   @override
   List<Object> get props => [message];
 }

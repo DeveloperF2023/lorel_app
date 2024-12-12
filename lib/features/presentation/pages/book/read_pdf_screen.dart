@@ -8,7 +8,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pdfx/pdfx.dart';
 import 'package:school_test_online/core/constants/app_colors.dart';
-import 'package:school_test_online/core/routes/routes.dart';
 import 'package:school_test_online/core/utils/helpers/locale_service.dart';
 import 'package:school_test_online/features/presentation/widgets/global/widgets_imports.dart';
 
@@ -126,9 +125,7 @@ class _ReadPdfScreenState extends State<ReadPdfScreen> {
                 right: AppLocalization.of(context)!.isArabicSelected(context)
                     ? 10.w
                     : 0.w),
-            child: BackButtonWidget(
-                onTap: () => Navigator.pushReplacementNamed(
-                    context, NavigationStrings.books)),
+            child: BackButtonWidget(onTap: () => Navigator.pop(context)),
           ),
           title: Text(
             widget.title,
@@ -143,20 +140,21 @@ class _ReadPdfScreenState extends State<ReadPdfScreen> {
           ],
           centerTitle: true,
           bottom: _isDownloading
-              ? PreferredSize(
-                  preferredSize: const Size.fromHeight(4.0),
+              ? const PreferredSize(
+                  preferredSize: Size.fromHeight(4.0),
                   child: LinearProgressIndicator(),
                 )
               : null),
       body: SafeArea(
         child: _loading
-            ? Center(child: CircularProgressIndicator())
+            ? const Center(child: CircularProgressIndicator())
             : _errorMessage != null
                 ? Center(child: Text(_errorMessage!))
                 : PdfView(
                     controller: _pdfController!,
                     onDocumentLoaded: (document) {
-                      print('PDF loaded with ${document.pagesCount} pages');
+                      debugPrint(
+                          'PDF loaded with ${document.pagesCount} pages');
                     },
                     onPageChanged: (page) {},
                   ),

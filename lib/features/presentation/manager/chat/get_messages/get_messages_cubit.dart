@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:school_test_online/features/domain/entities/chat/message_entity.dart';
 import 'package:school_test_online/features/domain/use_cases/chat/get_messages_use_case.dart';
 
@@ -21,12 +22,12 @@ class GetMessagesCubit extends Cubit<GetMessagesState> {
       result.fold((l) => emit(GetMessagesFailure(message: l.message)),
           (r) => emit(GetMessagesLoaded(messages: r)));
     } on SocketException catch (e) {
-      print("this is error $e");
-      print("failed registration");
+      debugPrint("this is error $e");
+      debugPrint("failed registration");
       emit(GetMessagesFailure(message: e.toString()));
     } catch (e) {
-      print("this is error $e");
-      print("failed registration");
+      debugPrint("this is error $e");
+      debugPrint("failed registration");
       emit(GetMessagesFailure(message: e.toString()));
     }
   }

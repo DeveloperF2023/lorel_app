@@ -10,7 +10,7 @@ class UserDataEntity extends Equatable {
   final bool? active;
   final String? createdAt;
   final String? updatedAt;
-  UserDataEntity({
+  const UserDataEntity({
     this.id,
     this.name,
     this.role,

@@ -9,7 +9,7 @@ class DomainEntity extends Equatable {
   final String? createdAt;
   final String? updatedAt;
 
-  DomainEntity(
+  const DomainEntity(
       {required this.id,
       required this.title,
       required this.sort,

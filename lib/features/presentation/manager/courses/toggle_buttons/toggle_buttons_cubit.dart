@@ -5,7 +5,7 @@ part 'toggle_buttons_state.dart';
 
 class ToggleButtonsCubit extends Cubit<ToggleButtonsState> {
   ToggleButtonsCubit()
-      : super(ToggleButtonsState(
+      : super(const ToggleButtonsState(
             isSelected: [true, false], status: 'in_progress'));
 
   void toggleButton(int index) {

@@ -33,5 +33,5 @@ class AppBarDetailMyCourse extends StatelessWidget
 
   @override
   // TODO: implement preferredSize
-  Size get preferredSize => Size(0, 60);
+  Size get preferredSize => const Size(0, 60);
 }

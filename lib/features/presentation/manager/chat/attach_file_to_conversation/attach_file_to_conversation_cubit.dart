@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:school_test_online/features/domain/use_cases/chat/attach_file_to_conversation_use_case.dart';
 
 import '../../../../domain/entities/chat/send_message_response_entity.dart';
@@ -28,14 +29,14 @@ class AttachFileToConversationCubit
           emit(AttachFileToConversationLoaded(attachFile: r));
         },
       );
-      print('File attached: $result');
+      debugPrint('File attached: $result');
     } on SocketException catch (e) {
-      print("this is error $e");
-      print("failed registration");
+      debugPrint("this is error $e");
+      debugPrint("failed registration");
       emit(AttachFileToConversationFailure(message: e.toString()));
     } catch (e) {
-      print("this is error $e");
-      print("failed registration");
+      debugPrint("this is error $e");
+      debugPrint("failed registration");
       emit(AttachFileToConversationFailure(message: e.toString()));
     }
   }

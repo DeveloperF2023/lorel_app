@@ -17,7 +17,7 @@ final class ApplyToOfferLoading extends ApplyToOfferState {
 final class ApplyToOfferLoaded extends ApplyToOfferState {
   final String message;
 
-  ApplyToOfferLoaded({required this.message});
+  const ApplyToOfferLoaded({required this.message});
   @override
   List<Object> get props => [message];
 }

@@ -74,7 +74,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       profilePicture = preferences.getString("profilePicture")!;
     });
 
-    print(profilePicture);
+    debugPrint(profilePicture);
   }
 
   @override

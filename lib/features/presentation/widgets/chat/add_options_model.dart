@@ -10,10 +10,10 @@ class AddOptionsModal extends StatelessWidget {
   final void Function() onAddImage;
 
   const AddOptionsModal({
-    Key? key,
+    super.key,
     required this.onAddDocument,
     required this.onAddImage,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class AddOptionsModal extends StatelessWidget {
                 Container(
                   height: 35.h,
                   width: 35.w,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       shape: BoxShape.circle, color: AppColors.macaroni),
                   child: Icon(
                     Icons.description,
@@ -61,7 +61,7 @@ class AddOptionsModal extends StatelessWidget {
                 Container(
                   height: 35.h,
                   width: 35.w,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       shape: BoxShape.circle, color: AppColors.lovelyPurple),
                   child: Icon(
                     Icons.image,

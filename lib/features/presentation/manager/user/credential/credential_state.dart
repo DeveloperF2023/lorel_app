@@ -22,7 +22,7 @@ class CredentialSuccess extends CredentialState {
 class CredentialFailure extends CredentialState {
   final String message;
 
-  CredentialFailure({required this.message});
+  const CredentialFailure({required this.message});
   @override
   List<Object> get props => [message];
 }

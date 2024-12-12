@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:pusher_client_fixed/pusher_client_fixed.dart';
 
 class PusherService {
@@ -25,7 +26,7 @@ class PusherService {
   void subscribeToChannel(String channelName, Map<String, String> events,
       Function(PusherEvent?) callback) {
     if (_subscribedChannels.containsKey(channelName)) {
-      print('Already subscribed to channel: $channelName');
+      debugPrint('Already subscribed to channel: $channelName');
       return;
     }
 
@@ -33,13 +34,13 @@ class PusherService {
     _subscribedChannels[channelName] = channel;
 
     events.forEach((eventName, eventDescription) {
-      print("Subscribing to event: $eventName on channel: $channelName");
+      debugPrint("Subscribing to event: $eventName on channel: $channelName");
       channel.bind(eventName, (PusherEvent? event) {
         if (event != null) {
-          print("Received event: $eventName with data: ${event.data}");
+          debugPrint("Received event: $eventName with data: ${event.data}");
           callback(event);
         } else {
-          print("Event received was null");
+          debugPrint("Event received was null");
         }
       });
     });

@@ -3,9 +3,10 @@ import 'package:school_test_online/features/domain/entities/lives/zoom_response_
 
 class ZoomResponseModel extends ZoomResponseEntity {
   final bool? status;
+
   final ZoomDataModel? data;
 
-  ZoomResponseModel({this.status, this.data})
+  const ZoomResponseModel({this.status, this.data})
       : super(status: status, data: data);
 
   factory ZoomResponseModel.fromJson(Map<String, dynamic> json) {

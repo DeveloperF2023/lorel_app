@@ -22,7 +22,7 @@ final class RemoveFromFavoriteListLoaded extends RemoveFromFavoriteListState {
 final class RemoveFromFavoriteListFailure extends RemoveFromFavoriteListState {
   final String message;
 
-  RemoveFromFavoriteListFailure({required this.message});
+  const RemoveFromFavoriteListFailure({required this.message});
   @override
   List<Object> get props => [message];
 }

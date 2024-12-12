@@ -6,6 +6,7 @@ import '../enrollment/enrollment_second_model.dart';
 class ManualPaymentResponseModel extends ManualPaymentResponseEntity {
   String? message;
   EnrollmentSecondModel? enrollments;
+
   CoursesModel? formation;
 
   ManualPaymentResponseModel({this.message, this.enrollments, this.formation});

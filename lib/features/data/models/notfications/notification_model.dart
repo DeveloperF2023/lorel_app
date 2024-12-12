@@ -2,8 +2,11 @@ import 'package:school_test_online/features/domain/entities/notifications/notifi
 
 class NotificationModel extends NotificationEntity {
   String? title;
+
   String? message;
+
   String? type;
+
   String? date;
 
   NotificationModel({this.title, this.message, this.type, this.date});

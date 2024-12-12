@@ -30,8 +30,7 @@ class ChatModel extends ChatEntity {
     lastMessage = json['last_message'] != null
         ? LastMessageModel.fromJson(json['last_message'])
         : null;
-    group =
-        json['group'] != null ? new GroupModel.fromJson(json['group']) : null;
+    group = json['group'] != null ? GroupModel.fromJson(json['group']) : null;
   }
 
   static List<ChatModel> fromJsonList(List<dynamic> jsonList) {

@@ -52,8 +52,8 @@ class _DetailConversationScreenState extends State<DetailConversationScreen> {
   bool _isDragging = false;
   bool _cancelledRecording = false;
   double _dragOffset = 0.0;
-  double _initialButtonSize = 40.0;
-  double _expandedButtonSize = 50.0;
+  final double _initialButtonSize = 40.0;
+  final double _expandedButtonSize = 50.0;
   String _recordingTime = "00:00";
 
   Timer? _timer;
@@ -128,7 +128,7 @@ class _DetailConversationScreenState extends State<DetailConversationScreen> {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String? name = preferences.getString("name");
     if (name == null) {
-      print("Name not found in preferences");
+      debugPrint("Name not found in preferences");
       return;
     }
 
@@ -171,25 +171,25 @@ class _DetailConversationScreenState extends State<DetailConversationScreen> {
             ),
           );
         } else {
-          print("Image is already uploaded.");
+          debugPrint("Image is already uploaded.");
         }
       } else {
-        print("Document is already uploaded.");
+        debugPrint("Document is already uploaded.");
       }
     } else {
-      print("Document picking cancelled or file path is null");
+      debugPrint("Document picking cancelled or file path is null");
     }
   }
 
   Future<void> pickImage() async {
-    final ImagePicker _picker = ImagePicker();
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String name = preferences.getString("name")!;
 
     if (image != null) {
       File imageFile = File(image.path);
-      print('image file ${imageFile}');
+      print('image file $imageFile');
 
       if (!messagesList.any((message) => message.file == imageFile.path)) {
         Navigator.push(
@@ -210,16 +210,16 @@ class _DetailConversationScreenState extends State<DetailConversationScreen> {
           ),
         );
       } else {
-        print("Image is already uploaded.");
+        debugPrint("Image is already uploaded.");
       }
     } else {
-      print("Image picking cancelled");
+      debugPrint("Image picking cancelled");
     }
   }
 
   Future<void> pickImageSecond() async {
-    final ImagePicker _picker = ImagePicker();
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String name = preferences.getString("name")!;
     if (!messagesList.any((message) => message.file == image!.path)) {
@@ -302,7 +302,7 @@ class _DetailConversationScreenState extends State<DetailConversationScreen> {
         );
         _startTimer();
       } catch (e) {
-        print('Failed to start recording: $e');
+        debugPrint('Failed to start recording: $e');
       }
     }
   }
@@ -329,15 +329,15 @@ class _DetailConversationScreenState extends State<DetailConversationScreen> {
                     file: audioFile,
                     type: "audio")
                 .whenComplete(() {
-              print('Audio message sent successfully');
+              debugPrint('Audio message sent successfully');
               _fetchMessages();
             });
           } else {
-            print('Recording path is null');
+            debugPrint('Recording path is null');
           }
         }
       } catch (e) {
-        print('Failed to stop recording: $e');
+        debugPrint('Failed to stop recording: $e');
       }
     }
   }
@@ -360,13 +360,13 @@ class _DetailConversationScreenState extends State<DetailConversationScreen> {
       'conversations.messages.${widget.conversationId}':
           '${widget.conversationId}'
     }, (event) async {
-      print('Event received: $event');
+      debugPrint('Event received: $event');
       if (event != null) {
-        print('Event data: ${event.data}');
+        debugPrint('Event data: ${event.data}');
         final Map<String, dynamic> jsonData = jsonDecode(event.data!);
-        print('Decoded JSON: $jsonData');
+        debugPrint('Decoded JSON: $jsonData');
         final newMessage = MessagesModel.fromJson(jsonData);
-        print('Parsed message: ${newMessage.body}');
+        debugPrint('Parsed message: ${newMessage.body}');
         if (newMessage.user!.id != widget.currentUser) {
           showNotification(
               "Message from ${newMessage.user!.name}", "${newMessage.body}");
@@ -377,7 +377,7 @@ class _DetailConversationScreenState extends State<DetailConversationScreen> {
 
         BlocProvider.of<GetMessagesCubit>(context).addMessage(newMessage);
       } else {
-        print('Received null event');
+        debugPrint('Received null event');
       }
     });
   }
@@ -455,11 +455,11 @@ class _DetailConversationScreenState extends State<DetailConversationScreen> {
                               itemCount: messagesList.length,
                               itemBuilder: (context, index) {
                                 final message = messagesList[index];
-                                print("Messages $message");
+                                debugPrint("Messages $message");
                                 final isCurrentUser =
                                     message.user!.id == widget.currentUser;
                                 final isUserImage = message.user!.image == null;
-                                print(
+                                debugPrint(
                                     'Message received: ${jsonEncode(message.toJson())}');
                                 return DetailMessageContent(
                                   userImage: !isUserImage

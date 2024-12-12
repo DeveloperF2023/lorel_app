@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../../../../domain/entities/user/request_register_user_entity.dart';
 import '../../../../domain/use_cases/user/register_user_use_case.dart';
@@ -18,16 +19,16 @@ class RegisterUserCubit extends Cubit<RegisterUserState> {
     try {
       final result = await registerUserUseCase.callback(requests);
       result.fold((l) {
-        print("ERROR: ${l.message}");
+        debugPrint("ERROR: ${l.message}");
         emit(RegisterUserFailure(message: l.message));
       }, (r) {
         emit(RegisterUserLoaded());
       });
     } on SocketException catch (e) {
-      print("This is error $e");
+      debugPrint("This is error $e");
       emit(RegisterUserFailure(message: e.message));
     } catch (e) {
-      print("This is error $e");
+      debugPrint("This is error $e");
       emit(RegisterUserFailure(message: e.toString()));
     }
   }

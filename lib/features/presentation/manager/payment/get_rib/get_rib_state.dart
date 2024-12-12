@@ -17,7 +17,7 @@ final class GetRibLoading extends GetRibState {
 final class GetRibLoaded extends GetRibState {
   final RibEntity rib;
 
-  GetRibLoaded({required this.rib});
+  const GetRibLoaded({required this.rib});
   @override
   List<Object> get props => [];
 }

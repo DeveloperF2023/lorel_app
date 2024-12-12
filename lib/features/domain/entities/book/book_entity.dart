@@ -11,7 +11,7 @@ class BookEntity extends Equatable {
   final String? createdAt;
   final String? updatedAt;
 
-  BookEntity(
+  const BookEntity(
       {this.id,
       this.title,
       this.pdf,
@@ -24,5 +24,6 @@ class BookEntity extends Equatable {
 
   @override
   // TODO: implement props
-  List<Object?> get props => [];
+  List<Object?> get props =>
+      [id, title, pdf, image, author, domain, active, createdAt, updatedAt];
 }

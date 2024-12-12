@@ -20,20 +20,20 @@ class AuthCubit extends Cubit<AuthState> {
       bool isSignIn = await isSignInUserUseCase.callback();
       if (isSignIn) {
         final token = await getCurrentTokenUserUseCase.callback();
-        print("Fetched token: $token");
+        debugPrint("Fetched token: $token");
         if (isValidToken(token)) {
-          print("Valid token: $token");
+          debugPrint("Valid token: $token");
           emit(Authenticated(userToken: token));
         } else {
-          print("Invalid token: $token");
+          debugPrint("Invalid token: $token");
           emit(UnAuthenticated());
         }
       } else {
-        print("User is not signed in");
+        debugPrint("User is not signed in");
         emit(UnAuthenticated());
       }
     } catch (e) {
-      print("Error during authentication: $e");
+      debugPrint("Error during authentication: $e");
       emit(UnAuthenticated());
     }
   }
@@ -41,7 +41,7 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> loggedIn() async {
     try {
       final token = await getCurrentTokenUserUseCase.callback();
-      print("this is token $token");
+      debugPrint("this is token $token");
       emit(Authenticated(userToken: token));
     } catch (_) {
       emit(UnAuthenticated());

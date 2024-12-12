@@ -33,9 +33,6 @@ class Validators {
 
   static String? passwordValidatorRegister(
       String? value, BuildContext context) {
-    String pattern = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$&*~]).{8,}$';
-    RegExp regex = RegExp(pattern);
-
     List<String> errors = [];
 
     /// Check for empty password

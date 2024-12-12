@@ -62,17 +62,23 @@ class ChatScreen extends StatelessWidget {
                             SharedPreferences preferences =
                                 await SharedPreferences.getInstance();
                             int userId = preferences.getInt("userId")!;
-                            Navigator.pushNamed(
-                                context, NavigationStrings.detailConversation,
+                            if (context.mounted) {
+                              Navigator.pushNamed(
+                                context,
+                                NavigationStrings.detailConversation,
                                 arguments: {
                                   "conversationId": conversations.id,
                                   "groupName": conversations.group!.name!,
                                   "currentUser": userId,
-                                });
+                                },
+                              );
+                            } else {
+                              debugPrint("User ID is null");
+                            }
                           });
                     },
                     separatorBuilder: (BuildContext context, int index) {
-                      return Divider();
+                      return const Divider();
                     },
                   ),
                 );

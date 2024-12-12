@@ -7,7 +7,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:school_test_online/core/constants/app_assets.dart';
 import 'package:school_test_online/core/constants/app_colors.dart';
 import 'package:school_test_online/features/presentation/manager/user/upload_avatar/upload_avatar_cubit.dart';
-import 'package:school_test_online/features/presentation/pages/settings/settings_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/utils/helpers/locale_service.dart';
@@ -37,7 +36,7 @@ class _UploadAvatarScreenState extends State<UploadAvatarScreen> {
     setState(() {
       profilePictureSaved = preferences.getString("profilePicture") ?? "";
     });
-    print("profile picture $profilePictureSaved");
+    debugPrint("profile picture $profilePictureSaved");
   }
 
   Future<void> _pickImage() async {
@@ -68,8 +67,7 @@ class _UploadAvatarScreenState extends State<UploadAvatarScreen> {
     return Scaffold(
       appBar: AppBarAllCourses(
         title: AppLocalization.of(context)!.translate('uploadAvatar'),
-        onTap: () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => SettingsScreen())),
+        onTap: () => Navigator.pop(context),
       ),
       body: SafeArea(
           child: Column(
@@ -87,7 +85,7 @@ class _UploadAvatarScreenState extends State<UploadAvatarScreen> {
                         ? FileImage(_profileImage!)
                         : (profilePictureSaved.isNotEmpty
                             ? NetworkImage(profilePictureSaved)
-                            : AssetImage(AppAssets.logo)),
+                            : const AssetImage(AppAssets.logo)),
                   ),
                   Positioned(
                       right: 5.w,
@@ -97,10 +95,10 @@ class _UploadAvatarScreenState extends State<UploadAvatarScreen> {
                         child: Container(
                           height: 40.h,
                           width: 40.w,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                               color: AppColors.primaryColor),
-                          child: Center(
+                          child: const Center(
                             child: Icon(
                               Icons.upload,
                               color: Colors.white,

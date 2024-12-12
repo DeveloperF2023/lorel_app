@@ -33,15 +33,15 @@ class _AudioWidgetState extends State<AudioWidget> {
     try {
       // Load the audio source and ensure it's fully loaded
       await player.setSourceUrl(widget.audioUrl);
-      print('Audio Loaded');
+      debugPrint('Audio Loaded');
 
       // Listen for when the duration becomes available
       _durationSubscription = player.onDurationChanged.listen((duration) {
         if (duration != Duration.zero && mounted) {
           setState(() {
             _duration = duration; // Update the duration when available
-            print(
-                'Audio Duration: ${_formatDuration(_duration!)}'); // Debug print
+            debugPrint(
+                'Audio Duration: ${_formatDuration(_duration)}'); // Debug debugPrint
           });
         }
       });
@@ -51,9 +51,9 @@ class _AudioWidgetState extends State<AudioWidget> {
 
       // Ensure to update player state after duration is fetched
       _playerState = player.state;
-      print('Player state: $_playerState');
+      debugPrint('Player state: $_playerState');
     } catch (e) {
-      print('Error initializing audio player: $e');
+      debugPrint('Error initializing audio player: $e');
     }
   }
 
@@ -107,17 +107,9 @@ class _AudioWidgetState extends State<AudioWidget> {
     setState(() => _playerState = PlayerState.paused);
   }
 
-  Future<void> _stop() async {
-    await player.stop();
-    setState(() {
-      _playerState = PlayerState.stopped;
-      _position = Duration.zero;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: HelperFunctions.screenHeight(context) * .07.h, // Adjust as needed
       width: HelperFunctions.screenWidth(context) * .7.w, // Adjust as needed
       child: Padding(

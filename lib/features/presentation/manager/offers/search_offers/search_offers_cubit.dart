@@ -27,13 +27,13 @@ class SearchOffersCubit extends Cubit<SearchOffersState> {
           emit(SearchOffersLoaded(searchOffers: successMessage));
         },
       );
-    } on SocketException catch (e) {
+    } on SocketException {
       // Handle network errors
-      emit(SearchOffersFailure(
+      emit(const SearchOffersFailure(
           message: "No internet connection. Please try again."));
     } catch (e) {
       // Handle general errors
-      emit(SearchOffersFailure(message: "An error occurred while applying."));
+      emit(const SearchOffersFailure(message: "An error occurred while applying."));
     }
   }
 

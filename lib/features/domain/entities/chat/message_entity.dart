@@ -13,7 +13,7 @@ class MessageEntity extends Equatable {
   final String? lastRead;
   final UserDataEntity? user;
 
-  MessageEntity(
+  const MessageEntity(
       {this.id,
       this.conversationId,
       this.userId,

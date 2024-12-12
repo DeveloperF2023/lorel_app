@@ -50,14 +50,14 @@ class ConversationsContent extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       lastMessage == ""
-                          ? Text("")
+                          ? const Text("")
                           : Text(
-                              "${senderName}: $lastMessage",
+                              "$senderName: $lastMessage",
                               style: GoogleFonts.robotoCondensed(
                                   color: AppColors.gullGrey, fontSize: 14.sp),
                             ),
                       timeLastMessage == ""
-                          ? Text("")
+                          ? const Text("")
                           : Text(
                               DateFormat.jm()
                                   .format(DateTime.parse(timeLastMessage)),

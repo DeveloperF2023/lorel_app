@@ -6,22 +6,39 @@ import 'package:school_test_online/features/domain/entities/offers/favorite_enti
 
 class FavoriteModel extends FavoriteEntity {
   int? id;
+
   String? title;
+
   String? image;
+
   String? company;
+
   String? city;
+
   SalaryModel? salary;
+
   String? type;
+
   String? contract;
+
   String? nature;
+
   String? missions;
+
   String? skills;
+
   String? experience;
+
   int? periode;
+
   String? unit;
+
   bool? active;
+
   String? createdAt;
+
   String? updatedAt;
+
   bool? isFavorite;
   PivotModel? pivots;
 

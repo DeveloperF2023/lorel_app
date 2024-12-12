@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:school_test_online/core/api/api_client.dart';
 import 'package:school_test_online/core/api/constants_api.dart';
 import 'package:school_test_online/core/utils/helpers/preferences_helpers.dart';
@@ -61,7 +62,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   Future<String> getCurrentCustomerUser() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String token = preferences.getString("token")!;
-    print("token $token");
+    debugPrint("token $token");
     return token;
   }
 
@@ -84,10 +85,10 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         requests.toJson(),
         null,
         false);
-    print(response.data);
+    debugPrint(response.data);
     if (response.statusCode == 201) {
       await preferencesHelper.saveUserDetailsRegister(response.data);
-      print("OK");
+      debugPrint("OK");
       return UserModel.fromJson(response.data);
     } else {
       throw Exception('Failed to register user');
@@ -98,7 +99,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   Future<String> updatePassword(
       String oldPassword, String password, String confirmationPassword) async {
     final token = await preferencesHelper.getToken();
-    print("Token: $token");
+    debugPrint("Token: $token");
     final response = await apiClient.postRequest(
         "${EndpointsConstants.baseUrl}${EndpointsConstants.updatePassword}",
         {
@@ -205,10 +206,10 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     final response = await apiClient.getRequest(
         "${EndpointsConstants.baseUrl}${EndpointsConstants.settings}", null);
 
-    print("this is status code rib :${response.statusCode}");
+    debugPrint("this is status code rib :${response.statusCode}");
     if (response.statusCode == 200) {
-      print("success status code");
-      print(response.data);
+      debugPrint("success status code");
+      debugPrint(response.data);
       if (response.data is Map<String, dynamic>) {
         return RibModel.fromJson(response.data);
       } else if (response.data is String) {
@@ -295,9 +296,9 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         "${EndpointsConstants.baseUrl}formations/$formationId/courses/$courseId/start",
         null,
         token);
-    print("Response start course: ${response.data}");
-    print("Response status code: ${response.statusCode}");
-    print("Token: $token");
+    debugPrint("Response start course: ${response.data}");
+    debugPrint("Response status code: ${response.statusCode}");
+    debugPrint("Token: $token");
     if (response.statusCode == 200) {
       return response.data["message"];
     } else {
@@ -312,9 +313,9 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         "${EndpointsConstants.baseUrl}formations/$formationId/courses/$courseId/finish",
         null,
         token);
-    print("Response start course: ${response.data}");
-    print("Response status code: ${response.statusCode}");
-    print("Token: $token");
+    debugPrint("Response start course: ${response.data}");
+    debugPrint("Response status code: ${response.statusCode}");
+    debugPrint("Token: $token");
     if (response.statusCode == 200) {
       return response.data["message"];
     } else {
@@ -326,13 +327,19 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   Future<List<DetailCourseModel>> getCoursesOfFormation(int formationId) async {
     final token = await preferencesHelper.getToken();
     final response = await apiClient.getRequest(
-        "${EndpointsConstants.baseUrl}formations/$formationId/courses", token);
-    print(response.data);
-    print(response.statusCode);
+      "${EndpointsConstants.baseUrl}formations/$formationId/courses",
+      token,
+    );
+
+    debugPrint(response.data);
+    debugPrint(response.statusCode.toString());
+
     if (response.statusCode == 200) {
       return DetailCourseModel.fromJsonList(response.data);
     } else {
-      throw Exception('Failed to update profile');
+      final errorMessage =
+          response.data['message'] ?? 'Failed to fetch courses';
+      throw Exception(errorMessage);
     }
   }
 
@@ -630,7 +637,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         int? groupId = enrollment['group_id'];
         if (groupId != null) {
           groupIds.add(groupId);
-          print("Stored group ID: $groupId");
+          debugPrint("Stored group ID: $groupId");
         }
       }
       await preferences.setString("groupIds", jsonEncode(groupIds));
