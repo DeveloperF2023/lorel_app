@@ -102,7 +102,7 @@ class _DetailMyCourseContentState extends State<DetailMyCourseContent> {
                           left: 0,
                           right: 0,
                           child: Container(
-                            color: Colors.black.withOpacity(0.5),
+                            color: Colors.black.withValues(alpha: 0.5),
                             child: Column(
                               children: [
                                 SizedBox(
@@ -142,7 +142,7 @@ class _DetailMyCourseContentState extends State<DetailMyCourseContent> {
                       if (!_showControls && !_isPlaying)
                         Icon(
                           Icons.play_arrow,
-                          color: Colors.white,
+                          color: AppColors.primaryColor,
                           size: 50.sp,
                         ),
                       if (_showControls)
@@ -151,7 +151,7 @@ class _DetailMyCourseContentState extends State<DetailMyCourseContent> {
                             onTap: _togglePlayPause,
                             child: Icon(
                               _isPlaying ? Icons.pause : Icons.play_arrow,
-                              color: Colors.white,
+                              color: AppColors.primaryColor,
                               size: 50.sp,
                             ),
                           ),

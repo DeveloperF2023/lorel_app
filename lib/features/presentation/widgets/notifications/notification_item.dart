@@ -23,7 +23,7 @@ class NotificationItem extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15.r),
             border: Border.all(color: Colors.black),
-            color: AppColors.teaGreen.withOpacity(0.2)),
+            color: AppColors.teaGreen.withValues(alpha: 0.2)),
         child: Row(
           children: [
             Column(

@@ -95,7 +95,7 @@ class _TimetableScreenState extends State<TimetableScreen> {
                     IconButton(
                       icon: Icon(
                         Icons.arrow_back_ios,
-                        color: AppColors.sapphireBlue.withOpacity(0.6),
+                        color: AppColors.sapphireBlue.withValues(alpha: 0.6),
                         size: 20.sp,
                       ),
                       onPressed: currentSemIndex > 0
@@ -105,13 +105,13 @@ class _TimetableScreenState extends State<TimetableScreen> {
                     Text(
                       '${AppLocalization.of(context)!.translate(weekNumber!.isNotEmpty ? 'week' : 'sem')} $weekNumber',
                       style: GoogleFonts.robotoCondensed(
-                          color: AppColors.sapphireBlue.withOpacity(0.6),
+                          color: AppColors.sapphireBlue.withValues(alpha: 0.6),
                           fontSize: 20.sp),
                     ),
                     IconButton(
                       icon: Icon(
                         Icons.arrow_forward_ios_outlined,
-                        color: AppColors.sapphireBlue.withOpacity(0.6),
+                        color: AppColors.sapphireBlue.withValues(alpha: 0.6),
                         size: 20.sp,
                       ),
                       onPressed: currentSemIndex < semKeys.length - 1

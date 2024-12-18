@@ -5,13 +5,15 @@ import '../../constants/app_colors.dart';
 Color getCourseColor(String courseName) {
   switch (courseName) {
     case 'Web Development':
-      return AppColors.macaroni.withOpacity(0.2); // Define custom color
+      return AppColors.macaroni.withValues(alpha: 0.2); // Define custom color
     case 'Mobile Development':
-      return AppColors.lovelyPurple.withOpacity(0.2); // Define custom color
+      return AppColors.lovelyPurple
+          .withValues(alpha: 0.2); // Define custom color
     case 'Machine learning':
-      return AppColors.spotlightGoGreen.withOpacity(0.2); // Define custom color
+      return AppColors.spotlightGoGreen
+          .withValues(alpha: 0.2); // Define custom color
     default:
-      return AppColors.mediumTurquoise.withOpacity(0.2); // Fallback color
+      return AppColors.mediumTurquoise.withValues(alpha: 0.2); // Fallback color
   }
 }
 

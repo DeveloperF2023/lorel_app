@@ -60,41 +60,42 @@ class AppColors {
   static const Color lovelyPurple = Color(0xff893DEA);
   static const Color mediumTurquoise = Color(0xff3DCBEA);
   static const Color spotlightGoGreen = Color(0xff3DEA59);
+  static Color greyShimmer = Colors.grey.shade200;
   static LinearGradient gradient1 = LinearGradient(colors: [
     const Color(0xff98B5FF),
-    const Color(0xff929BF2).withOpacity(0.77),
-    const Color(0xff8669D8).withOpacity(0.32),
+    const Color(0xff929BF2).withValues(alpha: 0.77),
+    const Color(0xff8669D8).withValues(alpha: 0.32),
   ]);
   static LinearGradient gradient2 = LinearGradient(colors: [
     const Color(0xffDBE7FF),
-    const Color(0xffE2C6F9).withOpacity(0.35),
+    const Color(0xffE2C6F9).withValues(alpha: 0.35),
   ]);
   static LinearGradient buttonGradient = LinearGradient(
       begin: Alignment.centerLeft,
       end: Alignment.centerRight,
       colors: [
         const Color(0xff2475D3),
-        const Color(0xff3E97FF).withOpacity(0.5),
+        const Color(0xff3E97FF).withValues(alpha: 0.5),
       ]);
   static LinearGradient menuGradient = LinearGradient(
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
       colors: [
-        const Color(0xffB8D9FF).withOpacity(0.2),
-        const Color(0xffF1FAFF).withOpacity(0.2),
+        const Color(0xffB8D9FF).withValues(alpha: 0.2),
+        const Color(0xffF1FAFF).withValues(alpha: 0.2),
       ]);
   static LinearGradient menuItemGradient = LinearGradient(
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
       colors: [
         const Color(0xffB8D9FF),
-        const Color(0xffCBE4FF).withOpacity(0.2),
-        const Color(0xffF1FAFF).withOpacity(0.84),
-        const Color(0xffF1FAFF).withOpacity(0.98),
+        const Color(0xffCBE4FF).withValues(alpha: 0.2),
+        const Color(0xffF1FAFF).withValues(alpha: 0.84),
+        const Color(0xffF1FAFF).withValues(alpha: 0.98),
       ]);
   static LinearGradient gradient3 = LinearGradient(colors: [
     const Color(0xffFFFFFF),
-    const Color(0xff9CAADD).withOpacity(0.45),
+    const Color(0xff9CAADD).withValues(alpha: 0.45),
   ]);
   static LinearGradient workshopGradient = const LinearGradient(
       begin: Alignment.topCenter,

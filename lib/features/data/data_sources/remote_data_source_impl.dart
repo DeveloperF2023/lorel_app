@@ -331,7 +331,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       token,
     );
 
-    debugPrint(response.data);
+    //debugPrint(response.data);
     debugPrint(response.statusCode.toString());
 
     if (response.statusCode == 200) {

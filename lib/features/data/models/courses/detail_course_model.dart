@@ -18,6 +18,7 @@ class DetailCourseModel extends DetailCourseEntity {
   String? updatedAt;
   String? startedAt;
   String? finishedAt;
+  bool? isLast;
   List<LivesModel>? lives;
 
   DetailCourseModel(
@@ -36,26 +37,27 @@ class DetailCourseModel extends DetailCourseEntity {
       this.updatedAt,
       this.startedAt,
       this.finishedAt,
+      this.isLast,
       this.lives});
 
   factory DetailCourseModel.fromJson(Map<String, dynamic> json) {
     return DetailCourseModel(
-      id: json['id'],
-      title: json['title'],
-      description: json['description'],
-      image: json['image'],
-      video: json['video'],
-      pdf: (json['pdf'] as List).map((e) => PdfModel.fromJson(e)).toList(),
-      sort: json['sort'],
-      active: json['active'],
-      publishedAt: json['published_at'],
-      userId: json['user_id'],
-      formationId: json['formation_id'],
-      createdAt: json['created_at'],
-      updatedAt: json['updated_at'],
-      startedAt: json['started_at'],
-      finishedAt: json['finished_at'],
-    );
+        id: json['id'],
+        title: json['title'],
+        description: json['description'],
+        image: json['image'],
+        video: json['video'],
+        pdf: (json['pdf'] as List).map((e) => PdfModel.fromJson(e)).toList(),
+        sort: json['sort'],
+        active: json['active'],
+        publishedAt: json['published_at'],
+        userId: json['user_id'],
+        formationId: json['formation_id'],
+        createdAt: json['created_at'],
+        updatedAt: json['updated_at'],
+        startedAt: json['started_at'],
+        finishedAt: json['finished_at'],
+        isLast: json['is_last']);
   }
 
   static List<DetailCourseModel> fromJsonList(List<dynamic> jsonList) {

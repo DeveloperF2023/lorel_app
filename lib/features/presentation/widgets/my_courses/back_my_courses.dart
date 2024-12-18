@@ -35,7 +35,7 @@ class NavigationMyCourses extends StatelessWidget {
               : Row(
                   children: [
                     Text(
-                      AppLocalization.of(context)!.translate("next"),
+                      nextText!,
                       style: GoogleFonts.poppins(
                           fontSize: 16.sp, color: AppColors.geyser),
                     ),

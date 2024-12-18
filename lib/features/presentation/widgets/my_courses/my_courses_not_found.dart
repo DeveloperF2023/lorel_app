@@ -12,7 +12,7 @@ class MyCoursesNotFound extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20.r),
         border: Border.all(color: Colors.white),
-        color: AppColors.jungleMist.withOpacity(0.5),
+        color: AppColors.jungleMist.withValues(alpha: 0.5),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

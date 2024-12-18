@@ -19,6 +19,7 @@ class DetailCourseEntity extends Equatable {
   final String? updatedAt;
   final String? startedAt;
   final String? finishedAt;
+  final bool? isLast;
   final List<LivesEntity>? lives;
 
   const DetailCourseEntity(
@@ -37,6 +38,7 @@ class DetailCourseEntity extends Equatable {
       this.updatedAt,
       this.startedAt,
       this.finishedAt,
+        this.isLast,
       this.lives});
   @override
   // TODO: implement props
@@ -56,6 +58,7 @@ class DetailCourseEntity extends Equatable {
         updatedAt,
         startedAt,
         finishedAt,
+    isLast,
         lives
       ];
 }

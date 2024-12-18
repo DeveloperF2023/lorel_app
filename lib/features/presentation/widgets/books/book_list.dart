@@ -26,7 +26,7 @@ class BookList extends StatelessWidget {
           );
         },
         separatorBuilder: (context, index) => Divider(
-          color: AppColors.secondarySmokeyGrey.withOpacity(0.2),
+          color: AppColors.secondarySmokeyGrey.withValues(alpha: 0.2),
           thickness: 2,
         ),
         itemCount: filteredBooks.length,

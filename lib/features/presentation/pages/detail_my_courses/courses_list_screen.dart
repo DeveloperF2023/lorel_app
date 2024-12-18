@@ -120,7 +120,7 @@ class _CoursesListScreenState extends State<CoursesListScreen> {
                       },
                 onPrevious:
                     currentIndex > 0 ? () => _previousCourse(courses) : null,
-                nextText: currentIndex < courses.length - 1
+                nextText: currentCourse.isLast == false
                     ? AppLocalization.of(context)!.translate("next")
                     : AppLocalization.of(context)!.translate("finished"),
               );

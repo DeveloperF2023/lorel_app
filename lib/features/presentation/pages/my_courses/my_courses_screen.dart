@@ -160,7 +160,10 @@ class _MyCoursesScreenState extends State<MyCoursesScreen> {
                     GetCoursesByStatusState>(
                   builder: (context, state) {
                     if (state is GetCoursesByStatusLoading) {
-                      return const Center(child: CircularProgressIndicator());
+                      return const Center(
+                          child: CircularProgressIndicator(
+                        color: AppColors.primaryColor,
+                      ));
                     } else if (state is GetCoursesByStatusFailure) {
                       return Center(child: Text('Error: ${state.message}'));
                     } else if (state is GetCoursesByStatusLoaded) {
@@ -168,11 +171,11 @@ class _MyCoursesScreenState extends State<MyCoursesScreen> {
                         return Container(
                           width: HelperFunctions.screenWidth(context).w,
                           margin: EdgeInsets.only(
-                              left: 10.w, bottom: 10.h, right: 10.w),
+                              left: 20.w, bottom: 10.h, right: 20.w),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20.r),
                             border: Border.all(color: Colors.white),
-                            color: AppColors.jungleMist.withOpacity(0.5),
+                            color: AppColors.jungleMist.withValues(alpha: 0.5),
                           ),
                           child: ListView.builder(
                             itemCount: state.coursesByStatus.length,

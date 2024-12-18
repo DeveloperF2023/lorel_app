@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/constants/app_colors.dart';
+
 class CustomShimmer extends StatelessWidget {
   final double height;
   final double width;
-
   const CustomShimmer({super.key, required this.height, required this.width});
 
   @override
@@ -14,7 +15,7 @@ class CustomShimmer extends StatelessWidget {
           height: height,
           width: width,
           decoration: BoxDecoration(
-            color: Colors.grey[200],
+            color: AppColors.greyShimmer,
             borderRadius: BorderRadius.circular(20),
           ),
         ),
@@ -35,7 +36,7 @@ class CustomShimmer extends StatelessWidget {
                       begin: Alignment(-1.0 + value, 0.0),
                       end: const Alignment(1.0, 0.0),
                       colors: [
-                        Colors.grey[200]!,
+                        AppColors.greyShimmer,
                         Colors.grey[100]!,
                         Colors.grey[300]!,
                       ],
