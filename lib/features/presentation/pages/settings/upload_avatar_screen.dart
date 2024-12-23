@@ -132,7 +132,7 @@ class _UploadAvatarScreenState extends State<UploadAvatarScreen> {
                   ),
                 );
               } else if (state is UploadAvatarLoading) {
-                const CircularProgressIndicator();
+                const CircularProgressIndicator(color: AppColors.primaryColor);
               }
             },
             builder: (context, state) {

@@ -35,6 +35,7 @@ class _AllCoursesScreenState extends State<AllCoursesScreen> {
             Navigator.pushReplacementNamed(context, NavigationStrings.main,
                 arguments: token);
           } else {
+            Navigator.pushReplacementNamed(context, NavigationStrings.login);
             debugPrint("Token it's null ");
           }
         },

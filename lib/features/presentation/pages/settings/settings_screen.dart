@@ -70,10 +70,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
   fetchUserName() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
-      nameUser = preferences.getString("name") ?? "User";
-      profilePicture = preferences.getString("profilePicture")!;
-    });
+      nameUser = preferences.getString("name") ?? "";
+      profilePicture = preferences.getString("profilePicture") ?? "";
 
+      List<String> nameParts = nameUser.split(' ');
+      if (nameParts.length > 1) {
+        nameUser = nameParts[1]; // Second word
+      }
+    });
     debugPrint(profilePicture);
   }
 
@@ -90,6 +94,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 padding: EdgeInsets.only(top: 20.h),
                 child: Row(
                   children: [
+                    InkWell(
+                        onTap: () async {
+                          final prefs = await SharedPreferences.getInstance();
+                          final token = prefs.getString("token");
+                          if (token != null && context.mounted) {
+                            Navigator.pushReplacementNamed(
+                                context, NavigationStrings.main,
+                                arguments: token);
+                          } else {
+                            debugPrint("Token it's null ");
+                          }
+                        },
+                        child: const Icon(Icons.arrow_back_ios_new)),
+                    SizedBox(width: 15.w),
                     Directionality(
                       textDirection:
                           AppLocalization.of(context)!.isArabicSelected(context)
@@ -97,18 +115,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               : TextDirection.ltr,
                       child: BlocBuilder<UploadAvatarCubit, UploadAvatarState>(
                         builder: (context, avatarState) {
-                          // Determine the appropriate ImageProvider based on the avatar URL
+                          // Default image provider
                           ImageProvider backgroundImage;
+
                           if (avatarState is UploadAvatarLoaded) {
-                            if (avatarState.uploadAvatar.isNotEmpty) {
-                              backgroundImage =
-                                  NetworkImage(avatarState.uploadAvatar);
+                            String avatarUrl = avatarState.uploadAvatar;
+
+                            if (avatarUrl.isNotEmpty &&
+                                Uri.parse(avatarUrl).isAbsolute) {
+                              backgroundImage = NetworkImage(avatarUrl);
                             } else {
                               backgroundImage =
                                   const AssetImage(AppAssets.logo);
                             }
                           } else {
-                            backgroundImage = NetworkImage(profilePicture);
+                            backgroundImage = const AssetImage(AppAssets.logo);
                           }
 
                           return GestureDetector(
@@ -117,6 +138,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             child: CircleAvatar(
                               radius: 38,
                               backgroundImage: backgroundImage,
+                              backgroundColor: AppColors.whiteSmoke,
                             ),
                           );
                         },
@@ -145,7 +167,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ),
                         );
                       },
-                    )
+                    ),
                   ],
                 ),
               ),

@@ -439,7 +439,9 @@ class _DetailConversationScreenState extends State<DetailConversationScreen> {
                 child: BlocBuilder<GetMessagesCubit, GetMessagesState>(
                   builder: (context, state) {
                     if (state is GetMessagesLoading) {
-                      return const Center(child: CircularProgressIndicator());
+                      return const Center(
+                          child: CircularProgressIndicator(
+                              color: AppColors.primaryColor));
                     } else if (state is GetMessagesLoaded) {
                       messagesList = state.messages as List<MessagesModel>;
                       WidgetsBinding.instance.addPostFrameCallback((_) {

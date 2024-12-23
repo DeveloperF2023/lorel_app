@@ -62,7 +62,9 @@ class _BooksScreenState extends State<BooksScreen> {
             BlocBuilder<GetBooksCubit, GetBooksState>(
               builder: (context, state) {
                 if (state is GetBooksLoading) {
-                  return const Center(child: CircularProgressIndicator());
+                  return const Center(
+                      child: CircularProgressIndicator(
+                          color: AppColors.primaryColor));
                 } else if (state is GetBooksLoaded) {
                   _books = state.books;
                   if (_filteredBooks.isEmpty) _filteredBooks = _books;

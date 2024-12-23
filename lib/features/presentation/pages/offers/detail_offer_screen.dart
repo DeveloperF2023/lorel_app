@@ -75,7 +75,9 @@ class DetailOfferScreen extends StatelessWidget {
               child: BlocBuilder<GetDetailOfferCubit, GetDetailOfferState>(
                 builder: (context, state) {
                   if (state is GetDetailOfferLoading) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(
+                        child: CircularProgressIndicator(
+                            color: AppColors.primaryColor));
                   } else if (state is GetDetailOfferLoaded) {
                     final detailOffer = state.offer;
                     return DetailOfferContent(

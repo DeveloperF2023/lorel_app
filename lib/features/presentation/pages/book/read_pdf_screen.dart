@@ -147,7 +147,8 @@ class _ReadPdfScreenState extends State<ReadPdfScreen> {
               : null),
       body: SafeArea(
         child: _loading
-            ? const Center(child: CircularProgressIndicator())
+            ? const Center(
+                child: CircularProgressIndicator(color: AppColors.primaryColor))
             : _errorMessage != null
                 ? Center(child: Text(_errorMessage!))
                 : PdfView(

@@ -72,7 +72,7 @@ void main() async {
   PreferencesHelper preferences = PreferencesHelper(preferences0);
   RemoteDataSource remoteDataSource = RemoteDataSourceImpl(
       apiClient: apiClient, preferencesHelper: preferences);
-  debugPrint("Get Courses ${remoteDataSource.getCoursesOfFormation(2)}");
+  debugPrint("Get Courses ${remoteDataSource.getRib()}");
   runApp(const MyApp());
 }
 

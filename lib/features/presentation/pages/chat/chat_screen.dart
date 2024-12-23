@@ -32,7 +32,9 @@ class ChatScreen extends StatelessWidget {
           child: BlocBuilder<GetConversationsCubit, GetConversationsState>(
             builder: (context, state) {
               if (state is GetConversationsLoading) {
-                return const Center(child: CircularProgressIndicator());
+                return const Center(
+                    child: CircularProgressIndicator(
+                        color: AppColors.primaryColor));
               } else if (state is GetConversationsLoaded) {
                 return Padding(
                   padding: EdgeInsets.only(top: 10.h),

@@ -59,7 +59,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     DateTime.now().add(const Duration(hours: 6));
                 return liveDateTime.isBefore(sixHoursLater);
               }).toList();
-
               if (upcomingLives.isNotEmpty) {
                 return GestureDetector(
                   onTap: () =>

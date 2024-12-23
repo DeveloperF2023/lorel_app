@@ -37,7 +37,8 @@ class PaymentContent extends StatelessWidget {
               builder: (context, state) {
                 debugPrint("State Rib: $state");
                 if (state is GetRibLoading) {
-                  return const CircularProgressIndicator();
+                  return const CircularProgressIndicator(
+                      color: AppColors.primaryColor);
                 } else if (state is GetRibLoaded) {
                   final rib = state.rib;
                   return GestureDetector(
@@ -86,7 +87,8 @@ class PaymentContent extends StatelessWidget {
             },
             builder: (context, state) {
               if (state is ManualPaymentLoading) {
-                return const CircularProgressIndicator();
+                return const CircularProgressIndicator(
+                    color: AppColors.primaryColor);
               }
               return PrimaryButton(
                   textButton:

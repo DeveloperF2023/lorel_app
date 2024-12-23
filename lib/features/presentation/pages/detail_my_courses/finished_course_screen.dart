@@ -6,6 +6,7 @@ import 'package:school_test_online/features/presentation/manager/courses/get_cou
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/utils/helpers/locale_service.dart';
 import '../../../../dependencies_injection.dart';
+import '../../manager/courses/finish_course/finish_course_cubit.dart';
 import '../../widgets/detail_my_courses/widgets_imports.dart';
 
 class FinishedCourseScreen extends StatefulWidget {
@@ -53,7 +54,9 @@ class _FinishedCourseScreenState extends State<FinishedCourseScreen> {
             BlocBuilder<GetCoursesOfFormationCubit, GetCoursesOfFormationState>(
           builder: (context, state) {
             if (state is GetCoursesOfFormationLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(
+                  child:
+                      CircularProgressIndicator(color: AppColors.primaryColor));
             } else if (state is GetCoursesOfFormationLoaded) {
               final courses = state.courses;
               if (courses.isEmpty) {
@@ -63,20 +66,28 @@ class _FinishedCourseScreenState extends State<FinishedCourseScreen> {
               print("Courses $currentCourse");
               return DetailMyCourseContent(
                 detailCourse: currentCourse,
-                onNext: currentIndex < courses.length - 1
-                    ? () {
-                        _nextCourse(courses);
-                      }
-                    : () {
-                        Navigator.pushNamed(
-                            context, NavigationStrings.requestDiploma,
-                            arguments: widget.formationId);
-                      },
+                onNext: () {
+                  _nextCourse(courses);
+                  if (currentCourse.isLast == true) {
+                    BlocProvider.of<FinishCourseCubit>(context).finishCourse(
+                        courseId: currentCourse.id!,
+                        formationId: widget.formationId);
+                    Navigator.pushNamed(
+                        context, NavigationStrings.requestDiploma,
+                        arguments: widget.formationId);
+                  } else {
+                    BlocProvider.of<FinishCourseCubit>(context).finishCourse(
+                        courseId: currentCourse.id!,
+                        formationId: widget.formationId);
+                  }
+                },
                 onPrevious:
                     currentIndex > 0 ? () => _previousCourse(courses) : null,
                 nextText: currentIndex < courses.length - 1
                     ? AppLocalization.of(context)!.translate("next")
                     : AppLocalization.of(context)!.translate("finished"),
+                currentIndex: currentIndex,
+                courseLength: courses.length,
               );
             } else if (state is GetCoursesOfFormationFailure) {
               return Center(child: Text(state.message));

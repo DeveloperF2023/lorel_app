@@ -6,6 +6,7 @@ import 'package:school_test_online/features/presentation/pages/main/main_screen.
 import 'package:school_test_online/features/presentation/widgets/auth/widgets_imports.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../core/constants/app_colors.dart';
 import '../../manager/user/auth/auth_cubit.dart';
 import '../../manager/user/credential/credential_cubit.dart';
 
@@ -54,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
               debugPrint("Login successful, transitioning to main screen");
             } else if (credentialState is CredentialLoading) {
               debugPrint("Credential loading...");
-              const CircularProgressIndicator();
+              const CircularProgressIndicator(color: AppColors.primaryColor);
             } else if (credentialState is CredentialFailure) {
               setState(() {
                 _isSigningIn = false;

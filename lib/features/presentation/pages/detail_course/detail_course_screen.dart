@@ -30,7 +30,9 @@ class DetailCourseScreen extends StatelessWidget {
         child: BlocBuilder<GetDetailFormationCubit, GetDetailFormationState>(
           builder: (context, state) {
             if (state is GetDetailFormationLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(
+                  child:
+                      CircularProgressIndicator(color: AppColors.primaryColor));
             } else if (state is GetDetailFormationLoaded) {
               return DetailCourseContent(
                 detailCourse: state.detailFormation,

@@ -68,9 +68,13 @@ class _TimetableScreenState extends State<TimetableScreen> {
         builder: (context, state) {
           if (state is GetScheduleInitial) {
             context.read<GetScheduleCubit>().fetchSchedule("1");
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+                child:
+                    CircularProgressIndicator(color: AppColors.primaryColor));
           } else if (state is GetScheduleLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+                child:
+                    CircularProgressIndicator(color: AppColors.primaryColor));
           } else if (state is GetScheduleLoaded) {
             final schedules = state.schedules;
             final semKeys = schedules.keys.toList();

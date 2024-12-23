@@ -6,6 +6,7 @@ import 'package:school_test_online/dependencies_injection.dart';
 import 'package:school_test_online/features/presentation/manager/offers/get_favorites/get_favorites_cubit.dart';
 import 'package:school_test_online/features/presentation/widgets/all_courses/widgets_imports.dart';
 
+import '../../../../core/constants/app_colors.dart';
 import '../../../../core/routes/routes.dart';
 import '../../manager/offers/add_to_favorite_list/add_to_favorite_list_cubit.dart';
 import '../../manager/offers/favorite_status_cubit.dart';
@@ -40,7 +41,7 @@ class FavoritesScreen extends StatelessWidget {
           builder: (context, state) {
             if (state is GetFavoritesLoading) {
               return const Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(color: AppColors.primaryColor),
               );
             } else if (state is GetFavoritesLoaded) {
               return ListView.separated(

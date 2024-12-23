@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:school_test_online/core/utils/helpers/helper_functions.dart';
 import 'package:school_test_online/core/utils/helpers/locale_service.dart';
 import 'package:school_test_online/features/presentation/manager/lives/get_lives/get_lives_cubit.dart';
@@ -28,6 +29,7 @@ class LivesScreen extends StatelessWidget {
     }
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBarDetailMyCourse(
         backgroundColor: AppColors.harp,
         title: AppLocalization.of(context)!.translate("lives"),
@@ -69,6 +71,31 @@ class LivesScreen extends StatelessWidget {
                     DateTime.now().add(const Duration(hours: 6));
                 return liveDateTime.isBefore(sixHoursLater);
               }).toList();
+              if (upcomingLives.isEmpty) {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.info,
+                        color: Colors.red,
+                        size: 30,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: Text(
+                          AppLocalization.of(context)!.translate("emptyLives"),
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.poppins(fontSize: 15),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
               return SizedBox(
                 height: HelperFunctions.screenHeight(context) * .8,
                 child: ListView.builder(

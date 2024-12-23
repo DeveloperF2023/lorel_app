@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:school_test_online/core/utils/helpers/locale_service.dart';
 import 'package:school_test_online/core/utils/helpers/validators.dart';
 
+import '../../../../core/constants/app_colors.dart';
 import '../../../../core/routes/routes.dart';
 import '../../../data/models/user/requests_register_model.dart';
 import '../../manager/user/register_user/register_user_cubit.dart';

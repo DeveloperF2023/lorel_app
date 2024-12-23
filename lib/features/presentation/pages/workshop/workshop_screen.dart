@@ -79,7 +79,9 @@ class _WorkshopScreenState extends State<WorkshopScreen> {
                 builder: (context, state) {
                   debugPrint("Workshop State : $state");
                   if (state is GetWorkshopsLoading) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(
+                        child: CircularProgressIndicator(
+                            color: AppColors.primaryColor));
                   } else if (state is GetWorkshopsLoaded) {
                     if (state.workshops.isEmpty) {
                       return Center(
@@ -113,7 +115,9 @@ class _WorkshopScreenState extends State<WorkshopScreen> {
                         },
                       );
                     } else {
-                      return const Center(child: CircularProgressIndicator());
+                      return const Center(
+                          child: CircularProgressIndicator(
+                              color: AppColors.primaryColor));
                     }
                   } else if (state is GetWorkshopsFailure) {
                     return Center(child: Text(state.message));

@@ -9,6 +9,7 @@ class TextFieldApp extends StatelessWidget {
   final bool? hasSuffixIcon;
   final void Function()? onTap;
   final IconData? suffixIcon;
+  final TextInputType? keyboardType;
   const TextFieldApp(
       {super.key,
       required this.icon,
@@ -18,13 +19,15 @@ class TextFieldApp extends StatelessWidget {
       this.obscureText = false,
       this.hasSuffixIcon = false,
       this.onTap,
-      this.suffixIcon});
+      this.suffixIcon,
+      this.keyboardType});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 30.w),
       child: TextFormField(
+        keyboardType: keyboardType,
         controller: controller,
         validator: validator,
         obscureText: obscureText!,

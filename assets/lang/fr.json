@@ -148,5 +148,7 @@
   "newEnrollment": "Nouvelle inscription👋",
   "newEnrollmentCreated": "Nouvelle inscription, vous pouvez vérifier maintenant👌",
   "newLive": "Nouveau live👋",
-  "newLiveCreated": "Nouveau live créé, vous pouvez vérifier maintenant👌"
+  "newLiveCreated": "Nouveau live créé, vous pouvez vérifier maintenant👌",
+  "emptyLives": "Aucun résultat trouvé pour le moment. Veuillez réessayer plus tard.",
+  "emailExist": "l'e-mail existe déjà. Veuillez essayer avec un autre e-mail"
 }

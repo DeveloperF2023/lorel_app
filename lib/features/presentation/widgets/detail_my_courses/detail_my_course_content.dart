@@ -5,12 +5,16 @@ class DetailMyCourseContent extends StatefulWidget {
   final void Function()? onNext;
   final void Function()? onPrevious;
   final String nextText;
+  final int courseLength;
+  final int currentIndex;
   const DetailMyCourseContent({
     super.key,
     required this.detailCourse,
     required this.onNext,
     this.onPrevious,
     required this.nextText,
+    required this.courseLength,
+    required this.currentIndex,
   });
 
   @override
@@ -283,19 +287,21 @@ class _DetailMyCourseContentState extends State<DetailMyCourseContent> {
                     },
                     isBack: true,
                   ),
-                  NavigationMyCourses(
-                    onNavigate: () {
-                      setState(() {
-                        _isPlaying = false;
-                      });
-                      _controller.pause();
-                      if (widget.onNext != null) {
-                        widget.onNext!();
-                      }
-                    },
-                    isBack: false,
-                    nextText: widget.nextText,
-                  ),
+                  widget.currentIndex == widget.courseLength - 1
+                      ? Container()
+                      : NavigationMyCourses(
+                          onNavigate: () {
+                            setState(() {
+                              _isPlaying = false;
+                            });
+                            _controller.pause();
+                            if (widget.onNext != null) {
+                              widget.onNext!();
+                            }
+                          },
+                          isBack: false,
+                          nextText: widget.nextText,
+                        ),
                 ],
               ),
             ),

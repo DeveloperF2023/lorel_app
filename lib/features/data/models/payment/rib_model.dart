@@ -7,7 +7,7 @@ class RibModel extends RibEntity {
 
   factory RibModel.fromJson(Map<String, dynamic> json) {
     return RibModel(
-      rib: json['rib'] as String,
+      rib: json['rib'],
     );
   }
 }

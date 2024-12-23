@@ -162,8 +162,7 @@ class _MyCoursesScreenState extends State<MyCoursesScreen> {
                     if (state is GetCoursesByStatusLoading) {
                       return const Center(
                           child: CircularProgressIndicator(
-                        color: AppColors.primaryColor,
-                      ));
+                              color: AppColors.primaryColor));
                     } else if (state is GetCoursesByStatusFailure) {
                       return Center(child: Text('Error: ${state.message}'));
                     } else if (state is GetCoursesByStatusLoaded) {

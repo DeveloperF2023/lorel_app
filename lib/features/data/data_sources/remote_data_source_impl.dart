@@ -85,7 +85,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         requests.toJson(),
         null,
         false);
-    debugPrint(response.data);
+    //debugPrint(response.data);
     if (response.statusCode == 201) {
       await preferencesHelper.saveUserDetailsRegister(response.data);
       debugPrint("OK");
@@ -206,19 +206,18 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     final response = await apiClient.getRequest(
         "${EndpointsConstants.baseUrl}${EndpointsConstants.settings}", null);
 
-    debugPrint("this is status code rib :${response.statusCode}");
     if (response.statusCode == 200) {
       debugPrint("success status code");
-      debugPrint(response.data);
       if (response.data is Map<String, dynamic>) {
+        print("Get Rib Data :${response.data}");
         return RibModel.fromJson(response.data);
-      } else if (response.data is String) {
-        return RibModel(rib: response.data);
       } else {
-        throw Exception('Unexpected response format');
+        throw Exception(
+            'Unexpected response format. Expected Map<String, dynamic>.');
       }
     } else {
-      throw Exception('Failed to get Rib');
+      throw Exception(
+          'Failed to get Rib with status code: ${response.statusCode}');
     }
   }
 
@@ -296,7 +295,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         "${EndpointsConstants.baseUrl}formations/$formationId/courses/$courseId/start",
         null,
         token);
-    debugPrint("Response start course: ${response.data}");
+    //debugPrint("Response start course: ${response.data}");
     debugPrint("Response status code: ${response.statusCode}");
     debugPrint("Token: $token");
     if (response.statusCode == 200) {
@@ -313,7 +312,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         "${EndpointsConstants.baseUrl}formations/$formationId/courses/$courseId/finish",
         null,
         token);
-    debugPrint("Response start course: ${response.data}");
+    //debugPrint("Response start course: ${response.data}");
     debugPrint("Response status code: ${response.statusCode}");
     debugPrint("Token: $token");
     if (response.statusCode == 200) {

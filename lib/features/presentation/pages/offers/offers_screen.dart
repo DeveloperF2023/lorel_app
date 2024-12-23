@@ -93,7 +93,8 @@ class _OffersScreenState extends State<OffersScreen> {
                                 builder: (context, state) {
                                   if (state is SearchOffersLoading) {
                                     return const Center(
-                                      child: CircularProgressIndicator(),
+                                      child: CircularProgressIndicator(
+                                          color: AppColors.primaryColor),
                                     );
                                   } else if (state is SearchOffersLoaded) {
                                     return ListView.separated(
@@ -136,7 +137,8 @@ class _OffersScreenState extends State<OffersScreen> {
                                 builder: (context, state) {
                                   if (state is GetOffersByTypeLoading) {
                                     return const Center(
-                                      child: CircularProgressIndicator(),
+                                      child: CircularProgressIndicator(
+                                          color: AppColors.primaryColor),
                                     );
                                   } else if (state is GetOffersByTypeLoaded) {
                                     return ListView.separated(

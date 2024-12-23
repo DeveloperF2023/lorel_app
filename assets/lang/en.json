@@ -148,5 +148,7 @@
   "newEnrollment": "New enrollment👋",
   "newEnrollmentCreated": "New enrollment, you can check now👌",
   "newLive": "New live👋",
-  "newLiveCreated": "New live created, you can check now👌"
+  "newLiveCreated": "New live created, you can check now👌",
+  "emptyLives": "No results found at the moment. Please try again later.",
+  "emailExist": "Email is already exist. Please try with another email"
 }

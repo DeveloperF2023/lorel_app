@@ -105,6 +105,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                 hintText: AppLocalization.of(context)!.translate("phone"),
                 controller: phoneController,
                 validator: (value) => Validators.phoneValidator(value, context),
+                keyboardType: TextInputType.phone,
               ),
               SizedBox(
                 height: 10.h,
@@ -134,12 +135,23 @@ class _RegistrationFormState extends State<RegistrationForm> {
                   if (state is RegisterUserLoaded) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                          content: Text("The user register successfully")),
+                          content: Text("The user registered successfully")),
+                    );
+                    Navigator.pushNamed(
+                      context,
+                      NavigationStrings.payment,
+                      arguments: {
+                        "selectedDiplomas": widget.selectedDiploma,
+                        "formationId": widget.formationId,
+                      },
                     );
                   } else if (state is RegisterUserFailure) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("error ${state.message}")),
+                      SnackBar(
+                          content: Text(AppLocalization.of(context)!
+                              .translate('emailExist'))),
                     );
+                    debugPrint("Error: ${state.message}");
                   }
                 },
                 builder: (context, state) {
@@ -154,7 +166,10 @@ class _RegistrationFormState extends State<RegistrationForm> {
                   );
                 },
               ),
-              if (isLoading) const Center(child: CircularProgressIndicator()),
+              if (isLoading)
+                const Center(
+                    child: CircularProgressIndicator(
+                        color: AppColors.primaryColor)),
             ],
           ),
         ),
@@ -182,15 +197,6 @@ class _RegistrationFormState extends State<RegistrationForm> {
       setState(() {
         isLoading = false;
       });
-
-      Navigator.pushNamed(
-        context,
-        NavigationStrings.payment,
-        arguments: {
-          "selectedDiplomas": widget.selectedDiploma,
-          "formationId": widget.formationId,
-        },
-      );
 
       debugPrint("This is email ${emailController.text}");
       debugPrint("This is password ${passwordController.text}");

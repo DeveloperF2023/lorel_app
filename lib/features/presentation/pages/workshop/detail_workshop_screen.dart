@@ -25,7 +25,9 @@ class DetailWorkshopScreen extends StatelessWidget {
           child: BlocBuilder<GetDetailWorkshopCubit, GetDetailWorkshopState>(
             builder: (context, state) {
               if (state is GetDetailWorkshopLoading) {
-                return const Center(child: CircularProgressIndicator());
+                return const Center(
+                    child: CircularProgressIndicator(
+                        color: AppColors.primaryColor));
               } else if (state is GetDetailWorkshopLoaded) {
                 final workshop = state.workshop;
                 return DetailWorkshopContent(

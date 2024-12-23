@@ -28,8 +28,6 @@ class _CoursesListScreenState extends State<CoursesListScreen> {
       setState(() {
         currentIndex++;
       });
-    } else {
-      Navigator.pushNamed(context, NavigationStrings.lives);
     }
   }
 
@@ -59,7 +57,9 @@ class _CoursesListScreenState extends State<CoursesListScreen> {
             BlocBuilder<GetCoursesOfFormationCubit, GetCoursesOfFormationState>(
           builder: (context, state) {
             if (state is GetCoursesOfFormationLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(
+                  child:
+                      CircularProgressIndicator(color: AppColors.primaryColor));
             } else if (state is GetCoursesOfFormationLoaded) {
               final courses = state.courses;
               if (courses.isEmpty) {
@@ -97,32 +97,28 @@ class _CoursesListScreenState extends State<CoursesListScreen> {
               final currentCourse = courses[currentIndex];
               return DetailMyCourseContent(
                 detailCourse: currentCourse,
-                onNext: currentIndex < courses.length - 1
-                    ? () {
-                        _nextCourse(courses);
-                        widget.status == "finished"
-                            ? null
-                            : BlocProvider.of<FinishCourseCubit>(context)
-                                .finishCourse(
-                                    courseId: currentCourse.id!,
-                                    formationId: widget.formationId);
-                      }
-                    : () {
-                        widget.status == "finished"
-                            ? null
-                            : BlocProvider.of<FinishCourseCubit>(context)
-                                .finishCourse(
-                                    courseId: currentCourse.id!,
-                                    formationId: widget.formationId);
-                        Navigator.pushNamed(
-                            context, NavigationStrings.requestDiploma,
-                            arguments: widget.formationId);
-                      },
+                onNext: () {
+                  _nextCourse(courses);
+                  if (currentCourse.isLast == true) {
+                    BlocProvider.of<FinishCourseCubit>(context).finishCourse(
+                        courseId: currentCourse.id!,
+                        formationId: widget.formationId);
+                    Navigator.pushNamed(
+                        context, NavigationStrings.requestDiploma,
+                        arguments: widget.formationId);
+                  } else {
+                    BlocProvider.of<FinishCourseCubit>(context).finishCourse(
+                        courseId: currentCourse.id!,
+                        formationId: widget.formationId);
+                  }
+                },
                 onPrevious:
                     currentIndex > 0 ? () => _previousCourse(courses) : null,
                 nextText: currentCourse.isLast == false
                     ? AppLocalization.of(context)!.translate("next")
                     : AppLocalization.of(context)!.translate("finished"),
+                currentIndex: currentIndex,
+                courseLength: courses.length,
               );
             } else if (state is GetCoursesOfFormationFailure) {
               return Column(

@@ -18,6 +18,12 @@ class _HomeContentState extends State<HomeContent> {
       nameUser = preferences.getString("name") ?? "";
       profilePicture = preferences.getString("profilePicture") ?? "";
       isLoading = false;
+
+      // Fetch the second word from the name (if the name has more than one word)
+      List<String> nameParts = nameUser.split(' ');
+      if (nameParts.length > 1) {
+        nameUser = nameParts[1]; // Second word
+      }
     });
     debugPrint(profilePicture);
   }
@@ -40,20 +46,25 @@ class _HomeContentState extends State<HomeContent> {
             Row(
               children: [
                 isLoading
-                    ? const CircularProgressIndicator()
+                    ? const CircularProgressIndicator(
+                        color: AppColors.primaryColor)
                     : BlocBuilder<UploadAvatarCubit, UploadAvatarState>(
                         builder: (context, avatarState) {
+                          // Default image provider
                           ImageProvider backgroundImage;
+
                           if (avatarState is UploadAvatarLoaded) {
-                            if (avatarState.uploadAvatar.isNotEmpty) {
-                              backgroundImage =
-                                  NetworkImage(avatarState.uploadAvatar);
+                            String avatarUrl = avatarState.uploadAvatar;
+
+                            if (avatarUrl.isNotEmpty &&
+                                Uri.parse(avatarUrl).isAbsolute) {
+                              backgroundImage = NetworkImage(avatarUrl);
                             } else {
                               backgroundImage =
                                   const AssetImage(AppAssets.logo);
                             }
                           } else {
-                            backgroundImage = NetworkImage(profilePicture);
+                            backgroundImage = const AssetImage(AppAssets.logo);
                           }
 
                           return GestureDetector(
@@ -62,6 +73,7 @@ class _HomeContentState extends State<HomeContent> {
                             child: CircleAvatar(
                               radius: 38,
                               backgroundImage: backgroundImage,
+                              backgroundColor: AppColors.whiteSmoke,
                             ),
                           );
                         },

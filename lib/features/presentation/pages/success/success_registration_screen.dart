@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:school_test_online/core/utils/helpers/locale_service.dart';
 import 'package:school_test_online/features/presentation/widgets/global/widgets_imports.dart';
@@ -26,7 +25,12 @@ class SuccessRegistrationScreen extends StatelessWidget {
           ),
           Positioned(
               top: 25.h,
-              left: 0.w,
+              left: AppLocalization.of(context)!.isArabicSelected(context)
+                  ? 0
+                  : 10.w,
+              right: AppLocalization.of(context)!.isArabicSelected(context)
+                  ? 10
+                  : 0.w,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -60,30 +64,6 @@ class SuccessRegistrationScreen extends StatelessWidget {
                       topLeft: Radius.circular(30.r),
                     )),
                 child: const SuccessRegistrationContent(),
-              )),
-          Positioned(
-              top: 80.h,
-              left: 100.w,
-              right: 100.w,
-              child: Container(
-                height: 55.h,
-                width: 55.w,
-                decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 8,
-                          offset: Offset(1, 1))
-                    ]),
-                child: Center(
-                  child: Icon(
-                    FontAwesomeIcons.solidUser,
-                    color: AppColors.darkGrey,
-                    size: 25.sp,
-                  ),
-                ),
               )),
         ],
       ),
